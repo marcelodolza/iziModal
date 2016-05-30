@@ -10,9 +10,9 @@ Elegant, complete and lightweight modal plugin with jQuery
 
 
 
-Fast | Responsive | Animated | Lightweight | Customizable
-:---: | :---: | :---: | :---: | :---:
-![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
+Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers
+:---: | :---: | :---: | :---: | :---: | :---:
+![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
 
 
 
