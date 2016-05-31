@@ -62,7 +62,7 @@ Argument | Default Value | Description
 **autoOpen** | *false* | 	If set true, the modal opens automatically without any user action.
 **transitionInModal** | *transitionIn* | Modal opening default transition.
 **transitionOutModal** | *transitionOut* | Modal closing default transition.
-**transitionInOverlay** | *fadeIn* | Transição padrão de abertura do overlay.
+**transitionInOverlay** | *fadeIn* | Default opening transition of the overlay.
 **transitionOutOverlay** | *fadeOut* | Default Transition opening overlay.
 **onOpening** | *function() {}*	 | Callback function that will run when opening the modal.
 **onOpened** | *function() {}*	 | Callback function that will run when the modal is open.
