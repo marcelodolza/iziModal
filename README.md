@@ -9,7 +9,7 @@ Elegant, complete and lightweight modal plugin with jQuery
 [logo]: http://i.imgur.com/hCYIhep.png "Check icon"
 
 Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers		
-:---: | :---: | :---: | :---: | :---: | :---:		
+:-----: | :-----: | :-----: | :-----: | :-----: | :-----:
 ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
 
 ___
