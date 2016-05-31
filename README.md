@@ -3,11 +3,14 @@ Elegant, complete and lightweight modal plugin with jQuery
 
 [**izimodal**.marcelodolce.com](http://izimodal.marcelodolce.com)
 
-
+![capa](http://i.imgur.com/TPdnES8.png)
 
 
 [logo]: http://i.imgur.com/hCYIhep.png "Check icon"
 
+Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers		
+:---: | :---: | :---: | :---: | :---: | :---:		
+![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
 
 ___
 #### Default Options
