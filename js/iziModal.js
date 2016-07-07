@@ -472,10 +472,6 @@
 		});
 	};
 
-/*
-stop timer to recalculate
-*/
-
 	$.fn[PLUGIN_NAME].defaults = {
 	    title: "",
 	    subtitle: "",
