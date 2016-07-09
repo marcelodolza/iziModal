@@ -1,3 +1,8 @@
+/*
+* iziModal | v1.0
+* http://izimodal.dolce.ninja
+* by Marcelo Dolce.
+*/
 (function($){
 
 	"use strict";
@@ -274,6 +279,9 @@
 			}
 
             if (this.options.transitionOutModal !== '') {
+
+                //this.$element.removeClass(this.options.transitionInModal).addClass(this.options.transitionOutModal);
+                //this.$overlay.removeClass(this.options.transitionInOverlay).addClass(this.options.transitionOutOverlay);
 
                 this.$element.attr('class', PLUGIN_NAME + " " + this.options.theme + " " + this.options.transitionOutModal);
 				this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
