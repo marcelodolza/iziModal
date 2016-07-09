@@ -265,7 +265,7 @@
                 }
 
 				if (that.options.bodyOverflow || isMobile){
-					$(document.body).attr('overflow', '');
+					$(document.body).css('overflow', 'initial');
 				}
 
 				$(document.body).removeClass(PLUGIN_NAME+'-attached');
