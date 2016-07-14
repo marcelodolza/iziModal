@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.0
+* iziModal | v1.0.1
 * http://izimodal.dolce.ninja
 * by Marcelo Dolce.
 */
@@ -128,13 +128,6 @@
             	this.$element.css('overflow', 'hidden');
             }
 
-            // Close on overlay click
-            this.$overlay.click(function () {
-                if (that.options.overlayClose && !that.$element.hasClass(that.options.transitionOutModal)) {
-                    that.close();
-                }
-            });
-
             // Close when button pressed
             this.$element.on('click', '[data-'+PLUGIN_NAME+'-close]', function (e) {
                 e.preventDefault();
@@ -197,6 +190,7 @@
 			    console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
 
 				that.options.onOpened.call(this);
+
 			}
 
 			this.$overlay.appendTo('body');
@@ -222,7 +216,14 @@
 				opened();
 			}
 
-			if (that.options.focusInput){
+            // Close on overlay click
+            if (this.options.overlayClose && !this.$element.hasClass(this.options.transitionOutModal)) {
+            	that.$overlay.click(function () {
+                    that.close();
+            	});
+            }
+
+			if (this.options.focusInput){
 		    	that.$element.find(':input:not(button):enabled:visible:first').focus(); // Focus on the first field
 			}
 			
