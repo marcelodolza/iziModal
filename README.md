@@ -12,8 +12,15 @@ Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers
 :-----: | :-----: | :-----: | :-----: | :-----: | :-----:
 ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
 
+
 ___
-#### Default Options
+### Version Log
+**v1.0.1**
+- *overlayClose* funcionava apenas a primeira vez - Corrigido.
+
+
+___
+### Default Options
 
 ```javascript
 $("#modal").iziModal({
@@ -74,7 +81,7 @@ Argument | Default Value | Description
 
 
 ___
-#### Methods
+### Methods
 
 - *Instantiating*
 ```javascript
@@ -140,7 +147,7 @@ $('#modal').iziModal('recalculateLayout');
 ```
 
 ___
-#### Events
+### Events
 
 - *Opening*
 ```javascript
