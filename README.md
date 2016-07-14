@@ -1,5 +1,5 @@
 # [iziModal](http://izimodal.dolce.ninja)
-Elegant, complete and lightweight modal plugin with jQuery
+Elegant, responsive, flexible and lightweight modal plugin with jQuery.
 
 [**izimodal**.marcelodolce.com](http://izimodal.marcelodolce.com)
 
