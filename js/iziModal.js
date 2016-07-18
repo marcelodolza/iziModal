@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.0.1
+* iziModal | v1.1.0
 * http://izimodal.dolce.ninja
 * by Marcelo Dolce.
 */
@@ -57,9 +57,19 @@
 			this.state = STATES.CLOSED;
 			this.options = options;
 			this.timer = null;
+			this.timerTimeout = null;
+			this.isFullscreen = false;
             this.headerHeight = 0;
-			            this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title">' + options.title + '</h2><p class="'+PLUGIN_NAME+'-header-subtitle">' + options.subtitle + '</p><a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button-close" data-'+PLUGIN_NAME+'-close></a></div>');
+			this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title">' + options.title + '</h2><p class="'+PLUGIN_NAME+'-header-subtitle">' + options.subtitle + '</p><a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-close" data-'+PLUGIN_NAME+'-close></a></div>');
             this.$overlay = $('<div class="'+PLUGIN_NAME+'-overlay" style="background-color:'+options.overlayColor+'"></div>');
+
+            if (options.fullscreen === true) {
+            	this.$header.append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
+            }
+
+			if (options.timeoutProgressbar === true && !isNaN(options.timeout) && options.timeout !== false && options.timeout !== 0) {
+				this.$header.prepend('<div class="'+PLUGIN_NAME+'-progressbar"><div style="background-color:'+options.timeoutProgressbarColor+'"></div></div>');
+            }
 
             if (options.subtitle === '') {
         		this.$header.addClass(PLUGIN_NAME+'-noSubtitle');
@@ -117,12 +127,15 @@
 			this.mediaQueries = '<style rel="' + this.id + '">@media handheld, only screen and (max-width: ' + wClear + 'px) { #' + this.$element[0].id + '{ width: 100% !important; max-width: 100% !important; margin-left: 0 !important; left: 0 !important; } }</style>';
         	$(document.body).append(this.mediaQueries);
 
-            // Adjusting horizontal positioning
             this.$element.addClass(PLUGIN_NAME + " " + options.theme);
+
+			if(options.openFullscreen === true){
+			    that.isFullscreen = true;
+			    that.$element.addClass('isFullscreen');
+			}
 
             // Adjusting vertical positioning
             this.$element.css('margin-top', parseInt(-(this.$element.innerHeight() / 2)) + 'px');
-
 
             if(this.$element.find('.'+PLUGIN_NAME+'-header').length){
             	this.$element.css('overflow', 'hidden');
@@ -132,6 +145,18 @@
             this.$element.on('click', '[data-'+PLUGIN_NAME+'-close]', function (e) {
                 e.preventDefault();
                 that.close();
+            });
+
+            // Expand when button pressed
+            this.$element.on('click', '[data-'+PLUGIN_NAME+'-fullscreen]', function (e) {
+                e.preventDefault();
+                if(that.isFullscreen === true){
+					that.isFullscreen = false;
+	                that.$element.removeClass('isFullscreen');
+                } else {
+	                that.isFullscreen = true;
+	                that.$element.addClass('isFullscreen');
+                }
             });
 		},
 
@@ -175,7 +200,7 @@
             this.$element.trigger(STATES.OPENING);
 			this.state = STATES.OPENING;
 
-			console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Opening...');
+			// console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Opening...');
 
 			if (this.options.bodyOverflow || isMobile){
 				$(document.body).css('overflow', 'hidden');
@@ -187,10 +212,9 @@
 		    	that.$element.trigger(STATES.OPENED);
 				that.state = STATES.OPENED;
 
-			    console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
+			    // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
 
 				that.options.onOpened.call(this);
-
 			}
 
 			this.$overlay.appendTo('body');
@@ -216,6 +240,38 @@
 				opened();
 			}
 
+			if (this.options.timeout !== false && !isNaN(this.options.timeout) && this.options.timeout !== false && this.options.timeout !== 0) {
+
+				if (this.options.timeoutProgressbar === true) {
+
+					var progressBar = {
+	                    hideEta: null,
+	                    maxHideTime: null
+	                }
+					var $progressElement = this.$element.find('.'+PLUGIN_NAME+'-progressbar > div');
+
+					if (this.options.timeout > 0) {
+                        progressBar.maxHideTime = parseFloat(this.options.timeout);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                        this.timerTimeout = setInterval(updateProgress, 10);
+                    }
+	                function updateProgress() {
+	                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
+	                    $progressElement.width(percentage + '%');
+	                    if(percentage < 0){
+	                    	that.close();	                    	
+	                    }
+	                    //console.info(percentage + '%');
+	                }
+
+				} else {
+
+					this.timerTimeout = setTimeout(function(){
+						that.close();
+					}, that.options.timeout);
+				}
+			}
+
             // Close on overlay click
             if (this.options.overlayClose && !this.$element.hasClass(this.options.transitionOutModal)) {
             	that.$overlay.click(function () {
@@ -228,8 +284,8 @@
 			}
 			
 			(function updateTimer(){
-			    that.recalculateLayout();
-			    that.timer = setTimeout(updateTimer, 500);
+		    	that.recalculateLayout();					
+			    that.timer = setTimeout(updateTimer, 200);
 			})();
 
             // Close when the Escape key is pressed
@@ -253,9 +309,10 @@
 
 			this.state = STATES.CLOSING;
 			this.$element.trigger(STATES.CLOSING);
-			console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Closing...');
+			// console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Closing...');
 
-            clearTimeout(that.timer);
+            clearTimeout(this.timer);
+            clearTimeout(this.timerTimeout);
 
 			that.options.onClosing.call(this);
 
@@ -274,17 +331,14 @@
                 that.$element.trigger(STATES.CLOSED);
                 that.state = STATES.CLOSED;
                 
-                console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
+                // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
 
 				that.options.onClosed.call(this);
 			}
 
             if (this.options.transitionOutModal !== '') {
 
-                //this.$element.removeClass(this.options.transitionInModal).addClass(this.options.transitionOutModal);
-                //this.$overlay.removeClass(this.options.transitionInOverlay).addClass(this.options.transitionOutOverlay);
-
-                this.$element.attr('class', PLUGIN_NAME + " " + this.options.theme + " " + this.options.transitionOutModal);
+                this.$element.attr('class', PLUGIN_NAME + " " + this.options.transitionOutModal + " " + this.options.theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : ''));
 				this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
 
                 this.$element.one(animationEvent, function () {
@@ -314,6 +368,7 @@
             $(document).off("keydown");
 
 			clearTimeout(this.timer);
+			clearTimeout(this.timerTimeout);
 
 			if (this.options.iframe === true) {
 				this.$element.find('.'+PLUGIN_NAME+'-iframe').remove();
@@ -409,9 +464,9 @@
             if(this.state == STATES.OPENED || this.state == STATES.OPENING){
 
 				if (this.options.iframe === true) {
-					
+
 					// Se a altura da janela é menor que o modal com iframe
-					if(windowHeight < (this.options.iframeHeight + this.headerHeight)){
+					if(windowHeight < (this.options.iframeHeight + this.headerHeight) || this.isFullscreen === true){
 
 						$(document.body).addClass(PLUGIN_NAME+'-attached');
 
@@ -482,12 +537,12 @@
 	};
 
 	$.fn[PLUGIN_NAME].defaults = {
-	    title: "",
-	    subtitle: "",
-	    theme: "",
-	    headerColor: "#88A0B9",
-	    overlayColor: "rgba(0, 0, 0, 0.4)",
-	    iconColor: "",
+	    title: '',
+	    subtitle: '',
+	    theme: '',
+	    headerColor: '#88A0B9',
+	    overlayColor: 'rgba(0, 0, 0, 0.4)',
+	    iconColor: '',
 	    iconClass: null,
 	    width: 600,
 	    padding: 0,
@@ -499,6 +554,11 @@
 	    bodyOverflow: false,
 	    focusInput: true,
 	    autoOpen: false,
+	    fullscreen: false,
+	    openFullscreen: false,
+	    timeout: false,
+	    timeoutProgressbar: false,
+	    timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
 	    transitionInModal: 'transitionIn',
 	    transitionOutModal: 'transitionOut',
 	    transitionInOverlay: 'fadeIn',
