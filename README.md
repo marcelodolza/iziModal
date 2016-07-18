@@ -5,8 +5,10 @@ Elegant, responsive, flexible and lightweight modal plugin with jQuery.
 
 ![capa](http://i.imgur.com/TPdnES8.png)
 
-
 [logo]: http://i.imgur.com/hCYIhep.png "Check icon"
+
+[new]: http://i.imgur.com/41zuVDk.png "New label"
+[bug]: http://i.imgur.com/92lu4ln.png "Bug label"
 
 Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers		
 :-----: | :-----: | :-----: | :-----: | :-----: | :-----:
@@ -16,20 +18,34 @@ Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers
 ___
 ### Version Log
 **v1.0.1**
-- *overlayClose* funcionava apenas a primeira vez - Corrigido.
+- ![alt text][bug] *overlayClose* only works the first time - *Fixed*.
 
+**v1.1.0**
+- ![alt text][new] feature to apply fullscreen - **Implemented**
+- ![alt text][new] timeout feature with progress bar - **Implemented**
+
+___
+### Data Attributes
+- Add *data-izimodal-close* to any button or link inside the modal will close it when clicked.
+```html
+<button data-izimodal-close>Close</button>
+```
+- Add *data-izimodal-fullscreen* to any button or link inside the modal will expand it when clicked.
+```html
+<button data-izimodal-fullscreen>Maximize</button>
+```
 
 ___
 ### Default Options
 
 ```javascript
 $("#modal").iziModal({
-    title: "",
-    subtitle: "",
-    theme: "",
-    headerColor: "#88A0B9",
-    overlayColor: "rgba(0, 0, 0, 0.4)",
-    iconColor: "",
+    title: '',
+    subtitle: '',
+    theme: '',
+    headerColor: '#88A0B9',
+    overlayColor: 'rgba(0, 0, 0, 0.4)',
+    iconColor: '',
     iconClass: null,
     width: 600,
     padding: 0,
@@ -41,6 +57,11 @@ $("#modal").iziModal({
     bodyOverflow: false,
     focusInput: true,
     autoOpen: false,
+    fullscreen: false,
+    openFullscreen: false,
+    timeout: false,
+    timeoutProgressbar: false,
+    timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
     transitionInModal: 'transitionIn',
     transitionOutModal: 'transitionOut',
     transitionInOverlay: 'fadeIn',
@@ -57,6 +78,8 @@ Argument | Default Value | Description
 :---: | :---: | ---
 **title** | *""* | Title that appears in the modal header.
 **subtitle** | *""* | Caption that appears in the header below the title.
+**theme** | *""* | Caption that appears in the header below the title.
+**headerColor** | *#6d7d8d* | Color to fill the header background, will also be applied to the bottom edge of the modal.
 **iconClass** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
 **headerColor** | *#6d7d8d*	 | Color to fill the header background, will also be applied to the bottom edge of the modal.
 **overlayColor** | *rgba(0,0,0,0.4)* | Color overlay.
@@ -70,6 +93,11 @@ Argument | Default Value | Description
 **bodyOverflow** | *false* | Forcing overflow hidden in the document when opening the modal, closing the modal, overflow will be restored.
 **focusInput** | *true* | If set true, whenever you open a modal, the first visible field is active.
 **autoOpen** | *false* | 	If set true, the modal opens automatically without any user action.
+**fullscreen** | *false* | 	Allow button in header modal to expand.
+**openFullscreen** | *false* | 	Force to open modal in fullscreen.
+**timeout** | *0 or false* | 	Amount in milliseconds to close the modal or false to disable.
+**timeoutProgressbar** | *false* | 	Enable progress bar of timeout.
+**timeoutProgressbarColor** | *rgba(255,255,255,0.5)* | 	Progress bar color.
 **transitionInModal** | *transitionIn* | Modal opening default transition.
 **transitionOutModal** | *transitionOut* | Modal closing default transition.
 **transitionInOverlay** | *fadeIn* | Default transition of overlay opening.
