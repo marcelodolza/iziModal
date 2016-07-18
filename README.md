@@ -24,6 +24,16 @@ ___
 - ![alt text][new] feature to apply fullscreen - **Implemented**
 - ![alt text][new] timeout feature with progress bar - **Implemented**
 
+___
+### Data Attributes
+- Add *data-izimodal-close* to any button or link inside the modal will close it when clicked.
+```html
+<button data-izimodal-close>Close</button>
+```
+- Add *data-izimodal-fullscreen* to any button or link inside the modal will expand it when clicked.
+```html
+<button data-izimodal-fullscreen>Maximize</button>
+```
 
 ___
 ### Default Options
