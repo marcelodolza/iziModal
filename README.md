@@ -18,11 +18,11 @@ Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers
 ___
 ### Version Log
 - **v1.0.1**
-  - ![alt text][bug] *overlayClose* only works the first time - *Fixed*.
+  - ![alt text][bug] *overlayClose* only works the first time - *Fixed.*
 
 - **v1.1.0**
-  - ![alt text][new] feature to apply fullscreen - **Implemented**
-  - ![alt text][new] timeout feature with progress bar - **Implemented**
+  - ![alt text][new] feature to apply fullscreen - *Implemented.*
+  - ![alt text][new] timeout feature with progress bar - *Implemented.*
 
 ___
 ### Data Attributes
