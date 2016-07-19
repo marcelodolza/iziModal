@@ -25,6 +25,16 @@ ___
   - ![alt text][new] timeout feature with progress bar - *Implemented.*
 
 ___
+### Install
+
+#### [npm](https://www.npmjs.com/package/izimodal)
+```
+npm install --save izimodal
+```
+
+
+
+___
 ### Data Attributes
 - Add *data-izimodal-close* to any button or link inside the modal will close it when clicked.
 ```html
