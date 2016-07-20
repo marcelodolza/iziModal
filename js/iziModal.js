@@ -1,6 +1,6 @@
 /*
-* iziModal | v1.1.0
-* http://izimodal.dolce.ninja
+* iziModal | v1.2.0
+* http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
 (function($){
@@ -65,6 +65,7 @@
 
             if (options.fullscreen === true) {
             	this.$header.append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
+            	this.$header.css('padding-right', '76px');
             }
 
 			if (options.timeoutProgressbar === true && !isNaN(options.timeout) && options.timeout !== false && options.timeout !== 0) {
@@ -206,7 +207,9 @@
 				$(document.body).css('overflow', 'hidden');
 			}
 
-			that.options.onOpening.call(this);
+			if (that.options.onOpening && typeof(that.options.onOpening) === "function") {
+		        that.options.onOpening(this);
+		    }
 
 			function opened(){
 		    	that.$element.trigger(STATES.OPENED);
@@ -214,7 +217,9 @@
 
 			    // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
 
-				that.options.onOpened.call(this);
+				if (that.options.onOpened && typeof(that.options.onOpened) === "function") {
+			        that.options.onOpened(that);
+			    }
 			}
 
 			this.$overlay.appendTo('body');
@@ -246,23 +251,22 @@
 
 					var progressBar = {
 	                    hideEta: null,
-	                    maxHideTime: null
-	                }
-					var $progressElement = this.$element.find('.'+PLUGIN_NAME+'-progressbar > div');
-
+	                    maxHideTime: null,
+	                    el: this.$element.find('.'+PLUGIN_NAME+'-progressbar > div'),
+	                    updateProgress: function()
+	                    {
+		                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
+		                    progressBar.el.width(percentage + '%');
+		                    if(percentage < 0){
+		                    	that.close();	                    	
+		                    }	                    	
+	                    }
+	                };
 					if (this.options.timeout > 0) {
                         progressBar.maxHideTime = parseFloat(this.options.timeout);
                         progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
-                        this.timerTimeout = setInterval(updateProgress, 10);
+                        this.timerTimeout = setInterval(progressBar.updateProgress, 10);
                     }
-	                function updateProgress() {
-	                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
-	                    $progressElement.width(percentage + '%');
-	                    if(percentage < 0){
-	                    	that.close();	                    	
-	                    }
-	                    //console.info(percentage + '%');
-	                }
 
 				} else {
 
@@ -314,7 +318,9 @@
             clearTimeout(this.timer);
             clearTimeout(this.timerTimeout);
 
-			that.options.onClosing.call(this);
+			if (that.options.onClosing && typeof(that.options.onClosing) === "function") {
+		        that.options.onClosing(this);
+		    }
 
 			function closed(){
 
@@ -333,7 +339,9 @@
                 
                 // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
 
-				that.options.onClosed.call(this);
+				if (that.options.onClosed && typeof(that.options.onClosed) === "function") {
+			        that.options.onClosed(that);
+			    }
 			}
 
             if (this.options.transitionOutModal !== '') {
