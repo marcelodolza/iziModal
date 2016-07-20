@@ -29,8 +29,14 @@ ___
 
 #### [npm](https://www.npmjs.com/package/izimodal)
 ```
-npm install --save izimodal
+npm install izimodal --save
 ```
+
+#### bower
+```
+bower install izimodal
+```
+
 
 
 
