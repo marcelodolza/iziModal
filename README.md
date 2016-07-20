@@ -10,19 +10,24 @@ Elegant, responsive, flexible and lightweight modal plugin with jQuery.
 [new]: http://i.imgur.com/41zuVDk.png "New label"
 [bug]: http://i.imgur.com/92lu4ln.png "Bug label"
 
-Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers		
-:-----: | :-----: | :-----: | :-----: | :-----: | :-----:
-![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
+Fast | Responsive | Animated | Lightweight | Customizable | All modern browsers | Retina Display
+:-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----:
+![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
 
 
 ___
 ### Version Log
-- **v1.0.1**
-  - ![alt text][bug] *overlayClose* only works the first time - *Fixed.*
+
+- **v1.2.0**
+  - ![alt text][new] Retina display support - *Implemented.*
+  - ![alt text][bug] Callbacks had no access to modal functions - *Fixed.*
 
 - **v1.1.0**
   - ![alt text][new] feature to apply fullscreen - *Implemented.*
   - ![alt text][new] timeout feature with progress bar - *Implemented.*
+
+- **v1.0.1**
+  - ![alt text][bug] *overlayClose* only works the first time - *Fixed.*
 
 ___
 ### Install
