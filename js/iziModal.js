@@ -72,6 +72,11 @@
 				this.$header.prepend('<div class="'+PLUGIN_NAME+'-progressbar"><div style="background-color:'+options.timeoutProgressbarColor+'"></div></div>');
             }
 
+			if(options.z_index !== null){
+				this.$overlay.css('z-index', options.z_index-1);
+				this.$element.css('z-index', options.z_index);
+			}
+
             if (options.subtitle === '') {
         		this.$header.addClass(PLUGIN_NAME+'-noSubtitle');
             }
@@ -103,6 +108,7 @@
                     this.$header.prepend('<i class="'+PLUGIN_NAME+'-header-icon ' + options.iconClass + '"></i>');
                     this.$header.find("."+PLUGIN_NAME+'-header-icon').css('color', options.iconColor);
                 }
+
                 this.$element.prepend(this.$header);
             }
 
@@ -404,6 +410,12 @@
 			return this.state;
 		},
 
+		setZindex: function (z_index){
+			this.options.z_index = z_index;
+			this.$overlay.css('z-index', z_index-1);
+			this.$element.css('z-index', z_index);
+		},
+
 		setTitle: function(title){
 
 			if (this.options.title !== null) {
@@ -548,6 +560,7 @@
 	    title: '',
 	    subtitle: '',
 	    theme: '',
+	    z_index: '999',
 	    headerColor: '#88A0B9',
 	    overlayColor: 'rgba(0, 0, 0, 0.4)',
 	    iconColor: '',
