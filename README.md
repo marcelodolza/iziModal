@@ -70,6 +70,7 @@ $("#modal").iziModal({
     iconClass: null,
     width: 600,
     padding: 0,
+    z_index: 999,
     iframe: false,
     iframeHeight: 400,
     iframeURL: null,
@@ -106,6 +107,7 @@ Argument | Default Value | Description
 **overlayColor** | *rgba(0,0,0,0.4)* | Color overlay.
 **width** | *600* | Fixed width of the modal. You can use %, px, em or cm. If not using an unit of measure. It will be taken over the px unit.
 **padding** | *0* | Margin that will be applied to the inside of the modal.
+**z_index** | *999* | The z-index CSS attribute of the modal
 **iframe** | *false* | Set true to apply an iframe inside the modal.
 **iframeHeight** | *null* | Fixed height of the iframe.
 **iframeURL** | *null* | Address that will open in the iframe inside the modal, if not set, the user can alternatively use the href link responsible for opening it.
@@ -188,6 +190,11 @@ $('#modal').iziModal('setSubtitle', 'Subtitle');
 - *setIconClass*
 ```javascript
 $('#modal').iziModal('setIconClass', 'iconClass');
+```
+
+- *setZindex*
+```javascript
+$('#modal').iziModal('setZindex', 'value');
 ```
 
 - *recalculateLayout*
