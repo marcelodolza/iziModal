@@ -197,32 +197,44 @@ $("#modal").iziModal({
 
 Argument | Default Value | Description
 :---: | :---: | ---
-**title** | *""* | Title that appears in the modal header.
-**subtitle** | *""* | Caption that appears in the header below the title.
-**theme** | *""* | Caption that appears in the header below the title.
+**title** | *''* | Title that appears in the modal header.
+**subtitle** | *''* | Caption that appears in the header below the title.
 **headerColor** | *#6d7d8d* | Color to fill the header background, will also be applied to the bottom edge of the modal.
-**iconClass** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
-**headerColor** | *#6d7d8d*	 | Color to fill the header background, will also be applied to the bottom edge of the modal.
-**overlayColor** | *rgba(0,0,0,0.4)* | Color overlay.
+**theme** | *''* | Theme of the modal, can be empty or **"light"**.
+**icon** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
+**iconColor** | *''* | Color of the header icon.
 **width** | *600* | Fixed width of the modal. You can use %, px, em or cm. If not using an unit of measure. It will be taken over the px unit.
 **padding** | *0* | Margin that will be applied to the inside of the modal.
+**radius** | *0* | Border-radius that will be applied in modal.
+**zindex** | *999* | The z-index CSS attribute of the modal.
 **iframe** | *false* | Set true to apply an iframe inside the modal.
 **iframeHeight** | *null* | Fixed height of the iframe.
 **iframeURL** | *null* | Address that will open in the iframe inside the modal, if not set, the user can alternatively use the href link responsible for opening it.
-**overlayClose** | *true* | If set true, you can close the modal just by clicking on the outer layer of dark modal.
-**closeOnEscape** | *true* | If set true, you can close the modal only pressing the escape key.
-**bodyOverflow** | *false* | Forcing overflow hidden in the document when opening the modal, closing the modal, overflow will be restored.
 **focusInput** | *true* | If set true, whenever you open a modal, the first visible field is active.
+**group** | *true* | Create a group with everyone who has the same name, so can navigate between them.
+**loop** | *true* | It allows loop with modals of the same group.
+**navigateCaption** | *true* | Show arrows to inform possible navigation.
+**navigateArrows** | *true* | Change the layout which displays the arrows to navigate between the modals. Can be: 'closeToModal' or 'closeScreenEdge'.
+**history** | *true* | Enable browsing history.
+**restoreDefaultContent** | *true* | Makes return the default modal content to be open again.
 **autoOpen** | *false* | 	If set true, the modal opens automatically without any user action.
+**bodyOverflow** | *false* | Forcing overflow hidden in the document when opening the modal, closing the modal, overflow will be restored.
 **fullscreen** | *false* | 	Allow button in header modal to expand.
 **openFullscreen** | *false* | 	Force to open modal in fullscreen.
+**closeOnEscape** | *true* | If set true, you can close the modal only pressing the escape key.
+**overlay** | *true* | 	Enable or disable background overlay.
+**overlayClose** | *true* | If set true, you can close the modal just by clicking on the outer layer of dark modal.
+**overlayColor** | *rgba(0,0,0,0.4)* | Color overlay.
 **timeout** | *0 or false* | 	Amount in milliseconds to close the modal or false to disable.
 **timeoutProgressbar** | *false* | 	Enable progress bar of timeout.
 **timeoutProgressbarColor** | *rgba(255,255,255,0.5)* | 	Progress bar color.
+**pauseOnHover** | false | It allows the timeout is paused when the cursor is on the modal.
 **transitionInModal** | *transitionIn* | Modal opening default transition.
 **transitionOutModal** | *transitionOut* | Modal closing default transition.
 **transitionInOverlay** | *fadeIn* | Default transition of overlay opening.
 **transitionOutOverlay** | *fadeOut* | Default transition of overlay closure.
+**onFullscreen** | *function() {}*	 | Callback function that will run when the modal enable or disable full screen.
+**onResize** | *function() {}*	 | Callback function that will be executed when a resize occurs.
 **onOpening** | *function() {}*	 | Callback function that will run when opening the modal.
 **onOpened** | *function() {}*	 | Callback function that will run when the modal is open.
 **onClosing** | *function() {}*	 | Callback function that will run when closing the modal.
