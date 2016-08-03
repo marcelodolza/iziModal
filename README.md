@@ -199,7 +199,7 @@ Argument | Default Value | Description
 :---: | :---: | ---
 **title** | *''* | Title that appears in the modal header.
 **subtitle** | *''* | Caption that appears in the header below the title.
-**headerColor** | *#6d7d8d* | Color to fill the header background, will also be applied to the bottom edge of the modal.
+**headerColor** | *'#6d7d8d'* | Color to fill the header background, will also be applied to the bottom edge of the modal.
 **theme** | *''* | Theme of the modal, can be empty or **"light"**.
 **attached** | *''* | Attach the modal at the **top** or **bottom** of the screen.
 **icon** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
@@ -225,15 +225,15 @@ Argument | Default Value | Description
 **closeOnEscape** | *true* | If set true, you can close the modal only pressing the escape key.
 **overlay** | *true* | 	Enable or disable background overlay.
 **overlayClose** | *true* | If set true, you can close the modal just by clicking on the outer layer of dark modal.
-**overlayColor** | *rgba(0,0,0,0.4)* | Color overlay.
+**overlayColor** | *'rgba(0,0,0,0.4)'* | Color overlay.
 **timeout** | *0 or false* | 	Amount in milliseconds to close the modal or false to disable.
 **timeoutProgressbar** | *false* | 	Enable progress bar of timeout.
-**timeoutProgressbarColor** | *rgba(255,255,255,0.5)* | 	Progress bar color.
+**timeoutProgressbarColor** | *'rgba(255,255,255,0.5)'* | 	Progress bar color.
 **pauseOnHover** | false | It allows the timeout is paused when the cursor is on the modal.
-**transitionIn** | *comingIn* | Modal opening default transition.
-**transitionOut** | *comingOut* | Modal closing default transition.
-**transitionInOverlay** | *fadeIn* | Default transition of overlay opening.
-**transitionOutOverlay** | *fadeOut* | Default transition of overlay closure.
+**transitionIn** | *'comingI'n* | Modal opening default transition.
+**transitionOut** | *'comingOut'* | Modal closing default transition.
+**transitionInOverlay** | *'fadeIn'* | Default transition of overlay opening.
+**transitionOutOverlay** | *'fadeOut'* | Default transition of overlay closure.
 **onFullscreen** | *function() {}*	 | Callback function that will run when the modal enable or disable full screen.
 **onResize** | *function() {}*	 | Callback function that will be executed when a resize occurs.
 **onOpening** | *function() {}*	 | Callback function that will run when opening the modal.
