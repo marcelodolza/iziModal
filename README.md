@@ -96,11 +96,11 @@ ___
 
 - Closes the current and open the **Next** modal.
 ```html
-<button data-izimodal-next="">Next Modal</button>
+<button data-izimodal-next>Next Modal</button>
 ```
 - Closes the current and open the **Previous** modal.
 ```html
-<button data-izimodal-prev="">Previous Modal</button>
+<button data-izimodal-prev>Previous Modal</button>
 ```
 
 - Add **data-izimodal-group** to div of the modal for build a group with everyone involved.
@@ -110,7 +110,7 @@ ___
 
 - Sets **Loop** for the same modals in the group.
 ```html
-<div id="modal" class="iziModal" data-izimodal-loop=""></div>
+<div id="modal" class="iziModal" data-izimodal-loop></div>
 ```
 
 - Set a default **Title**.
