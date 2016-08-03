@@ -355,7 +355,7 @@ $('#modal').iziModal('setSubtitle', 'Subtitle');
 
 - **setIcon** - Change the icon of the modal.
 ```javascript
-$('#modal').iziModal('setIcon', 'icon');
+$('#modal').iziModal('setIcon', 'icon-home');
 ```
 
 - **setZindex** - Change the z-index CSS attribute of the modal.
