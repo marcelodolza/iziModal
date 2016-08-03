@@ -201,23 +201,24 @@ Argument | Default Value | Description
 **subtitle** | *''* | Caption that appears in the header below the title.
 **headerColor** | *#6d7d8d* | Color to fill the header background, will also be applied to the bottom edge of the modal.
 **theme** | *''* | Theme of the modal, can be empty or **"light"**.
+**attached** | *''* | Attach the modal at the **top** or **bottom** of the screen.
 **icon** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
 **iconColor** | *''* | Color of the header icon.
 **width** | *600* | Fixed width of the modal. You can use %, px, em or cm. If not using an unit of measure. It will be taken over the px unit.
 **padding** | *0* | Margin that will be applied to the inside of the modal.
-**radius** | *0* | Border-radius that will be applied in modal.
+**radius** | *3* | Border-radius that will be applied in modal.
 **zindex** | *999* | The z-index CSS attribute of the modal.
 **iframe** | *false* | Set true to apply an iframe inside the modal.
 **iframeHeight** | *null* | Fixed height of the iframe.
 **iframeURL** | *null* | Address that will open in the iframe inside the modal, if not set, the user can alternatively use the href link responsible for opening it.
 **focusInput** | *true* | If set true, whenever you open a modal, the first visible field is active.
-**group** | *true* | Create a group with everyone who has the same name, so can navigate between them.
-**loop** | *true* | It allows loop with modals of the same group.
+**group** | '' | Create a group with everyone who has the same name, so can navigate between them.
+**loop** | *false* | It allows loop with modals of the same group.
 **navigateCaption** | *true* | Show arrows to inform possible navigation.
 **navigateArrows** | *true* | Change the layout which displays the arrows to navigate between the modals. Can be: 'closeToModal' or 'closeScreenEdge'.
 **history** | *true* | Enable browsing history.
-**restoreDefaultContent** | *true* | Makes return the default modal content to be open again.
-**autoOpen** | *false* | 	If set true, the modal opens automatically without any user action.
+**restoreDefaultContent** | *false* | Makes return the default modal content to be open again.
+**autoOpen** | *0 or false* | 	If set true, the modal opens automatically without any user action.
 **bodyOverflow** | *false* | Forcing overflow hidden in the document when opening the modal, closing the modal, overflow will be restored.
 **fullscreen** | *false* | 	Allow button in header modal to expand.
 **openFullscreen** | *false* | 	Force to open modal in fullscreen.
@@ -229,8 +230,8 @@ Argument | Default Value | Description
 **timeoutProgressbar** | *false* | 	Enable progress bar of timeout.
 **timeoutProgressbarColor** | *rgba(255,255,255,0.5)* | 	Progress bar color.
 **pauseOnHover** | false | It allows the timeout is paused when the cursor is on the modal.
-**transitionInModal** | *transitionIn* | Modal opening default transition.
-**transitionOutModal** | *transitionOut* | Modal closing default transition.
+**transitionIn** | *comingIn* | Modal opening default transition.
+**transitionOut** | *comingOut* | Modal closing default transition.
 **transitionInOverlay** | *fadeIn* | Default transition of overlay opening.
 **transitionOutOverlay** | *fadeOut* | Default transition of overlay closure.
 **onFullscreen** | *function() {}*	 | Callback function that will run when the modal enable or disable full screen.
