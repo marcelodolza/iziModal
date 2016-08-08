@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.3.0
+* iziModal | v1.3.1
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
@@ -166,7 +166,9 @@
 					medida = "px";
 					wClear = String(wClear).split(",")[0];
 
-				if(isNaN(parseInt(options.width))){
+
+				if(isNaN(options.width)){
+					
 					if( String(options.width).indexOf("%") != -1){
 						medida = "%";
 					} else {
@@ -177,9 +179,10 @@
 	                'margin-left': -(wClear / 2) + medida,
 	                'max-width': parseInt(wClear) + medida
 	            });
-				that.mediaQueries = '<style rel="' + that.id + '">@media handheld, only screen and (max-width: ' + wClear + 'px) { #' + that.id + '{ width: 100% !important; max-width: 100% !important; margin-left: 0 !important; left: 0 !important; border-radius:0!important} #' + that.id + ' .'+PLUGIN_NAME+'-header{border-radius:0!important} }</style>';
-	        		
-	        	that.width = wClear;
+	            
+	        	that.width = that.$element.outerWidth();
+
+				that.mediaQueries = '<style rel="' + that.id + '">@media handheld, only screen and (max-width: ' + that.width + 'px) { #' + that.id + '{ width: 100% !important; max-width: 100% !important; margin-left: 0 !important; left: 0 !important; border-radius:0!important} #' + that.id + ' .'+PLUGIN_NAME+'-header{border-radius:0!important} }</style>';
 
 	        	$(document.body).append(that.mediaQueries);
 
@@ -296,17 +299,16 @@
 					});
 
 					var href = null;
-					if(this.options.iframeURL !== null){
+					try {
+						href = $(param.currentTarget).attr('href') !== "" ? $(param.currentTarget).attr('href') : null;
+					} catch(e) {
+						console.warn(e);
+					}
+					if( (this.options.iframeURL !== null) && (href === null || href === undefined)){
 						href = this.options.iframeURL;
-					} else {
-						try {
-							href = param.target.href;
-							if(href !== undefined){
-								href = param.target.href;
-							}
-						} catch(e) {
-							console.warn(e);
-						}
+					}
+					if(href === null || href === undefined){
+						alert("Failed to find iframe URL.");
 					}
 				    this.$element.find('.'+PLUGIN_NAME+'-iframe').attr('src', href);
 				}
@@ -465,6 +467,7 @@
 			            document.title = oldTitle + " - " + that.options.title;
 						document.location.hash = that.id;
 						document.title = oldTitle;
+						//history.pushState({}, that.options.title, "#"+that.id);
 					}
 	            })();
 
