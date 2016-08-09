@@ -18,6 +18,10 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 ___
 ### Version Log
 
+- **v1.3.1**
+  - ![alt text][bug] iframe URL (by event like click) not work with append childs - *Fixed.*
+  - ![alt text][bug] Widths with percentage does not work - *Fixed.*
+
 - **v1.3.0**
   - ![alt text][new] History support - *Implemented.*
   - ![alt text][new] Group support (data-iziModal-group) with caption and navigation - *Implemented.*
