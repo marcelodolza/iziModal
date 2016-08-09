@@ -18,6 +18,10 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 ___
 ### Version Log
 
+- **v1.3.2**
+  - ![alt text][new] setGroup to set new group name - *Implemented.*
+  - ![alt text][bug] group option work in some cases - *Fixed.*
+
 - **v1.3.1**
   - ![alt text][bug] iframe URL (by event like click) not work with append childs - *Fixed.*
   - ![alt text][bug] Widths with percentage does not work - *Fixed.*
@@ -301,6 +305,11 @@ $('#modal').iziModal('getState');
 - **getGroup** - Returns group information.
 ```javascript
 $('#modal').iziModal('getGroup');
+```
+
+- **setGroup** - Set a new group name.
+```javascript
+$('#modal').iziModal('setGroup', 'alerts');
 ```
 
 - **Next** - Skip to next modal to the same group.
