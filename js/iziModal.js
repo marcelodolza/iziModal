@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.3.1
+* iziModal | v1.3.2
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
@@ -72,12 +72,16 @@
             	index: null,
             	ids: []
             };
+            if(this.group.name === undefined && options.group !== ""){
+            	this.group.name = options.group;
+            	this.$element.attr('data-'+PLUGIN_NAME+'-group', options.group);
+            }
             if(this.$element.attr('data-'+PLUGIN_NAME+'-title') !== undefined){
             	options.title = this.$element.attr('data-'+PLUGIN_NAME+'-title');
             }
 			if(this.$element.attr('data-'+PLUGIN_NAME+'-subtitle') !== undefined){
             	options.subtitle = this.$element.attr('data-'+PLUGIN_NAME+'-subtitle');
-            }
+            }	
             if(this.$element.attr('data-'+PLUGIN_NAME+'-icon') !== undefined){
             	options.icon = this.$element.attr('data-'+PLUGIN_NAME+'-icon');
             }
@@ -189,22 +193,32 @@
 	            // Adjusting vertical positioning
 	            that.$element.css('margin-top', parseInt(-(that.$element.innerHeight() / 2)) + 'px');
 			})();
-            
-			(function setGroup(){
-				if(that.$element.attr('data-'+PLUGIN_NAME+'-group') !== undefined){
+		},
 
-	            	var count = 0;
-	            	$.each( $('.'+PLUGIN_NAME+'[data-'+PLUGIN_NAME+'-group='+that.group.name+']') , function(index, val) {
+		setGroup: function(groupName){
 
-						that.group.ids.push($(this).attr('id'));
+			var that = this,
+				group = this.group.name || groupName;
+				this.group.ids = [];
 
-						if(that.id == $(this).attr('id')){
-							that.group.index = count;
-						}
-	        			count++;
-	            	});
-	            }
-			})();
+			if( groupName !== undefined && groupName !== this.group.name){
+				group = groupName;
+				this.group.name = group;
+				this.$element.attr('data-'+PLUGIN_NAME+'-group', group);				
+			}
+			if(group !== undefined && group !== ""){
+
+            	var count = 0;
+            	$.each( $('.'+PLUGIN_NAME+'[data-'+PLUGIN_NAME+'-group='+group+']') , function(index, val) {
+
+					that.group.ids.push($(this).attr('id'));
+
+					if(that.id == $(this).attr('id')){
+						that.group.index = count;
+					}
+        			count++;
+            	});
+            }
 		},
 
 		toggle: function () {
@@ -287,6 +301,7 @@
 
 	            this.$element.trigger(STATES.OPENING);
 				this.state = STATES.OPENING;
+				this.setGroup();
 
 				// console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Opening...');
 
@@ -320,7 +335,6 @@
 				if (that.options.onOpening && typeof(that.options.onOpening) === "function") {
 			        that.options.onOpening(this);
 			    }			    
-
 				(function open(){
 
 			    	if(that.group.ids.length > 1 ){
