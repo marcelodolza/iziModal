@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.3.2
+* iziModal | v1.3.3
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
@@ -72,6 +72,8 @@
             	index: null,
             	ids: []
             };
+			this.$element.attr('aria-hidden', 'true');
+
             if(this.group.name === undefined && options.group !== ""){
             	this.group.name = options.group;
             	this.$element.attr('data-'+PLUGIN_NAME+'-group', options.group);
@@ -84,6 +86,9 @@
             }	
             if(this.$element.attr('data-'+PLUGIN_NAME+'-icon') !== undefined){
             	options.icon = this.$element.attr('data-'+PLUGIN_NAME+'-icon');
+            }
+            if(this.$element.attr('data-'+PLUGIN_NAME+'-iconText') !== undefined){
+            	options.iconText = this.$element.attr('data-'+PLUGIN_NAME+'-iconText');
             }
             if(this.options.loop === true){
             	this.$element.attr('data-'+PLUGIN_NAME+'-loop', true);
@@ -120,10 +125,17 @@
                     this.$element.css('border-bottom', '3px solid ' + options.headerColor + '');
                     this.$header.css('background', this.options.headerColor);
                 }
-                if (options.icon !== null) {
-                    this.$header.prepend('<i class="'+PLUGIN_NAME+'-header-icon ' + options.icon + '"></i>');
-                    this.$header.find('.'+PLUGIN_NAME+'-header-icon').css('color', options.iconColor);
-                }
+				if (options.icon !== null || options.iconText !== null){
+
+                    this.$header.prepend('<i class="'+PLUGIN_NAME+'-header-icon"></i>');
+
+	                if (options.icon !== null) {
+	                    this.$header.find('.'+PLUGIN_NAME+'-header-icon').addClass(options.icon).css('color', options.iconColor);
+					}
+	                if (options.iconText !== null){
+	                	this.$header.find('.'+PLUGIN_NAME+'-header-icon').html(options.iconText);
+	                }
+				}
                 this.$element.css('overflow', 'hidden').prepend(this.$header);
             }
 
@@ -142,10 +154,12 @@
             }
 
             if(options.theme !== ""){
-				this.$element.addClass(options.theme);
+				if(options.theme === "light"){
+					this.$element.addClass(PLUGIN_NAME+"-light");
+				} else {
+					this.$element.addClass(options.theme);
+				}
             }
-
-            this.$element.addClass(PLUGIN_NAME);
 
 			if(options.openFullscreen === true){
 			    this.isFullscreen = true;
@@ -240,8 +254,9 @@
 			    
 			    // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
 
-		    	that.$element.trigger(STATES.OPENED);
 				that.state = STATES.OPENED;
+		    	that.$element.trigger(STATES.OPENED);
+
 				if (that.options.onOpened && typeof(that.options.onOpened) === "function") {
 			        that.options.onOpened(that);
 			    }
@@ -299,9 +314,10 @@
 
 		    	bindEvents();
 
-	            this.$element.trigger(STATES.OPENING);
-				this.state = STATES.OPENING;
 				this.setGroup();
+				this.state = STATES.OPENING;
+	            this.$element.trigger(STATES.OPENING);
+				this.$element.attr('aria-hidden', 'false');
 
 				// console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Opening...');
 
@@ -329,11 +345,11 @@
 				}
 
 				if (this.options.bodyOverflow || isMobile){
-					$(document.body).css('overflow', 'hidden');
+					$('html').addClass(PLUGIN_NAME+'-isOverflow');
 				}
 
-				if (that.options.onOpening && typeof(that.options.onOpening) === "function") {
-			        that.options.onOpening(this);
+				if (this.options.onOpening && typeof(this.options.onOpening) === "function") {
+			        this.options.onOpening(this);
 			    }			    
 				(function open(){
 
@@ -476,7 +492,7 @@
 				})();
 
 	            (function setUrlHash(){
-					if(that.options.history || isMobile){
+					if(that.options.history){
 		            	var oldTitle = document.title;
 			            document.title = oldTitle + " - " + that.options.title;
 						document.location.hash = that.id;
@@ -505,13 +521,13 @@
                 }
 
 				if (that.options.bodyOverflow || isMobile){
-					$(document.body).css('overflow', 'initial');
+					$('html').removeClass(PLUGIN_NAME+'-isOverflow');
 				}
 
-				$(document.body).removeClass(PLUGIN_NAME+'-attached');
+				$('html').removeClass(PLUGIN_NAME+'-isAttached');
 
-                that.$element.trigger(STATES.CLOSED);
                 that.state = STATES.CLOSED;
+                that.$element.trigger(STATES.CLOSED);
                 
                 // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
 
@@ -530,6 +546,7 @@
 
 				this.state = STATES.CLOSING;
 				this.$element.trigger(STATES.CLOSING);
+				this.$element.attr('aria-hidden', 'true');
 
 				// console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Closing...');
 
@@ -718,10 +735,19 @@
 
 		setIcon: function(icon){
 
-			if (this.options.icon !== null) {
-				this.$header.find('.'+PLUGIN_NAME+'-header-icon').attr('class', PLUGIN_NAME+'-header-icon ' + icon);
-				this.options.icon = icon;
+			console.log(this.$header.find('.'+PLUGIN_NAME+'-header-icon').length);
+
+			if( this.$header.find('.'+PLUGIN_NAME+'-header-icon').length === 0 ){
+				this.$header.prepend('<i class="'+PLUGIN_NAME+'-header-icon"></i>');
 			}
+			this.$header.find('.'+PLUGIN_NAME+'-header-icon').attr('class', PLUGIN_NAME+'-header-icon ' + icon);
+			this.options.icon = icon;
+		},
+
+		setIconText: function(iconText){
+
+			this.$header.find('.'+PLUGIN_NAME+'-header-icon').html(iconText);
+			this.options.iconText = iconText;
 		},
 
 		setHeaderColor: function(headerColor){
@@ -792,14 +818,14 @@
 					// Se a altura da janela é menor que o modal com iframe
 					if(windowHeight < (this.options.iframeHeight + this.headerHeight) || this.isFullscreen === true){
 
-						$(document.body).addClass(PLUGIN_NAME+'-attached');
+						$('html').addClass(PLUGIN_NAME+'-isAttached');
 
 						this.$element.find('.'+PLUGIN_NAME+'-iframe').css({
 							'height': parseInt(windowHeight - this.headerHeight) + 'px',
 						});
 
 					} else {
-						$(document.body).removeClass(PLUGIN_NAME+'-attached');
+						$('html').removeClass(PLUGIN_NAME+'-isAttached');
 
 					    this.$element.find('.'+PLUGIN_NAME+'-iframe').css({
 					        'height': parseInt(this.options.iframeHeight) + 'px',
@@ -809,7 +835,7 @@
 				} else {
 
 	                if (windowHeight > (contentHeight + this.headerHeight) && this.isFullscreen !== true) {
-						$(document.body).removeClass(PLUGIN_NAME+'-attached');
+						$('html').removeClass(PLUGIN_NAME+'-isAttached');
 	                    this.$element.find('.'+PLUGIN_NAME+'-wrap').css({'height': 'auto'});
 	                }
 
@@ -817,8 +843,8 @@
 	                // Se o modal é maior que a altura da janela ou 
                 	if ((contentHeight + this.headerHeight) > windowHeight || this.$element.innerHeight() < contentHeight || this.isFullscreen === true) {
 
-		                if( !$(document.body).hasClass(PLUGIN_NAME+'-attached') ){
-							$(document.body).addClass(PLUGIN_NAME+'-attached');
+		                if( !$('html').hasClass(PLUGIN_NAME+'-isAttached') ){
+							$('html').addClass(PLUGIN_NAME+'-isAttached');
 		                }
 
 	                    this.$element.find('.'+PLUGIN_NAME+'-wrap').css({
@@ -849,23 +875,33 @@
 
 	$window.off('hashchange load').on('hashchange load', function(e) {
 
+		var modalHash = document.location.hash;
+
 		if(autoOpenModal === 0){
 
-			if(document.location.hash !== ""){
+			if(modalHash !== ""){
 				
 				$.each( $('.'+PLUGIN_NAME) , function(index, modal) {
 					 var state = $(modal).iziModal('getState');
 					 if(state == 'opened' || state == 'opening'){
 					 	
-					 	if( "#" + $(modal).attr('id') !== document.location.hash){
+					 	if( "#" + $(modal).attr('id') !== modalHash){
 					 		$(modal).iziModal('close');
 					 	}
 					 }
 				});
 
-				setTimeout(function(){
-					$(document.location.hash).iziModal("open");
-				},200);
+				var data = $(modalHash).data();
+
+				if(e.type === 'load'){
+					if(data.iziModal.options.autoOpen !== false){
+						$(modalHash).iziModal("open");
+					}
+				} else {
+					setTimeout(function(){
+						$(modalHash).iziModal("open");
+					},200);
+				}
 
 			} else {
 
@@ -933,32 +969,37 @@
 
 	$.fn[PLUGIN_NAME] = function(option, args) {
 
-		var $this = $(this),
-			data = $this.data(PLUGIN_NAME),
-			options = $.extend({}, $.fn.iziModal.defaults, $this.data(), typeof option == 'object' && option);
+		var objs = this;
 
-		if (!data && (!option || typeof option == 'object')){
+		for (var i=0; i<objs.length; i++) {
+			
+			var $this = $(objs[i]);
+			var data = $this.data(PLUGIN_NAME);
+			var options = $.extend({}, $.fn[PLUGIN_NAME].defaults, $this.data(), typeof option == 'object' && option);
 
-			$this.data(PLUGIN_NAME, (data = new iziModal(this, options)));
-		}
-		else if (typeof option == 'string' && typeof data != 'undefined'){
+			if (!data && (!option || typeof option == 'object')){
 
-			return data[option].apply(data, [].concat(args));
-		}
-
-		if (options.autoOpen){ // Automatically open the modal if autoOpen setted true
-
-			if( !isNaN(parseInt(options.autoOpen)) ){
-				
-				setTimeout(function(){
-					data.open();
-				}, options.autoOpen);
-
-			} else if(options.autoOpen === true ) {
-				data.open();
+				$this.data(PLUGIN_NAME, (data = new iziModal($this, options)));
 			}
-			autoOpenModal++;
+			else if (typeof option == 'string' && typeof data != 'undefined'){
+
+				return data[option].apply(data, [].concat(args));
+			}
+			if (options.autoOpen){ // Automatically open the modal if autoOpen setted true or ms
+
+				if( !isNaN(parseInt(options.autoOpen)) ){
+					
+					setTimeout(function(){
+						data.open();
+					}, options.autoOpen);
+
+				} else if(options.autoOpen === true ) {
+					data.open();
+				}
+				autoOpenModal++;
+			}
 		}
+
         return this;
     };
 
@@ -968,7 +1009,8 @@
 	    headerColor: '#88A0B9',
 	    theme: '',  // light
 	    attached: '', // bottom, top
-	    icon: '',
+	    icon: null,
+	    iconText: null,
 	    iconColor: '',
 	    width: 600,
 	    padding: 0,
