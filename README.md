@@ -15,8 +15,16 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo] | ![alt text][logo]
 
 
+- All modern browsers are supported (Tested in Chrome, Firefox, Opera, Safari, IE9+ and Edge).
+- Bugs? create a issue [here](https://github.com/dolce/iziModal/issues).
+
 ___
 ### Version Log
+
+- **v1.3.3**
+  - ![alt text][new] Text icons support (option, data-attr and set method)  - *Implemented.*
+  - ![alt text][bug] History was always active on mobile - *Fixed.*
+  - ![alt text][bug] It was not possible to instantiate multiple modals at once - *Fixed.*
 
 - **v1.3.2**
   - ![alt text][new] setGroup to set new group name - *Implemented.*
@@ -134,6 +142,11 @@ ___
 - Set a default **Icon** class.
 ```html
 <div id="modal" class="iziModal" data-izimodal-icon="icon-star"></div>
+```
+
+- Set a default **IconText**.
+```html
+<div id="modal" class="iziModal" data-izimodal-icontext="star"></div>
 ```
 
 - Set a default **transitionI*n* and **transitionOut**.
@@ -366,9 +379,14 @@ $('#modal').iziModal('setTitle', 'Title');
 $('#modal').iziModal('setSubtitle', 'Subtitle');
 ```
 
-- **setIcon** - Change the icon of the modal.
+- **setIcon** - Change the class of icon.
 ```javascript
 $('#modal').iziModal('setIcon', 'icon-home');
+```
+
+- **setIconText** - Change the text of font icon.
+```javascript
+$('#modal').iziModal('setIconText', 'icon');
 ```
 
 - **setZindex** - Change the z-index CSS attribute of the modal.
