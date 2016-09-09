@@ -29,6 +29,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "2"
+    "jquery": "~2"
   }
 }
