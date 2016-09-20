@@ -163,7 +163,33 @@
     .iziModal .iziModal-header.iziModal-noSubtitle .iziModal-button{
         top: 6px;
     }
+    
+    /* RTL */
 
+    .iziModal-rtl {
+        direction: rtl;
+    }
+    .iziModal-rtl .iziModal-header {
+        padding: 14px 18px 15px 40px;
+    }
+    .iziModal-rtl .iziModal-header-icon {
+        float: right;
+        padding: 0 0 0 15px;
+    }
+    .iziModal-rtl .iziModal-button-close {
+        left: 10px;
+        right: initial;
+    }
+    .iziModal-rtl .iziModal-button-fullscreen {
+        right: initial;
+        left: 44px;
+    }
+    .iziModal-rtl .iziModal-header.iziModal-noSubtitle {
+        padding: 10px 15px 12px 40px;
+    }    
+    .iziModal-rtl .iziModal-header.iziModal-noSubtitle .iziModal-header-icon {
+        padding: 0 0 0 13px;
+    }
     /* LIGHT THEME */
 
     .iziModal.iziModal-light .iziModal-header-icon{
