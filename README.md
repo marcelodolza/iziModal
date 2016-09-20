@@ -183,7 +183,7 @@ $("#modal").iziModal({
     headerColor: '#88A0B9',
     theme: '',  // light
     attached: '', // bottom, top
-    icon: '',
+    icon: null,
     iconText: null,
     iconColor: '',
     rtl: false,
