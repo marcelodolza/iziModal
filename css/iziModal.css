@@ -165,9 +165,14 @@
     .iziModal .iziModal-header.iziModal-noSubtitle .iziModal-button{
         top: 6px;
     }
-
+    
     /* RTL */
 
+<<<<<<< HEAD
+    /* RTL */
+
+=======
+>>>>>>> origin/master
     .iziModal-rtl {
         direction: rtl;
     }
@@ -192,7 +197,10 @@
     .iziModal-rtl .iziModal-header.iziModal-noSubtitle .iziModal-header-icon {
         padding: 0 0 0 13px;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     /* LIGHT THEME */
 
     .iziModal.iziModal-light .iziModal-header-icon{

@@ -103,8 +103,12 @@
             
             if (options.fullscreen === true) {
             	this.$header.append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
+<<<<<<< HEAD
 
 				if (options.rtl === true) {
+=======
+				if (options.rtl) {
+>>>>>>> origin/master
 					this.$header.css('padding-left', '76px');
 				} else {
 					this.$header.css('padding-right', '76px');
@@ -186,6 +190,10 @@
 
 			if(options.attached === 'bottom' || this.$element.attr('data-'+PLUGIN_NAME+'-attached') == 'bottom'){
 			    this.$element.addClass('isAttachedBottom');
+			}
+			
+			if(options.rtl) {
+				this.$element.addClass(PLUGIN_NAME+'-rtl');
 			}
 
             (function setPositioning(){
@@ -593,7 +601,11 @@
 
 				if (transitionOut !== '') {
 
+<<<<<<< HEAD
 	                this.$element.attr('class', PLUGIN_NAME + " transitionOut " + transitionOut + " " + this.options.theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : '') + " " + String(this.$element.hasClass('isAttached') ? "isAttached" : "") + " " + String((this.options.attached === 'top') ? 'isAttachedTop' : '') + " " + String((this.options.attached === 'bottom') ? 'isAttachedBottom' : '') + (this.options.rtl ? PLUGIN_NAME+'-rtl' : ''));
+=======
+	                this.$element.attr('class', PLUGIN_NAME + " transitionOut " + transitionOut + " " + this.options.theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : '') + " " + String((this.options.attached === 'top') ? 'isAttachedTop' : '') + " " + String((this.options.attached === 'bottom') ? 'isAttachedBottom' : '') + (this.options.rtl ? PLUGIN_NAME+'-rtl' : ''));
+>>>>>>> origin/master
 					this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
 					this.$navigate.attr('class', PLUGIN_NAME + "-navigate " + this.options.transitionOutOverlay);
 
@@ -1107,6 +1119,7 @@
 	    overlayClose: true,
 	    overlayColor: 'rgba(0, 0, 0, 0.4)',
 	    timeout: false,
+		rtl: false,
 	    timeoutProgressbar: false,
 	    pauseOnHover: false,
 	    timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
