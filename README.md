@@ -21,6 +21,15 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 ___
 ### Version Log
 
+- **v1.4.0**
+  - ![alt text][new] RTL support - *Implemented.*
+  - ![alt text][new] WAI-ARIA support - *Implemented.*
+  - ![alt text][bug] An error occurred if there was a hash did not belong to the modal - *Fixed.*
+  - ![alt text][bug] It breaks the layout if "iziModal" class is missing - *Fixed.*
+  - ![alt text][bug] The vertical positioning of the modal, sometimes was not applied correctly - *Fixed.*
+  - ![alt text][bug] Transitions of modals positioning do not behave correctly - *Fixed.*
+  - ![alt text][bug] The modals group navigation did not work correctly If any modal was destroyed - *Fixed.*
+
 - **v1.3.3**
   - ![alt text][new] Text icons support (option, data-attr and set method)  - *Implemented.*
   - ![alt text][bug] History was always active on mobile - *Fixed.*
@@ -175,7 +184,9 @@ $("#modal").iziModal({
     theme: '',  // light
     attached: '', // bottom, top
     icon: '',
+    iconText: null,
     iconColor: '',
+    rtl: false,
     width: 600,
     padding: 0,
     radius: 3,
@@ -224,7 +235,9 @@ Argument | Default Value | Description
 **theme** | *''* | Theme of the modal, can be empty or **"light"**.
 **attached** | *''* | Attach the modal at the **top** or **bottom** of the screen.
 **icon** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
+**iconText** | *null* | Icon text (font-icon using text) that will be displayed in modal header.
 **iconColor** | *''* | Color of the header icon.
+**rtl** | *false* | Right To Left option.
 **width** | *600* | Fixed width of the modal. You can use %, px, em or cm. If not using an unit of measure. It will be taken over the px unit.
 **padding** | *0* | Margin that will be applied to the inside of the modal.
 **radius** | *3* | Border-radius that will be applied in modal.
