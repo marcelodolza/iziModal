@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.3.3
+* iziModal | v1.4.0
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
@@ -73,7 +73,12 @@
             	ids: []
             };
 			this.$element.attr('aria-hidden', 'true');
+			this.$element.attr('aria-labelledby', this.id);
+			this.$element.attr('role', 'dialog');
 
+			if( !this.$element.hasClass('iziModal') ){
+				this.$element.addClass('iziModal');
+			}
             if(this.group.name === undefined && options.group !== ""){
             	this.group.name = options.group;
             	this.$element.attr('data-'+PLUGIN_NAME+'-group', options.group);
@@ -98,7 +103,12 @@
             
             if (options.fullscreen === true) {
             	this.$header.append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
-            	this.$header.css('padding-right', '76px');
+
+				if (options.rtl === true) {
+					this.$header.css('padding-left', '76px');
+				} else {
+					this.$header.css('padding-right', '76px');
+				}
             }
 
 			if (options.timeoutProgressbar === true && !isNaN(parseInt(options.timeout)) && options.timeout !== false && options.timeout !== 0) {
@@ -155,7 +165,7 @@
 
             if(options.theme !== ""){
 				if(options.theme === "light"){
-					this.$element.addClass(PLUGIN_NAME+"-light");
+					this.$element.addClass(PLUGIN_NAME+'-light');
 				} else {
 					this.$element.addClass(options.theme);
 				}
@@ -164,6 +174,10 @@
 			if(options.openFullscreen === true){
 			    this.isFullscreen = true;
 			    this.$element.addClass('isFullscreen');
+			}
+
+			if(options.rtl === true) {
+				this.$element.addClass(PLUGIN_NAME+'-rtl');
 			}
 
 			if(options.attached === 'top' || this.$element.attr('data-'+PLUGIN_NAME+'-attached') == 'top' ){
@@ -200,7 +214,11 @@
 	            
 	        	that.width = that.$element.outerWidth();
 
-				that.mediaQueries = '<style rel="' + that.id + '">@media handheld, only screen and (max-width: ' + that.width + 'px) { #' + that.id + '{ width: 100% !important; max-width: 100% !important; margin-left: 0 !important; left: 0 !important; border-radius:0!important} #' + that.id + ' .'+PLUGIN_NAME+'-header{border-radius:0!important} }</style>';
+	        	if(parseInt(wClear) > that.width){	
+	        		that.width = parseInt(wClear);
+	        	}
+
+				that.mediaQueries = '<style rel="' + that.id + '">@media handheld, only screen and (max-width: ' + that.width + 'px) { #' + that.id + '{ width:100% !important; max-width:100% !important; margin-left:0 !important; left:0 !important; right:0 !important; border-radius:0!important} #' + that.id + ' .'+PLUGIN_NAME+'-header{border-radius:0!important} }</style>';
 
 	        	$(document.body).append(that.mediaQueries);
 
@@ -346,6 +364,9 @@
 
 				if (this.options.bodyOverflow || isMobile){
 					$('html').addClass(PLUGIN_NAME+'-isOverflow');
+					if(isMobile){
+						$('body').css('overflow', 'hidden');
+					}
 				}
 
 				if (this.options.onOpening && typeof(this.options.onOpening) === "function") {
@@ -516,27 +537,32 @@
 			var that = this;
 
 			function closed(){
+                
+                // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
+                that.state = STATES.CLOSED;
+                that.$element.trigger(STATES.CLOSED);
+
                 if (that.options.iframe === true) {
                     that.$element.find('.'+PLUGIN_NAME+'-iframe').attr('src', "");
                 }
 
 				if (that.options.bodyOverflow || isMobile){
 					$('html').removeClass(PLUGIN_NAME+'-isOverflow');
-				}
-
-				$('html').removeClass(PLUGIN_NAME+'-isAttached');
-
-                that.state = STATES.CLOSED;
-                that.$element.trigger(STATES.CLOSED);
-                
-                // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
-
+					if(isMobile){
+						$('body').css('overflow','auto');
+					}
+				}                
+				
 				if (that.options.onClosed && typeof(that.options.onClosed) === "function") {
 			        that.options.onClosed(that);
 			    }
 
 				if(that.options.restoreDefaultContent === true){
 				    that.$element.find('.'+PLUGIN_NAME+'-content').html( that.content );
+				}
+
+				if( $('.'+PLUGIN_NAME+':visible').attr('id') === undefined){
+					$('html').removeClass(PLUGIN_NAME+'-isAttached');
 				}
 			}
 
@@ -567,7 +593,7 @@
 
 				if (transitionOut !== '') {
 
-	                this.$element.attr('class', PLUGIN_NAME + " transitionOut " + transitionOut + " " + this.options.theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : '') + " " + String((this.options.attached === 'top') ? 'isAttachedTop' : '') + " " + String((this.options.attached === 'bottom') ? 'isAttachedBottom' : ''));
+	                this.$element.attr('class', PLUGIN_NAME + " transitionOut " + transitionOut + " " + this.options.theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : '') + " " + String(this.$element.hasClass('isAttached') ? "isAttached" : "") + " " + String((this.options.attached === 'top') ? 'isAttachedTop' : '') + " " + String((this.options.attached === 'bottom') ? 'isAttachedBottom' : '') + (this.options.rtl ? PLUGIN_NAME+'-rtl' : ''));
 					this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
 					this.$navigate.attr('class', PLUGIN_NAME + "-navigate " + this.options.transitionOutOverlay);
 
@@ -618,17 +644,34 @@
 			setTimeout(function(){
 
 				var loop = $('.'+PLUGIN_NAME+'[data-'+PLUGIN_NAME+'-group="'+that.group.name+'"][data-'+PLUGIN_NAME+'-loop]').length;
+				for (var i = that.group.index+1; i <= that.group.ids.length; i++) {
 
-				if((loop > 0 || that.options.loop === true) && (that.group.index+1) === that.group.ids.length){
+					try {
+						modals.in = $("#"+that.group.ids[i]).data().iziModal;
+					} catch(log) {
+						console.warn("No next modal");
+					}
+					if(typeof modals.in !== 'undefined'){
 
-					$("#"+that.group.ids[0]).iziModal('open', { transition: transitionIn });
-					modals.in = $("#"+that.group.ids[0]).data().iziModal;
+						$("#"+that.group.ids[i]).iziModal('open', { transition: transitionIn });
+						break;
 
-				} else if(that.group.index+1 < that.group.ids.length){
+					} else {
 
-					$("#"+that.group.ids[that.group.index+1]).iziModal('open', { transition: transitionIn });
-					modals.in = $("#"+that.group.ids[that.group.index+1]).data().iziModal;
+						if(i == that.group.ids.length && loop > 0 || that.options.loop === true){
+
+							for (var index = 0; index <= that.group.ids.length; index++) {
+
+								modals.in = $("#"+that.group.ids[index]).data().iziModal;
+								if(typeof modals.in !== 'undefined'){
+									$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });								
+									break;
+								}
+							}
+						}
+					}
 				}
+
 			}, 200);
 
 			$(document).trigger( PLUGIN_NAME + "-group-change", modals );
@@ -647,7 +690,9 @@
             	modal = $(e.currentTarget);
             	transitionIn = modal.attr('data-'+PLUGIN_NAME+'-transitionIn');
             	transitionOut = modal.attr('data-'+PLUGIN_NAME+'-transitionOut');
+            	
 			} else if(e !== undefined){
+
 				if(e.transitionIn !== undefined){
 					transitionIn = e.transitionIn;
 				}
@@ -659,18 +704,37 @@
 			this.close({transition:transitionOut});
 
 			setTimeout(function(){
+
 				var loop = $('.'+PLUGIN_NAME+'[data-'+PLUGIN_NAME+'-group="'+that.group.name+'"][data-'+PLUGIN_NAME+'-loop]').length;
 
-				if( (loop > 0 || that.options.loop === true) && that.group.index === 0){
+				for (var i = that.group.index; i >= 0; i--) {
 
-					$("#"+that.group.ids[that.group.ids.length-1]).iziModal('open', { transition: transitionIn });
-					modals.in = $("#"+that.group.ids[that.group.ids.length-1]).data().iziModal;
+					try {
+						modals.in = $("#"+that.group.ids[i-1]).data().iziModal;
+					} catch(log) {
+						console.warn("No previous modal");
+					}
+					if(typeof modals.in !== 'undefined'){
 
-				} else if(that.group.index > 0){
+						$("#"+that.group.ids[i-1]).iziModal('open', { transition: transitionIn });
+						break;
 
-					$("#"+that.group.ids[that.group.index-1]).iziModal('open', { transition: transitionIn });
-					modals.in = $("#"+that.group.ids[that.group.index-1]).data().iziModal;
+					} else {
+
+						if(i === 0 && loop > 0 || that.options.loop === true){
+
+							for (var index = that.group.ids.length-1; index >= 0; index--) {
+
+								modals.in = $("#"+that.group.ids[index]).data().iziModal;
+								if(typeof modals.in !== 'undefined'){
+									$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });								
+									break;
+								}
+							}
+						}
+					}
 				}
+
 			}, 200);
 
 			$(document).trigger( PLUGIN_NAME + "-group-change", modals );
@@ -734,8 +798,6 @@
 		},
 
 		setIcon: function(icon){
-
-			console.log(this.$header.find('.'+PLUGIN_NAME+'-header-icon').length);
 
 			if( this.$header.find('.'+PLUGIN_NAME+'-header-icon').length === 0 ){
 				this.$header.prepend('<i class="'+PLUGIN_NAME+'-header-icon"></i>');
@@ -819,6 +881,7 @@
 					if(windowHeight < (this.options.iframeHeight + this.headerHeight) || this.isFullscreen === true){
 
 						$('html').addClass(PLUGIN_NAME+'-isAttached');
+						this.$element.addClass('isAttached');
 
 						this.$element.find('.'+PLUGIN_NAME+'-iframe').css({
 							'height': parseInt(windowHeight - this.headerHeight) + 'px',
@@ -826,6 +889,7 @@
 
 					} else {
 						$('html').removeClass(PLUGIN_NAME+'-isAttached');
+						this.$element.removeClass('isAttached');
 
 					    this.$element.find('.'+PLUGIN_NAME+'-iframe').css({
 					        'height': parseInt(this.options.iframeHeight) + 'px',
@@ -836,6 +900,7 @@
 
 	                if (windowHeight > (contentHeight + this.headerHeight) && this.isFullscreen !== true) {
 						$('html').removeClass(PLUGIN_NAME+'-isAttached');
+						this.$element.removeClass('isAttached');
 	                    this.$element.find('.'+PLUGIN_NAME+'-wrap').css({'height': 'auto'});
 	                }
 
@@ -845,6 +910,7 @@
 
 		                if( !$('html').hasClass(PLUGIN_NAME+'-isAttached') ){
 							$('html').addClass(PLUGIN_NAME+'-isAttached');
+							this.$element.addClass('isAttached');
 		                }
 
 	                    this.$element.find('.'+PLUGIN_NAME+'-wrap').css({
@@ -866,7 +932,7 @@
             }
 
             // Corrige margin-top caso o modal sofra alterações na altura de seu conteúdo
-            if (this.$element.css('margin-top') != modalMargin && this.$element.css('margin-top') != "0px") {
+            if (this.$element.css('margin-top') != modalMargin && this.$element.css('margin-top') != "0px" && !$('html').hasClass(PLUGIN_NAME+'-isAttached')) {
                 this.$element.css('margin-top', modalMargin);
             }
 		}
@@ -892,15 +958,20 @@
 				});
 
 				var data = $(modalHash).data();
-
-				if(e.type === 'load'){
-					if(data.iziModal.options.autoOpen !== false){
-						$(modalHash).iziModal("open");
+				try {
+					if(typeof data !== 'undefined'){
+						if(e.type === 'load'){
+							if(data.iziModal.options.autoOpen !== false){
+								$(modalHash).iziModal("open");
+							}
+						} else {
+							setTimeout(function(){
+								$(modalHash).iziModal("open");
+							},200);
+						}
 					}
-				} else {
-					setTimeout(function(){
-						$(modalHash).iziModal("open");
-					},200);
+				} catch(log) {
+					console.error(log);
 				}
 
 			} else {
@@ -1012,6 +1083,7 @@
 	    icon: null,
 	    iconText: null,
 	    iconColor: '',
+	    rtl: false,
 	    width: 600,
 	    padding: 0,
 	    radius: 3,
