@@ -3,7 +3,10 @@
   "version": "1.4.0",
   "description": "Elegant, responsive, flexible and lightweight modal plugin with jQuery.",
   "readmeFilename": "README.md",
-  "main": "index.js",
+  "main": [
+    "js/iziModal.js",
+    "css/iziModal.css"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dolce/iziModal.git"
