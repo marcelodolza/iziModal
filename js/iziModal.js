@@ -187,10 +187,6 @@
 			if(options.attached === 'bottom' || this.$element.attr('data-'+PLUGIN_NAME+'-attached') == 'bottom'){
 			    this.$element.addClass('isAttachedBottom');
 			}
-			
-			if(options.rtl) {
-				this.$element.addClass(PLUGIN_NAME+'-rtl');
-			}
 
             (function setPositioning(){
 
@@ -1111,7 +1107,6 @@
 	    overlayClose: true,
 	    overlayColor: 'rgba(0, 0, 0, 0.4)',
 	    timeout: false,
-		rtl: false,
 	    timeoutProgressbar: false,
 	    pauseOnHover: false,
 	    timeoutProgressbarColor: 'rgba(255,255,255,0.5)',

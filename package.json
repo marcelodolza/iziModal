@@ -9,7 +9,7 @@
     "url": "git+https://github.com/dolce/iziModal.git"
   },
   "dependencies":{
-    "jquery": "^2.0"
+    "jquery": "~2"
   },
   "keywords": [
     "izimodal",
