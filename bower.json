@@ -1,7 +1,10 @@
 {
   "name": "izimodal",
   "description": "Elegant, responsive, flexible and lightweight modal plugin with jQuery.",
-  "main": "index.js",
+  "main": [
+    "js/iziModal.js",
+    "css/iziModal.css"
+  ],
   "authors": [
     {
       "name": "Marcelo Dolce",
