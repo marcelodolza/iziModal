@@ -957,8 +957,8 @@
 					 }
 				});
 
-				var data = $(modalHash).data();
 				try {
+					var data = $(modalHash).data();
 					if(typeof data !== 'undefined'){
 						if(e.type === 'load'){
 							if(data.iziModal.options.autoOpen !== false){
@@ -971,7 +971,7 @@
 						}
 					}
 				} catch(log) {
-					console.error(log);
+					console.info(log);
 				}
 
 			} else {
