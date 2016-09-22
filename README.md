@@ -16,7 +16,7 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 
 
 - All modern browsers are supported (Tested in Chrome, Firefox, Opera, Safari, IE9+ and Edge).
-- Bugs? create a issue [here](https://github.com/dolce/iziModal/issues).
+- Bugs? create an issue [here](https://github.com/dolce/iziModal/issues).
 
 ___
 ### Version Log
