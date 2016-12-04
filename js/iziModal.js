@@ -906,7 +906,7 @@
 
 	                // subistuido (contentHeight + this.headerHeight) por this.$element.innerHeight()
 	                // Se o modal é maior que a altura da janela ou 
-                	if ((contentHeight + this.headerHeight) > windowHeight || this.$element.innerHeight() < contentHeight || this.isFullscreen === true) {
+                	if ((contentHeight + this.headerHeight) > windowHeight || Math.ceil(this.$element.innerHeight()) < contentHeight || this.isFullscreen === true) {
 
 		                if( !$('html').hasClass(PLUGIN_NAME+'-isAttached') ){
 							$('html').addClass(PLUGIN_NAME+'-isAttached');
