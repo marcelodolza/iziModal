@@ -23,7 +23,12 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 ___
 ### Version Log
 
-- **v1.4.0**
+- **v1.4.2**
+  - ![alt text][new] All the options can now be used through the data-iziModal-optionName attribute - *Implemented.*
+  - ![alt text][bug] Inaccurate modal height calculation - *Fixed.*
+  - ![alt text][bug] The Light theme was not applied correctly - *Fixed.*
+
+- **v1.4.0/1.4.1**
   - ![alt text][new] RTL support - *Implemented.*
   - ![alt text][new] WAI-ARIA support - *Implemented.*
   - ![alt text][bug] An error occurred if there was a hash did not belong to the modal - *Fixed.*
@@ -130,6 +135,8 @@ ___
 <button data-izimodal-prev>Previous Modal</button>
 ```
 
+#### Data-attr to Modal
+
 - Add **data-izimodal-group** to div of the modal for build a group with everyone involved.
 ```html
 <div id="modal" class="iziModal" data-izimodal-group="alerts"></div>
@@ -140,36 +147,8 @@ ___
 <div id="modal" class="iziModal" data-izimodal-loop></div>
 ```
 
-- Set a default **Title**.
-```html
-<div id="modal" class="iziModal" data-izimodal-title="Welcome to the iziModal"></div>
-```
-
-- Set a default **Subtitle**.
-```html
-<div id="modal" class="iziModal" data-izimodal-subtitle="Hello world"></div>
-```
-
-- Set a default **Icon** class.
-```html
-<div id="modal" class="iziModal" data-izimodal-icon="icon-star"></div>
-```
-
-- Set a default **IconText**.
-```html
-<div id="modal" class="iziModal" data-izimodal-icontext="star"></div>
-```
-
-- Set a default **transitionI*n* and **transitionOut**.
-```html
-<div id="modal" class="iziModal" data-izimodal-transitionin="comingIn" data-izimodal-transitionout="comingOut"></div>
-```
-
-- **Attach** the modal at the *top* or *bottom* of the screen.
-```html
-<div id="modal" class="iziModal" data-izimodal-attached="bottom">Attach Top/Bottom</div>
-```
-
+- Update v1.4.2+
+Now all options can be set via data-attrs.
 
 
 

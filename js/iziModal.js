@@ -1,8 +1,12 @@
 /*
-* iziModal | v1.4.0
+* iziModal | v1.4.2
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
+if (typeof jQuery === "undefined") {
+  throw new Error("iziModal requires jQuery");
+}
+
 (function($){
 
 	"use strict";
@@ -79,25 +83,30 @@
 			if( !this.$element.hasClass('iziModal') ){
 				this.$element.addClass('iziModal');
 			}
+
             if(this.group.name === undefined && options.group !== ""){
             	this.group.name = options.group;
             	this.$element.attr('data-'+PLUGIN_NAME+'-group', options.group);
             }
-            if(this.$element.attr('data-'+PLUGIN_NAME+'-title') !== undefined){
-            	options.title = this.$element.attr('data-'+PLUGIN_NAME+'-title');
-            }
-			if(this.$element.attr('data-'+PLUGIN_NAME+'-subtitle') !== undefined){
-            	options.subtitle = this.$element.attr('data-'+PLUGIN_NAME+'-subtitle');
-            }	
-            if(this.$element.attr('data-'+PLUGIN_NAME+'-icon') !== undefined){
-            	options.icon = this.$element.attr('data-'+PLUGIN_NAME+'-icon');
-            }
-            if(this.$element.attr('data-'+PLUGIN_NAME+'-iconText') !== undefined){
-            	options.iconText = this.$element.attr('data-'+PLUGIN_NAME+'-iconText');
-            }
             if(this.options.loop === true){
             	this.$element.attr('data-'+PLUGIN_NAME+'-loop', true);
             }
+
+            $.each( this.options , function(index, val) {
+				var attr = that.$element.attr('data-'+PLUGIN_NAME+'-'+index);
+            	try {
+		            if(typeof attr !== typeof undefined && attr !== false){
+
+						if(attr === ""){
+							options[index] = true;
+						} else if (typeof val == 'function') {
+							options[index] = new Function(attr);
+						} else {
+							options[index] = attr;
+						}
+		            }
+            	} catch(exc){}
+            });
 
 			this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title">' + options.title + '</h2><p class="'+PLUGIN_NAME+'-header-subtitle">' + options.subtitle + '</p><a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-close" data-'+PLUGIN_NAME+'-close></a></div>');
             
@@ -351,13 +360,13 @@
 					try {
 						href = $(param.currentTarget).attr('href') !== "" ? $(param.currentTarget).attr('href') : null;
 					} catch(e) {
-						console.warn(e);
+						// console.warn(e);
 					}
 					if( (this.options.iframeURL !== null) && (href === null || href === undefined)){
 						href = this.options.iframeURL;
 					}
 					if(href === null || href === undefined){
-						alert("Failed to find iframe URL.");
+						throw new Error("Failed to find iframe URL");
 					}
 				    this.$element.find('.'+PLUGIN_NAME+'-iframe').attr('src', href);
 				}
@@ -442,7 +451,6 @@
 						opened();
 					}
 
-
 					if(that.options.pauseOnHover === true && that.options.pauseOnHover === true && that.options.timeout !== false && !isNaN(parseInt(that.options.timeout)) && that.options.timeout !== false && that.options.timeout !== 0){
 
 						that.$element.off('mouseenter').on('mouseenter', function(event) {
@@ -456,7 +464,6 @@
 					}
 
 				})();
-
 
 				if (this.options.timeout !== false && !isNaN(parseInt(this.options.timeout)) && this.options.timeout !== false && this.options.timeout !== 0) {
 
@@ -592,8 +599,8 @@
 				}
 
 				if (transitionOut !== '') {
-
-	                this.$element.attr('class', PLUGIN_NAME + " transitionOut " + transitionOut + " " + this.options.theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : '') + " " + String(this.$element.hasClass('isAttached') ? "isAttached" : "") + " " + String((this.options.attached === 'top') ? 'isAttachedTop' : '') + " " + String((this.options.attached === 'bottom') ? 'isAttachedBottom' : '') + (this.options.rtl ? PLUGIN_NAME+'-rtl' : ''));
+					var theme = this.options.theme == 'light' ? PLUGIN_NAME+'-light' : this.options.theme;
+	                this.$element.attr('class', PLUGIN_NAME + " transitionOut " + transitionOut + " " + theme + " " + String((this.isFullscreen === true) ? 'isFullscreen' : '') + " " + String(this.$element.hasClass('isAttached') ? "isAttached" : "") + " " + String((this.options.attached === 'top') ? 'isAttachedTop' : '') + " " + String((this.options.attached === 'bottom') ? 'isAttachedBottom' : '') + (this.options.rtl ? PLUGIN_NAME+'-rtl' : ''));
 					this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
 					this.$navigate.attr('class', PLUGIN_NAME + "-navigate " + this.options.transitionOutOverlay);
 
@@ -649,7 +656,7 @@
 					try {
 						modals.in = $("#"+that.group.ids[i]).data().iziModal;
 					} catch(log) {
-						console.warn("No next modal");
+						console.info("No next modal");
 					}
 					if(typeof modals.in !== 'undefined'){
 
@@ -712,7 +719,7 @@
 					try {
 						modals.in = $("#"+that.group.ids[i-1]).data().iziModal;
 					} catch(log) {
-						console.warn("No previous modal");
+						console.info("No previous modal");
 					}
 					if(typeof modals.in !== 'undefined'){
 
@@ -856,7 +863,7 @@
 		recalculateLayout: function(){
 
             if(this.$element.find('.'+PLUGIN_NAME+'-header').length){
-            	this.headerHeight = parseInt(this.$element.find('.'+PLUGIN_NAME+'-header').innerHeight()) + 2/*border bottom of modal*/;
+            	this.headerHeight = parseInt(this.$element.find('.'+PLUGIN_NAME+'-header').innerHeight()) + 2 /*border bottom of modal*/;
             	this.$element.css('overflow', 'hidden');
             }
 
@@ -877,7 +884,7 @@
 
 				if (this.options.iframe === true) {
 
-					// Se a altura da janela é menor que o modal com iframe
+					// If the height of the window is smaller than the modal with iframe
 					if(windowHeight < (this.options.iframeHeight + this.headerHeight) || this.isFullscreen === true){
 
 						$('html').addClass(PLUGIN_NAME+'-isAttached');
@@ -904,8 +911,7 @@
 	                    this.$element.find('.'+PLUGIN_NAME+'-wrap').css({'height': 'auto'});
 	                }
 
-	                // subistuido (contentHeight + this.headerHeight) por this.$element.innerHeight()
-	                // Se o modal é maior que a altura da janela ou 
+	                // If the modal is larger than the height of the window..
                 	if ((contentHeight + this.headerHeight) > windowHeight || Math.ceil(this.$element.innerHeight()) < contentHeight || this.isFullscreen === true) {
 
 		                if( !$('html').hasClass(PLUGIN_NAME+'-isAttached') ){
@@ -931,7 +937,7 @@
 				}
             }
 
-            // Corrige margin-top caso o modal sofra alterações na altura de seu conteúdo
+            // Fixes margin-top if there are changes to the height of Modal content
             if (this.$element.css('margin-top') != modalMargin && this.$element.css('margin-top') != "0px" && !$('html').hasClass(PLUGIN_NAME+'-isAttached')) {
                 this.$element.css('margin-top', modalMargin);
             }
