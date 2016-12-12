@@ -148,7 +148,8 @@ ___
 ```
 
 - Update v1.4.2+
-Now all options can be set via data-attrs.
+
+#### Now all options can be set via data-attrs.
 
 
 
