@@ -83,6 +83,11 @@ ___
   - ![alt text][bug] overlayClose only works the first time - *Fixed.*
 
 ___
+### Use
+
+#### [CDNJS](https://cdnjs.com/libraries/izimodal)
+https://cdnjs.com/libraries/izimodal
+
 ### Install
 
 #### [npm](https://www.npmjs.com/package/izimodal)
