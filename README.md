@@ -149,7 +149,7 @@ ___
 
 - Update v1.4.2+
 
-#### Now all options can be set via data-attrs.
+#### ![alt text][new] Now all options can be set via data-attrs.
 
 
 
