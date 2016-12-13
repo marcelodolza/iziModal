@@ -1071,7 +1071,10 @@ if (typeof jQuery === "undefined") {
 					}, options.autoOpen);
 
 				} else if(options.autoOpen === true ) {
-					data.open();
+					
+					setTimeout(function(){
+						data.open();
+					}, 0);
 				}
 				autoOpenModal++;
 			}
