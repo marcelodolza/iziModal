@@ -311,6 +311,7 @@
         transition: opacity 0.3s ease;
         pointer-events: all;
         margin: 0;
+        outline: none;
     }
     .iziModal-navigate > button:hover{
         opacity: 1;
