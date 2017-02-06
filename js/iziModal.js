@@ -530,7 +530,7 @@ if (typeof jQuery === "undefined") {
 	            })();
 
 	            // Close when the Escape key is pressed
-	            $document.keydown(function (e) {
+	            $document.on('keydown.iziModal', function (e) {
 	                if (that.options.closeOnEscape && e.keyCode === 27) {
 	                    that.close();
 	                }
@@ -575,7 +575,7 @@ if (typeof jQuery === "undefined") {
 
             if(this.state == STATES.OPENED || this.state == STATES.OPENING){
 
-            	$document.off("keydown");
+            	$document.off("keydown.iziModal");
 
 				this.state = STATES.CLOSING;
 				this.$element.trigger(STATES.CLOSING);
@@ -752,7 +752,7 @@ if (typeof jQuery === "undefined") {
 
 			this.$element.trigger(e);
 
-            $document.off("keydown");
+            $document.off("keydown.iziModal");
 
 			clearTimeout(this.timer);
 			clearTimeout(this.timerTimeout);
@@ -945,7 +945,7 @@ if (typeof jQuery === "undefined") {
 
 	};
 
-	$window.off('hashchange load').on('hashchange load', function(e) {
+	$window.off('hashchange.iziModal load.iziModal').on('hashchange.iziModal load.iziModal', function(e) {
 
 		var modalHash = document.location.hash;
 
@@ -1022,7 +1022,7 @@ if (typeof jQuery === "undefined") {
 		}, 200);
 	});
 
-	$document.off('keyup').on('keyup', function(event) {
+	$document.off('keyup.iziModal').on('keyup.iziModal', function(event) {
 
 		var modal = $('.'+PLUGIN_NAME+':visible').attr('id'),
 			group = $("#"+modal).iziModal('getGroup'),
