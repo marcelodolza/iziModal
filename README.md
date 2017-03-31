@@ -406,9 +406,9 @@ $('#modal').iziModal('setTransitionOut', 'comingOut');
 // comingOut, bounceOutDown, bounceOutUp, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX
 ```
 
-- **recalculateLayout** - Used to recalculate the placement and dimensions of the modal layout.
+- **recalcLayout** - Used to recalculate the placement and dimensions of the modal layout.
 ```javascript
-$('#modal').iziModal('recalculateLayout');
+$('#modal').iziModal('recalcLayout');
 ```
 
 ___
