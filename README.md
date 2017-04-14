@@ -5,7 +5,7 @@ Elegant, responsive, flexible and lightweight modal plugin with jQuery.
 
 [**izimodal**.marcelodolce.com](http://izimodal.marcelodolce.com)
 
-![capa](http://i.imgur.com/TPdnES8.png)
+![capa](http://i.imgur.com/KuLPzZo.gif)
 
 [logo]: http://i.imgur.com/hCYIhep.png "Check icon"
 
