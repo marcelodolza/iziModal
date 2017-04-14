@@ -23,6 +23,24 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 ___
 ### Version Log
 
+- **v1.5.0**
+  
+  - ![alt text][new] AMD support - *Implemented.*
+  - ![alt text][new] closeButton option - *Implemented.*
+  - ![alt text][new] appendTo option - *Implemented.*
+  - ![alt text][new] Static margin (Top and Bottom options) - *Implemented.*
+  - ![alt text][new] Namespace  - *Implemented.*
+  - ![alt text][new] Improvements when using Modal in flexbox layouts - *Implemented.*
+  - ![alt text][bug] Scroll iframe on iOS - *Fixed.*
+  - ![alt text][bug] Some kinds of Data-attr do not work as they should - *Fixed.*
+  - ![alt text][bug] Incompatibility with iziToast animations - *Fixed.*
+  - ![alt text][bug] Methods setTransitionIn and setTransitionOut - *Fixed.*
+  - ![alt text][bug] Modal closes when use shortcut arrows - *Fixed.*
+  - ![alt text][bug] Modal loses its classes when closed - *Fixed.*
+  - ![alt text][bug] Modal loses option RTL when closed - *Fixed.*
+  - ![alt text][bug] Modal loses reference if it does not have an ID - *Fixed.*
+
+
 - **v1.4.2**
   - ![alt text][new] All the options can now be used through the data-iziModal-optionName attribute - *Implemented.*
   - ![alt text][bug] Inaccurate modal height calculation - *Fixed.*
@@ -170,11 +188,14 @@ $("#modal").iziModal({
     headerColor: '#88A0B9',
     theme: '',  // light
     attached: '', // bottom, top
+    appendTo: '.body', or false
     icon: null,
     iconText: null,
     iconColor: '',
     rtl: false,
     width: 600,
+    top: null,
+    bottom: null,
     padding: 0,
     radius: 3,
     zindex: 999,
@@ -185,7 +206,7 @@ $("#modal").iziModal({
     group: '',
     loop: false,
     navigateCaption: true,
-    navigateArrows: true, // closeToModal, closeScreenEdge
+    navigateArrows: true, // Boolean, 'closeToModal', 'closeScreenEdge'
     history: true,
     restoreDefaultContent: false,
     autoOpen: 0, // Boolean, Number
@@ -193,6 +214,7 @@ $("#modal").iziModal({
     fullscreen: false,
     openFullscreen: false,
     closeOnEscape: true,
+    closeButton: true,
     overlay: true,
     overlayClose: true,
     overlayColor: 'rgba(0, 0, 0, 0.4)',
@@ -216,43 +238,48 @@ $("#modal").iziModal({
 
 Argument | Default Value | Description
 :---: | :---: | ---
-**title** | *''* | Title that appears in the modal header.
-**subtitle** | *''* | Caption that appears in the header below the title.
+**title** | *''* | Title in modal's header.
+**subtitle** | *''* | Caption below modal's title.
 **headerColor** | *'#6d7d8d'* | Color to fill the header background, will also be applied to the bottom edge of the modal.
-**theme** | *''* | Theme of the modal, can be empty or **"light"**.
+**theme** | *''* | Theme of the modal, can be empty or **light**.
 **attached** | *''* | Attach the modal at the **top** or **bottom** of the screen.
+**appendTo** | *'.body'* | Where the modal will be placed?
 **icon** | *null* | Icon class (font-icon of your choice) that will be displayed in modal header.
 **iconText** | *null* | Icon text (font-icon using text) that will be displayed in modal header.
 **iconColor** | *''* | Color of the header icon.
 **rtl** | *false* | Right To Left option.
-**width** | *600* | Fixed width of the modal. You can use %, px, em or cm. If not using an unit of measure. It will be taken over the px unit.
-**padding** | *0* | Margin that will be applied to the inside of the modal.
+**width** | *600* | Fixed width of the modal. You can use %, px, em or cm. If not using a measure unity, PX will be assumed as measurement unit.
+**top** | *null* | Top static margin.
+**bottom** | *null* | Bottom static margin.
+**padding** | *0* | Modal inner margin.
 **radius** | *3* | Border-radius that will be applied in modal.
 **zindex** | *999* | The z-index CSS attribute of the modal.
-**iframe** | *false* | Set true to apply an iframe inside the modal.
-**iframeHeight** | *null* | Fixed height of the iframe.
+**iframe** | *false* | If true, an Iframe will be used inside the modal.
+**iframeHeight** | *400* | Fixed height of the iframe.
 **iframeURL** | *null* | Address that will open in the iframe inside the modal, if not set, the user can alternatively use the href link responsible for opening it.
 **focusInput** | *true* | If set true, whenever you open a modal, the first visible field is active.
-**group** | '' | Create a group with everyone who has the same name, so can navigate between them.
+**group** | '' | Create a group with same 'group' name, so can navigate between them.
 **loop** | *false* | It allows loop with modals of the same group.
-**navigateCaption** | *true* | Show arrows to inform possible navigation.
-**navigateArrows** | *true* | Change the layout which displays the arrows to navigate between the modals. Can be: 'closeToModal' or 'closeScreenEdge'.
+**navigateCaption** | *true* | Displays arrows to navigate.
+**navigateArrows** | *true* | Change arrows position to navigate between the modals. It can be: 'closeToModal' or 'closeScreenEdge'.
 **history** | *true* | Enable browsing history.
-**restoreDefaultContent** | *false* | Makes return the default modal content to be open again.
-**autoOpen** | *0 or false* | 	If set true, the modal opens automatically without any user action.
+**restoreDefaultContent** | *false* | Reset the modal to default to be opened again. 
+**autoOpen** | *0 or false* | If true, the modal opens automatically with any user action. Or you can set a delay time (in milliseconds) to open.
 **bodyOverflow** | *false* | Forcing overflow hidden in the document when opening the modal, closing the modal, overflow will be restored.
-**fullscreen** | *false* | 	Allow button in header modal to expand.
+**fullscreen** | *false* | 	Show a button in modal header to expand.
 **openFullscreen** | *false* | 	Force to open modal in fullscreen.
 **closeOnEscape** | *true* | If set true, you can close the modal only pressing the escape key.
-**overlay** | *true* | 	Enable or disable background overlay.
-**overlayClose** | *true* | If set true, you can close the modal just by clicking on the outer layer of dark modal.
+**closeButton** | *true* | Display close button in the header.
+**overlay** | *true* | Enable or disable background overlay.
+**overlayClose** | *true* | If set true, the modal will be closed clicking outside of it.
+
 **overlayColor** | *'rgba(0,0,0,0.4)'* | Color overlay.
 **timeout** | *0 or false* | 	Amount in milliseconds to close the modal or false to disable.
-**timeoutProgressbar** | *false* | 	Enable progress bar of timeout.
-**timeoutProgressbarColor** | *'rgba(255,255,255,0.5)'* | 	Progress bar color.
-**pauseOnHover** | false | It allows the timeout is paused when the cursor is on the modal.
-**transitionIn** | *'comingI'n* | Modal opening default transition.
-**transitionOut** | *'comingOut'* | Modal closing default transition.
+**timeoutProgressbar** | *false* | Enable timeout progress bar.
+**timeoutProgressbarColor** | *'rgba(255,255,255,0.5)'* | Progress bar color.
+**pauseOnHover** | *false* | Pause the progress bar when mouse cursor hover the modal.
+**transitionIn** | *'comingIn'* | Modal opening default transition. Can be: <b>comingIn, bounceInDown, bounceInUp, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX</b>.
+**transitionOut** | *'comingOut'* | Modal closing default transition. Can be: <b>comingOut, bounceOutDown, bounceOutUp, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX</b>.
 **transitionInOverlay** | *'fadeIn'* | Default transition of overlay opening.
 **transitionOutOverlay** | *'fadeOut'* | Default transition of overlay closure.
 **onFullscreen** | *function() {}*	 | Callback function that will run when the modal enable or disable full screen.
