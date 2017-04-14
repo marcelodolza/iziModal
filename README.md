@@ -1,4 +1,4 @@
-# [IZIMODAL](http://izimodal.dolce.ninja)
+# [iziModal](http://izimodal.dolce.ninja)
 [![CDNJS](https://img.shields.io/cdnjs/v/izimodal.svg)](https://cdnjs.com/libraries/izimodal)
 
 Elegant, responsive, flexible and lightweight modal plugin with jQuery.
@@ -23,6 +23,8 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 
 ___
 - ### [Changelog](http://izimodal.marcelodolce.com/#Changelog)
+- ### [Iframe](http://izimodal.marcelodolce.com/#Iframe)
+- ### [Ajax](http://izimodal.marcelodolce.com/#Ajax)
 - ### [DataAttributes](http://izimodal.marcelodolce.com/#DataAttributes)
 - ### [Options](http://izimodal.marcelodolce.com/#Options)
 - ### [Methods](http://izimodal.marcelodolce.com/#Methods)
