@@ -1,4 +1,5 @@
 # [iziModal](http://izimodal.dolce.ninja)
+v1.5.0
 [![CDNJS](https://img.shields.io/cdnjs/v/izimodal.svg)](https://cdnjs.com/libraries/izimodal)
 
 Elegant, responsive, flexible and lightweight modal plugin with jQuery.
