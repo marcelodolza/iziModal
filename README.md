@@ -41,7 +41,7 @@ npm install izimodal --save
 
 #### bower
 ```
-bower install izimodal
+bower install izimodal --save
 ```
 
 #### [GEM](https://github.com/elitenomad/izimodal)
