@@ -22,17 +22,15 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 
 
 ___
-### [Changelog](http://izimodal.marcelodolce.com/#Changelog)
-### [DataAttributes](http://izimodal.marcelodolce.com/#DataAttributes)
-### [Options](http://izimodal.marcelodolce.com/#Options)
-### [Methods](http://izimodal.marcelodolce.com/#Methods)
-### [Events](http://izimodal.marcelodolce.com/#Events)
-### [Use](http://izimodal.marcelodolce.com/#Start)
+- ### [Changelog](http://izimodal.marcelodolce.com/#Changelog)
+- ### [DataAttributes](http://izimodal.marcelodolce.com/#DataAttributes)
+- ### [Options](http://izimodal.marcelodolce.com/#Options)
+- ### [Methods](http://izimodal.marcelodolce.com/#Methods)
+- ### [Events](http://izimodal.marcelodolce.com/#Events)
+- ### [Use](http://izimodal.marcelodolce.com/#Start)
 ___
 #### [CDNJS](https://cdnjs.com/libraries/izimodal)
 https://cdnjs.com/libraries/izimodal
-
-### Install
 
 #### [npm](https://www.npmjs.com/package/izimodal)
 ```
