@@ -235,7 +235,7 @@
 		            // Adjusting vertical positioning
 					if(options.top !== null){
 		            	that.$element.css('margin-top', options.top);
-		            	if(options.top == 0){
+		            	if(options.top === 0){
 		            		that.$element.css({
 		            			borderTopRightRadius: 0,
 		            			borderTopLeftRadius: 0
@@ -244,7 +244,7 @@
 					}
 					if (options.bottom !== null){
 		            	that.$element.css('margin-bottom', options.bottom);
-		            	if(options.bottom == 0){
+		            	if(options.bottom === 0){
 		            		that.$element.css({
 		            			borderBottomRightRadius: 0,
 		            			borderBottomLeftRadius: 0
@@ -414,14 +414,18 @@
 				    		}
 
 				    		var modalWidth = that.$element.outerWidth();
-
-					    	if(that.options.navigateArrows === true || that.options.navigateArrows === 'closeToModal'){
-						    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('margin-left', -((modalWidth/2)+84));
-						    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84));
-					    	} else {
-				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('left', 0);
-				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('right', 0);
-					    	}
+				    		if(that.options.navigateArrows !== false){
+						    	if (that.options.navigateArrows === 'closeScreenEdge'){
+					    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('left', 0).show();
+					    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('right', 0).show();
+						    	} else {
+							    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('margin-left', -((modalWidth/2)+84)).show();
+							    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84)).show();					    		
+						    	}
+				    		} else {
+				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').hide();
+				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').hide();
+				    		}
 				    		
 				    		var loop;
 							if(that.group.index === 0){
@@ -634,7 +638,10 @@
 						].join(' '));
 						
 						this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
-						this.$navigate.attr('class', PLUGIN_NAME + "-navigate " + this.options.transitionOutOverlay);
+
+						if(that.options.navigateArrows !== false){
+							this.$navigate.attr('class', PLUGIN_NAME + "-navigate " + this.options.transitionOutOverlay);
+						}
 
 		                this.$element.one(animationEvent, function () {
 		                    
