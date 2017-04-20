@@ -55,6 +55,11 @@
 			}
 		}
 
+		function clearValue(value){
+			var separators = /%|px|em|cm|vh|vw/;
+			return parseInt(String(value).split(separators)[0]);
+		}
+
 		var animationEvent = whichAnimationEvent(),
 			isMobile = (/Mobi/.test(navigator.userAgent)) ? true : false,
 			autoOpenModal = 0;
@@ -215,45 +220,8 @@
 				    this.$element.addClass('isFullscreen');
 				}
 
-	            (function applyVerticalPos(){
-
-					var separators = /%|px|em|cm/,
-						wClear = String(options.width).split(separators),
-						w = String(options.width),
-						medida = "px";
-						wClear = String(wClear).split(",")[0];
-
-					if(isNaN(options.width)){
-						if( String(options.width).indexOf("%") != -1){
-							medida = "%";
-						} else {
-							medida = w.slice("-2");
-						}
-					}
-		            that.$element.css('max-width', parseInt(wClear) + medida);
-
-		            // Adjusting vertical positioning
-					if(options.top !== null){
-		            	that.$element.css('margin-top', options.top);
-		            	if(options.top === 0){
-		            		that.$element.css({
-		            			borderTopRightRadius: 0,
-		            			borderTopLeftRadius: 0
-		            		});
-		            	}
-					}
-					if (options.bottom !== null){
-		            	that.$element.css('margin-bottom', options.bottom);
-		            	if(options.bottom === 0){
-		            		that.$element.css({
-		            			borderBottomRightRadius: 0,
-		            			borderBottomLeftRadius: 0
-		            		});
-		            	}
-					}
-
-				})();
-
+				this.recalcWidth();
+				this.recalcVerticalPos();
 			},
 
 			setGroup: function(groupName){
@@ -825,6 +793,35 @@
 				return this.group;
 			},
 
+			setWidth: function(width){
+
+				this.options.width = width;
+
+				this.recalcWidth();
+
+				var modalWidth = this.$element.outerWidth();
+	    		if(this.options.navigateArrows === true || this.options.navigateArrows == 'closeToModal'){
+			    	this.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('margin-left', -((modalWidth/2)+84)).show();
+			    	this.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84)).show();					    		
+	    		}
+
+			},
+
+			setTop: function(top){
+
+				this.options.top = top;
+
+				this.recalcVerticalPos(false);
+			},
+
+			setBottom: function(bottom){
+
+				this.options.bottom = bottom;
+
+				this.recalcVerticalPos(false);
+
+			},
+
 			setTitle: function(title){
 
 				if( this.$header.find('.'+PLUGIN_NAME+'-header-title').length === 0 ){
@@ -919,6 +916,48 @@
 				},600);
 			},
 
+			recalcWidth: function(){
+
+	            this.$element.css('max-width', this.options.width);
+			},
+
+			recalcVerticalPos: function(first){
+
+				if(this.options.top !== null && this.options.top !== false){
+	            	this.$element.css('margin-top', this.options.top);
+	            	if(this.options.top === 0){
+	            		this.$element.css({
+	            			borderTopRightRadius: 0,
+	            			borderTopLeftRadius: 0
+	            		});
+	            	}
+				} else {
+					if(first === false){
+						this.$element.css({
+							marginTop: '',
+	            			borderRadius: this.options.radius
+	            		});
+					}
+				}
+				if (this.options.bottom !== null && this.options.bottom !== false){
+	            	this.$element.css('margin-bottom', this.options.bottom);
+	            	if(this.options.bottom === 0){
+	            		this.$element.css({
+	            			borderBottomRightRadius: 0,
+	            			borderBottomLeftRadius: 0
+	            		});
+	            	}
+				} else {
+					if(first === false){
+						this.$element.css({
+							marginBottom: '',
+	            			borderRadius: this.options.radius
+	            		});
+					}
+				}
+
+			},
+
 			recalcLayout: function(){
 
 				var that = this,
@@ -968,10 +1007,10 @@
 	        		}
 					this.recalcButtons();
 
-	                // If the modal is larger than the height of the window..
 					if(this.isFullscreen === false){
-	                	windowHeight = windowHeight - (this.options.top || 0) - (this.options.bottom || 0);
+ 	                	windowHeight = windowHeight - (clearValue(this.options.top) || 0) - (clearValue(this.options.bottom) || 0);
 					}
+	                // If the modal is larger than the height of the window..
 	                if (outerHeight > windowHeight) {
 						if(this.options.top > 0 && this.options.bottom === null && contentHeight < $window.height()){
 					    	this.$element.addClass('isAttachedBottom');
