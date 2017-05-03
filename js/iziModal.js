@@ -55,6 +55,11 @@
 			}
 		}
 
+		function isIE(userAgent) {
+			userAgent = userAgent || navigator.userAgent;
+			return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1;
+		}
+
 		function clearValue(value){
 			var separators = /%|px|em|cm|vh|vw/;
 			return parseInt(String(value).split(separators)[0]);
@@ -919,6 +924,13 @@
 			recalcWidth: function(){
 
 	            this.$element.css('max-width', this.options.width);
+
+	            if(isIE()){
+	            	this.$element.css({
+	            		left: '50%',
+	            		marginLeft: -(this.options.width/2)
+	            	});
+	            }
 			},
 
 			recalcVerticalPos: function(first){
@@ -963,11 +975,26 @@
 				var that = this,
 	        		windowHeight = $window.height(),
 	                modalHeight = this.$element.outerHeight(),
+	                modalWidth = this.$element.outerWidth(),
 	                contentHeight = this.$element.find('.'+PLUGIN_NAME+'-content')[0].scrollHeight,
                 	outerHeight = contentHeight + this.headerHeight,
                 	wrapperHeight = this.$element.innerHeight() - this.headerHeight,
 	                modalMargin = parseInt(-((this.$element.innerHeight() + 1) / 2)) + 'px',
                 	scrollTop = this.$wrap.scrollTop();
+
+				if(isIE()){
+					if( modalWidth >= $window.width() || this.isFullscreen === true ){
+						this.$element.css({
+							left: '',
+							marginLeft: ''
+						});
+					} else {
+		            	this.$element.css({
+		            		left: '50%',
+		            		marginLeft: -(this.options.width/2)
+		            	});
+					}
+				}
 
 	            if(this.$element.find('.'+PLUGIN_NAME+'-header').length){
 	            	this.headerHeight = parseInt(this.$element.find('.'+PLUGIN_NAME+'-header').innerHeight()) + 2 /*border bottom of modal*/;
@@ -1223,7 +1250,7 @@
 		    loop: false,
 		    navigateCaption: true,
 		    navigateArrows: true, // Boolean, 'closeToModal', 'closeScreenEdge'
-		    history: true,
+		    history: false,
 		    restoreDefaultContent: false,
 		    autoOpen: 0, // Boolean, Number
 		    bodyOverflow: false,
