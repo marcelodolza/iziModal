@@ -1120,18 +1120,18 @@
 							}
 						}
 					} catch(log) {
-						console.info(log);
+						// console.info(log);
 					}
 
 				} else {
-
 					$.each( $('.'+PLUGIN_NAME) , function(index, modal) {
-						 var state = $(modal).iziModal('getState');
-						 if(state == 'opened' || state == 'opening'){
-						 	$(modal).iziModal('close');
-						 }
+						if( $(modal).data().iziModal !== undefined ){
+							var state = $(modal).iziModal('getState');
+							if(state == 'opened' || state == 'opening'){
+								$(modal).iziModal('close');
+							}
+						}
 					});
-
 				}
 			} else {
 				autoOpenModal = 0;
@@ -1189,6 +1189,26 @@
 
 		$.fn[PLUGIN_NAME] = function(option, args) {
 
+			if( !$(this).length ){
+
+				var $div = document.createElement("div"),
+					id = this.selector.split('#'),
+					classes = this.selector.split('.');
+
+				if(id.length > 1){
+
+					$div.id = this.selector.split('#')[1];
+
+				} else if(classes.length > 1){
+
+					for (var x=1; x<classes.length; x++) {
+						$div.classList.add(classes[x]);
+					}
+				}
+				document.body.appendChild($div);
+
+				this.push($(this.selector));
+			}
 			var objs = this;
 
 			for (var i=0; i<objs.length; i++) {
