@@ -230,8 +230,9 @@
     overflow-scrolling: touch;
 }
 .iziModal .iziModal-iframe{
+    border: 0;
+    margin: 0 0 -6px 0;
     width: 100%;
-    margin-bottom: -4px;
     transition: height 0.3s ease;
 }
 .iziModal-overlay{
