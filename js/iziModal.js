@@ -1197,12 +1197,12 @@
 
 				if(id.length > 1){
 
-					$div.id = this.selector.split('#')[1];
+					$div.id = this.selector.split('#')[1].trim();
 
 				} else if(classes.length > 1){
 
 					for (var x=1; x<classes.length; x++) {
-						$div.classList.add(classes[x]);
+						$div.classList.add(classes[x].trim());
 					}
 				}
 				document.body.appendChild($div);
