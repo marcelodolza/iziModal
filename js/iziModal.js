@@ -890,6 +890,18 @@
 		        }
 			},
 
+			setFullscreen: function(value){
+
+				if(value){
+				    this.isFullscreen = true;
+				    this.$element.addClass('isFullscreen');
+				} else {
+					this.isFullscreen = false;
+				    this.$element.removeClass('isFullscreen');
+				}
+
+			},
+
 			setTransitionIn: function(transition){
 				
 				this.options.transitionIn = transition;
