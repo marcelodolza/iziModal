@@ -56,4 +56,4 @@ Donations
 
 If you liked this plugin, you can donate to support it:
 
-- https://izimodal.marcelodolce.com#Donations
+- http://izimodal.marcelodolce.com#Donations
