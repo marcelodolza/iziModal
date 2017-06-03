@@ -51,3 +51,9 @@ gem install izimodal
 
 
 
+Donations
+---------
+
+If you liked this plugin, you can donate to support it:
+
+- http://izimodal.marcelodolce.com#Donations
