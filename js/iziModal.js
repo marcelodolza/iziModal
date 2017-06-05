@@ -1042,7 +1042,7 @@
 					}
 				}
 
-				if(this.options.borderBottom === true){
+				if(this.options.borderBottom === true && this.options.title !== ""){
 					borderSize = 3;
 				}
 
