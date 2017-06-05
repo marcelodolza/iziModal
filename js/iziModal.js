@@ -3,7 +3,6 @@
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
-
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -962,15 +961,17 @@
 
 			recalcWidth: function(){
 
+				var that = this;
+
 	            this.$element.css('max-width', this.options.width);
 
 	            if(isIE()){
-	            	var modalWidth = this.options.width;
+	            	var modalWidth = that.options.width;
 
-	            	if( this.options.width.indexOf("%") !== -1 ){
-						modalWidth = this.$element.outerWidth();
+	            	if(modalWidth.toString().split("%").length > 1){
+						modalWidth = that.$element.outerWidth();
 	            	}
-	            	this.$element.css({
+	            	that.$element.css({
 	            		left: '50%',
 	            		marginLeft: -(modalWidth/2)
 	            	});
