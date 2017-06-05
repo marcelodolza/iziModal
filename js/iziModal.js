@@ -1224,22 +1224,24 @@
 
 		$document.off('keyup.'+PLUGIN_NAME).on('keyup.'+PLUGIN_NAME, function(event) {
 
-			var modal = $('.'+PLUGIN_NAME+':visible')[0].id,
-				group = $("#"+modal).iziModal('getGroup'),
-				e = event || window.event,
-				target = e.target || e.srcElement,
-				modals = {};
+			if( $('.'+PLUGIN_NAME+':visible').length ){
+				var modal = $('.'+PLUGIN_NAME+':visible')[0].id,
+					group = $("#"+modal).iziModal('getGroup'),
+					e = event || window.event,
+					target = e.target || e.srcElement,
+					modals = {};
 
-			if(modal !== undefined && group.name !== undefined && !e.ctrlKey && !e.metaKey && !e.altKey && target.tagName.toUpperCase() !== 'INPUT' && target.tagName.toUpperCase() != 'TEXTAREA'){ //&& $(e.target).is('body')
+				if(modal !== undefined && group.name !== undefined && !e.ctrlKey && !e.metaKey && !e.altKey && target.tagName.toUpperCase() !== 'INPUT' && target.tagName.toUpperCase() != 'TEXTAREA'){ //&& $(e.target).is('body')
 
-				if(e.keyCode === 37) { // left
+					if(e.keyCode === 37) { // left
 
-					$("#"+modal).iziModal('prev', e);
-				}
-				else if(e.keyCode === 39 ) { // right
+						$("#"+modal).iziModal('prev', e);
+					}
+					else if(e.keyCode === 39 ) { // right
 
-					$("#"+modal).iziModal('next', e);
+						$("#"+modal).iziModal('next', e);
 
+					}
 				}
 			}
 		});
