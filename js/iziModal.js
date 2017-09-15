@@ -1,14 +1,12 @@
 /*
-* iziModal | v1.5.0
+* iziModal | v1.5.1
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
         define(['jquery'], factory);
     } else if (typeof module === 'object' && module.exports) {
-        // Node/CommonJS
         module.exports = function( root, jQuery ) {
             if ( jQuery === undefined ) {
                 if ( typeof window !== 'undefined' ) {
@@ -22,7 +20,6 @@
             return jQuery;
         };
     } else {
-        // Browser globals
         factory(jQuery);
     }
 }(function ($) {
@@ -54,9 +51,13 @@
 			}
 		}
 
-		function isIE(userAgent) {
-			userAgent = userAgent || navigator.userAgent;
-			return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1;
+		function isIE(version) {
+			if(version === 9){
+				return navigator.appVersion.indexOf("MSIE 9.") !== -1;
+			} else {
+				userAgent = navigator.userAgent;
+				return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1;
+			}
 		}
 
 		function clearValue(value){
@@ -65,8 +66,11 @@
 		}
 
 		var animationEvent = whichAnimationEvent(),
-			isMobile = (/Mobi/.test(navigator.userAgent)) ? true : false,
-			autoOpenModal = 0;
+			isMobile = (/Mobi/.test(navigator.userAgent)) ? true : false;
+
+		window.$iziModal = {};
+		window.$iziModal.autoOpen = 0;
+		window.$iziModal.history = false;
 
 		var iziModal = function (element, options) {
 			this.init(element, options);
@@ -154,6 +158,10 @@
 	            	this.$element.html('<div class="'+PLUGIN_NAME+'-wrap"><div class="'+PLUGIN_NAME+'-content">' + this.content + '</div></div>');
 	            }
 
+				if (this.options.background !== null) {
+					this.$element.css('background', this.options.background);
+				}
+
 	            this.$wrap = this.$element.find('.'+PLUGIN_NAME+'-wrap');
 
 				if(options.zindex !== null && !isNaN(parseInt(options.zindex)) ){
@@ -190,6 +198,11 @@
 				this.createHeader();
 				this.recalcWidth();
 				this.recalcVerticalPos();
+
+				if (that.options.afterRender && ( typeof(that.options.afterRender) === "function" || typeof(that.options.afterRender) === "object" ) ) {
+			        that.options.afterRender(that);
+			    }
+
 			},
 
 			createHeader: function(){
@@ -275,6 +288,28 @@
 
 				var that = this;
 
+				$.each( $('.'+PLUGIN_NAME) , function(index, modal) {
+					if( $(modal).data().iziModal !== undefined ){
+						var state = $(modal).iziModal('getState');
+						if(state == 'opened' || state == 'opening'){
+							$(modal).iziModal('close');
+						}
+					}
+				});
+
+	            (function urlHash(){
+					if(that.options.history){
+		            	var oldTitle = document.title;
+			            document.title = oldTitle + " - " + that.options.title;
+						document.location.hash = that.id;
+						document.title = oldTitle;
+						//history.pushState({}, that.options.title, "#"+that.id);
+						window.$iziModal.history = true;
+					} else {
+						window.$iziModal.history = false;
+					}
+	            })();
+
 				function opened(){
 				    
 				    // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
@@ -282,7 +317,7 @@
 					that.state = STATES.OPENED;
 			    	that.$element.trigger(STATES.OPENED);
 
-					if (that.options.onOpened && typeof(that.options.onOpened) === "function") {
+					if (that.options.onOpened && ( typeof(that.options.onOpened) === "function" || typeof(that.options.onOpened) === "object" ) ) {
 				        that.options.onOpened(that);
 				    }
 				}
@@ -423,9 +458,12 @@
 				    	}
 
 						if(that.options.overlay === true) {
-							that.$overlay.appendTo('body');
-						} else if($(that.options.overlay).length > 0) {
-							that.$overlay.appendTo($(that.options.overlay));
+
+							if(that.options.appendToOverlay === false){
+								that.$overlay.appendTo('body');
+							} else {
+								that.$overlay.appendTo( that.options.appendToOverlay );								
+							}
 						}
 
 						if (that.options.transitionInOverlay) {
@@ -440,7 +478,7 @@
 							}
 						}
 
-						if (transitionIn !== '') {
+						if (transitionIn !== '' && animationEvent !== undefined) {
 
 							that.$element.addClass("transitionIn "+transitionIn).show();
 							that.$wrap.one(animationEvent, function () {
@@ -453,6 +491,7 @@
 							});
 
 						} else {
+
 							that.$element.show();
 							opened();
 						}
@@ -522,18 +561,8 @@
 					
 					(function updateTimer(){
 				    	that.recalcLayout();
-					    that.timer = setTimeout(updateTimer, 100);
+					    that.timer = setTimeout(updateTimer, 300);
 					})();
-
-		            (function urlHash(){
-						if(that.options.history){
-			            	var oldTitle = document.title;
-				            document.title = oldTitle + " - " + that.options.title;
-							document.location.hash = that.id;
-							document.title = oldTitle;
-							//history.pushState({}, that.options.title, "#"+that.id);
-						}
-		            })();
 
 		            // Close when the Escape key is pressed
 		            $document.on('keydown.'+PLUGIN_NAME, function (e) {
@@ -606,7 +635,7 @@
 						} 
 					}
 
-					if (transitionOut !== '') {
+					if (transitionOut !== '' && animationEvent !== undefined) {
 
 		                this.$element.attr('class', [
 							this.classes,
@@ -902,6 +931,16 @@
 	            this.options.headerColor = headerColor;
 			},
 
+			setBackground: function(background){
+				if(background === false){
+					this.options.background = null;
+					this.$element.css('background', '');
+				} else{
+	            	this.$element.css('background', background);
+	            	this.options.background = background;					
+				}
+			},
+
 			setZindex: function(zIndex){
 
 		        if (!isNaN(parseInt(this.options.zindex))) {
@@ -924,6 +963,21 @@
 
 			},
 
+			setContent: function(content){
+
+				if( typeof content == "object" ){
+					var replace = content.default || false;
+					if(replace === true){
+						this.content = content.content;
+					}
+					content = content.content;
+				}
+	            if (this.options.iframe === false) {
+            		this.$element.find('.'+PLUGIN_NAME+'-content').html(content);
+	            }
+
+			},
+
 			setTransitionIn: function(transition){
 				
 				this.options.transitionIn = transition;
@@ -932,6 +986,12 @@
 			setTransitionOut: function(transition){
 
 				this.options.transitionOut = transition;
+			},
+
+			resetContent: function(){
+
+				this.$element.find('.'+PLUGIN_NAME+'-content').html(this.content);
+
 			},
 
 			startLoading: function(){
@@ -1031,7 +1091,7 @@
 				if(isIE()){
 					if( modalWidth >= $window.width() || this.isFullscreen === true ){
 						this.$element.css({
-							left: '',
+							left: '0',
 							marginLeft: ''
 						});
 					} else {
@@ -1144,43 +1204,42 @@
 		};
 
 
-
-		$window.off('hashchange.'+PLUGIN_NAME+' load.'+PLUGIN_NAME).on('hashchange.'+PLUGIN_NAME+' load.'+PLUGIN_NAME, function(e) {
+		$window.off('load.'+PLUGIN_NAME).on('load.'+PLUGIN_NAME, function(e) {
 
 			var modalHash = document.location.hash;
 
-			if(autoOpenModal === 0){
+			if(window.$iziModal.autoOpen === 0 && !$('.'+PLUGIN_NAME).is(":visible")){
 
-				if(modalHash !== ""){
-					
-					$.each( $('.'+PLUGIN_NAME) , function(index, modal) {
-						 var state = $(modal).iziModal('getState');
-						 if(state == 'opened' || state == 'opening'){
-						 	
-						 	if( "#" + $(modal)[0].id !== modalHash){
-						 		$(modal).iziModal('close');
-						 	}
-						 }
-					});
-
-					try {
-						var data = $(modalHash).data();
-						if(typeof data !== 'undefined'){
-							if(e.type === 'load'){
-								if(data.iziModal.options.autoOpen !== false){
-									$(modalHash).iziModal("open");
-								}
-							} else {
-								setTimeout(function(){
-									$(modalHash).iziModal("open");
-								},200);
-							}
+				try {
+					var data = $(modalHash).data();
+					if(typeof data !== 'undefined'){
+						if(data.iziModal.options.autoOpen !== false){
+							$(modalHash).iziModal("open");
 						}
-					} catch(log) {
-						// console.info(log);
 					}
+				} catch(exc) { /* console.warn(exc); */ }
+			}
 
-				} else {
+		});
+
+		$window.off('hashchange.'+PLUGIN_NAME).on('hashchange.'+PLUGIN_NAME, function(e) {
+
+			var modalHash = document.location.hash;
+			var data = $(modalHash).data();
+
+			if(modalHash !== ""){
+				try {
+					if(typeof data !== 'undefined' && $(modalHash).iziModal('getState') !== 'opening'){
+
+						setTimeout(function(){
+							$(modalHash).iziModal("open");
+						},200);
+					}
+				} catch(exc) { /* console.warn(exc); */ }
+
+			} else {
+
+				if(window.$iziModal.history){
 					$.each( $('.'+PLUGIN_NAME) , function(index, modal) {
 						if( $(modal).data().iziModal !== undefined ){
 							var state = $(modal).iziModal('getState');
@@ -1190,9 +1249,9 @@
 						}
 					});
 				}
-			} else {
-				autoOpenModal = 0;
 			}
+
+
 		});
 
 		$document.off('click', '[data-'+PLUGIN_NAME+'-open]').on('click', '[data-'+PLUGIN_NAME+'-open]', function(e) {
@@ -1305,7 +1364,7 @@
 						
 						data.open();
 					}
-					autoOpenModal++;
+					window.$iziModal.autoOpen++;
 				}
 			}
 
@@ -1316,8 +1375,8 @@
 		    title: '',
 		    subtitle: '',
 		    headerColor: '#88A0B9',
+		    background: null,
 		    theme: '',  // light
-		    appendTo: '.body', // or false
 		    icon: null,
 		    iconText: null,
 		    iconColor: '',
@@ -1345,6 +1404,8 @@
 		    openFullscreen: false,
 		    closeOnEscape: true,
 		    closeButton: true,
+		    appendTo: 'body', // or false
+		    appendToOverlay: 'body', // or false
 		    overlay: true,
 		    overlayClose: true,
 		    overlayColor: 'rgba(0, 0, 0, 0.4)',
@@ -1361,7 +1422,8 @@
 	        onOpening: function(){},
 	        onOpened: function(){},
 	        onClosing: function(){},
-	        onClosed: function(){}
+	        onClosed: function(){},
+	        afterRender: function(){}
 		};
 
 	$.fn[PLUGIN_NAME].Constructor = iziModal;

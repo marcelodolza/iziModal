@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.5.0
+* iziModal | v1.5.1
 * http://izimodal.marcelodolce.com
 * by Marcelo Dolce.
 */
@@ -14,6 +14,7 @@
     background: #FFF;
     box-shadow: 0 0 8px rgba(0,0,0,.3);
     transition: margin-top 0.3s ease, height 0.3s ease;
+    transform: translateZ(0);
 }
 .iziModal *{
     -webkit-font-smoothing: antialiased;
@@ -88,6 +89,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
 }
 .iziModal .iziModal-header-buttons {
     position: absolute;
@@ -171,6 +173,9 @@
     }
     .iziModal-rtl .iziModal-button{
         float: left;
+    }
+    .iziModal-rtl .iziModal-header-title, .iziModal-rtl .iziModal-header-subtitle{
+        text-align: right;
     }
     .iziModal-rtl .iziModal-header.iziModal-noSubtitle {
         padding: 10px 15px 12px 40px;
