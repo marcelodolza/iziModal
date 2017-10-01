@@ -420,7 +420,7 @@
 				    	if(that.group.ids.length > 1 ){
 
 				    		that.$navigate.appendTo('body');
-				    		that.$navigate.addClass(that.options.transitionInOverlay);
+				    		that.$navigate.addClass('fadeIn');
 
 				    		if(that.options.navigateCaption === true){
 				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-caption').show();
@@ -485,7 +485,7 @@
 
 							    that.$element.removeClass(transitionIn + " transitionIn");
 							    that.$overlay.removeClass(that.options.transitionInOverlay);
-							    that.$navigate.removeClass(that.options.transitionInOverlay);
+							    that.$navigate.removeClass('fadeIn');
 
 								opened();
 							});
@@ -635,7 +635,14 @@
 						} 
 					}
 
-					if (transitionOut !== '' && animationEvent !== undefined) {
+					if( (transitionOut === false || transitionOut === '' ) || animationEvent === undefined){
+
+		                this.$element.hide();
+		                this.$overlay.remove();
+	                	this.$navigate.remove();
+		                closed();
+
+					} else {
 
 		                this.$element.attr('class', [
 							this.classes,
@@ -649,7 +656,7 @@
 						this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
 
 						if(that.options.navigateArrows !== false){
-							this.$navigate.attr('class', PLUGIN_NAME + "-navigate " + this.options.transitionOutOverlay);
+							this.$navigate.attr('class', PLUGIN_NAME + "-navigate fadeOut");
 						}
 
 		                this.$element.one(animationEvent, function () {
@@ -658,16 +665,12 @@
 		                        that.$element.removeClass(transitionOut + " transitionOut").hide();
 		                    }
 	                        that.$overlay.removeClass(that.options.transitionOutOverlay).remove();
-							that.$navigate.removeClass(that.options.transitionOutOverlay).remove();
+							that.$navigate.removeClass('fadeOut').remove();
 							closed();
 		                });
-		            }
-		            else {
-		                this.$element.hide();
-		                this.$overlay.remove();
-	                	this.$navigate.remove();
-		                closed();
-		            }
+
+					}
+
 	            }
 			},
 

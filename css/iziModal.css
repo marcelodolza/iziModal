@@ -85,7 +85,7 @@
     display: block;
     margin: 0;
     padding: 0;
-    font-family: Arial;
+    font-family: 'Lato', Arial;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -176,6 +176,8 @@
     }
     .iziModal-rtl .iziModal-header-title, .iziModal-rtl .iziModal-header-subtitle{
         text-align: right;
+        font-family: Tahoma, 'Lato', Arial;
+        font-weight: 500;
     }
     .iziModal-rtl .iziModal-header.iziModal-noSubtitle {
         padding: 10px 15px 12px 40px;
@@ -265,7 +267,7 @@
     color: white;
     line-height: 16px;
     font-size: 9px;
-    font-family: arial;
+    font-family: 'Lato', Arial;
     letter-spacing: 0.1em;
     text-indent: 0;
     text-align: center;
