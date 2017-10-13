@@ -70,7 +70,7 @@
 
 		window.$iziModal = {};
 		window.$iziModal.autoOpen = 0;
-		window.$iziModal.history = false;
+        window.$iziModal.history = false;
 
 		var iziModal = function (element, options) {
 			this.init(element, options);
@@ -92,7 +92,7 @@
 					this.$element.attr('id', this.id);
 				}
 				this.classes = ( this.$element.attr('class') !== undefined ) ? this.$element.attr('class') : '';
-				this.content = this.$element.html();
+                this.content = this.$element.html();
 				this.state = STATES.CLOSED;
 				this.options = options;
 				this.width = 0;
@@ -295,7 +295,7 @@
 							$(modal).iziModal('close');
 						}
 					}
-				});
+                });
 
 	            (function urlHash(){
 					if(that.options.history){
@@ -1089,7 +1089,7 @@
                 	wrapperHeight = this.$element.innerHeight() - this.headerHeight,
 	                modalMargin = parseInt(-((this.$element.innerHeight() + 1) / 2)) + 'px',
                 	scrollTop = this.$wrap.scrollTop(),
-                	borderSize = 0;
+                    borderSize = 0;
 
 				if(isIE()){
 					if( modalWidth >= $window.width() || this.isFullscreen === true ){
@@ -1286,12 +1286,15 @@
 
 		$document.off('keyup.'+PLUGIN_NAME).on('keyup.'+PLUGIN_NAME, function(event) {
 
-			if( $('.'+PLUGIN_NAME+':visible').length ){
+			if( $('.'+PLUGIN_NAME+':visible').length){
 				var modal = $('.'+PLUGIN_NAME+':visible')[0].id,
 					group = $("#"+modal).iziModal('getGroup'),
 					e = event || window.event,
 					target = e.target || e.srcElement,
-					modals = {};
+                    modals = {};
+                    disable = $("#"+modal).data('izimodal-disablearrowkeys') || false
+
+                if(disable) return
 
 				if(modal !== undefined && group.name !== undefined && !e.ctrlKey && !e.metaKey && !e.altKey && target.tagName.toUpperCase() !== 'INPUT' && target.tagName.toUpperCase() != 'TEXTAREA'){ //&& $(e.target).is('body')
 
@@ -1402,7 +1405,8 @@
 		    history: false,
 		    restoreDefaultContent: false,
 		    autoOpen: 0, // Boolean, Number
-		    bodyOverflow: false,
+            bodyOverflow: false,
+            disableArrowKeys: false,
 		    fullscreen: false,
 		    openFullscreen: false,
 		    closeOnEscape: true,
