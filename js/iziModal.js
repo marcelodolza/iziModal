@@ -86,7 +86,7 @@
 				this.$element = $(element);
 
 				if(this.$element[0].id !== undefined && this.$element[0].id !== ''){
-					this.id = this.$element[0].id;	
+					this.id = this.$element[0].id;
 				} else {
 					this.id = PLUGIN_NAME+Math.floor((Math.random() * 10000000) + 1);
 					this.$element.attr('id', this.id);
@@ -145,12 +145,12 @@
 	            });
 
 	            if(options.appendTo !== false){
-					this.$element.appendTo(options.appendTo);            	
+					this.$element.appendTo(options.appendTo);
 	            }
 
 	            if (options.iframe === true) {
 	                this.$element.html('<div class="'+PLUGIN_NAME+'-wrap"><div class="'+PLUGIN_NAME+'-content"><iframe class="'+PLUGIN_NAME+'-iframe"></iframe>' + this.content + "</div></div>");
-	                
+
 		            if (options.iframeHeight !== null) {
 		                this.$element.find('.'+PLUGIN_NAME+'-iframe').css('height', options.iframeHeight);
 		            }
@@ -212,7 +212,7 @@
 				if (this.options.closeButton === true) {
 					this.$header.find('.'+PLUGIN_NAME+'-header-buttons').append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-close" data-'+PLUGIN_NAME+'-close></a>');
 				}
-	            
+
 	            if (this.options.fullscreen === true) {
 	            	this.$header.find('.'+PLUGIN_NAME+'-header-buttons').append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
 	            }
@@ -229,7 +229,7 @@
 
 	                if (this.options.headerColor !== null) {
 	                	if(this.options.borderBottom === true){
-	                    	this.$element.css('border-bottom', '3px solid ' + this.options.headerColor + '');	                		
+	                    	this.$element.css('border-bottom', '3px solid ' + this.options.headerColor + '');
 	                	}
 	                    this.$header.css('background', this.options.headerColor);
 	                }
@@ -257,7 +257,7 @@
 				if( groupName !== undefined && groupName !== this.group.name){
 					group = groupName;
 					this.group.name = group;
-					this.$element.attr('data-'+PLUGIN_NAME+'-group', group);				
+					this.$element.attr('data-'+PLUGIN_NAME+'-group', group);
 				}
 				if(group !== undefined && group !== ""){
 
@@ -311,7 +311,7 @@
 	            })();
 
 				function opened(){
-				    
+
 				    // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Opened.');
 
 					that.state = STATES.OPENED;
@@ -382,7 +382,7 @@
 					// console.info('[ '+PLUGIN_NAME+' | '+this.id+' ] Opening...');
 
 					if(this.options.iframe === true){
-						
+
 						this.$element.find('.'+PLUGIN_NAME+'-content').addClass(PLUGIN_NAME+'-content-loader');
 
 						this.$element.find('.'+PLUGIN_NAME+'-iframe').on('load', function(){
@@ -414,7 +414,7 @@
 
 					if (this.options.onOpening && typeof(this.options.onOpening) === "function") {
 				        this.options.onOpening(this);
-				    }			    
+				    }
 					(function open(){
 
 				    	if(that.group.ids.length > 1 ){
@@ -433,13 +433,13 @@
 					    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('right', 0).show();
 						    	} else {
 							    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('margin-left', -((modalWidth/2)+84)).show();
-							    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84)).show();					    		
+							    	that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84)).show();
 						    	}
 				    		} else {
 				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').hide();
 				    			that.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').hide();
 				    		}
-				    		
+
 				    		var loop;
 							if(that.group.index === 0){
 
@@ -462,7 +462,7 @@
 							if(that.options.appendToOverlay === false){
 								that.$overlay.appendTo('body');
 							} else {
-								that.$overlay.appendTo( that.options.appendToOverlay );								
+								that.$overlay.appendTo( that.options.appendToOverlay );
 							}
 						}
 
@@ -522,7 +522,7 @@
 			                    updateProgress: function()
 			                    {
 									if(!that.isPaused){
-										
+
 										that.progressBar.currentTime = that.progressBar.currentTime+10;
 
 					                    var percentage = ((that.progressBar.hideEta - (that.progressBar.currentTime)) / that.progressBar.maxHideTime) * 100;
@@ -558,7 +558,7 @@
 					if (this.options.focusInput){
 				    	this.$element.find(':input:not(button):enabled:visible:first').focus(); // Focus on the first field
 					}
-					
+
 					(function updateTimer(){
 				    	that.recalcLayout();
 					    that.timer = setTimeout(updateTimer, 300);
@@ -580,7 +580,7 @@
 				var that = this;
 
 				function closed(){
-	                
+
 	                // console.info('[ '+PLUGIN_NAME+' | '+that.id+' ] Closed.');
 
 	                that.state = STATES.CLOSED;
@@ -595,8 +595,8 @@
 						if(isMobile){
 							$('body').css('overflow','auto');
 						}
-					}                
-					
+					}
+
 					if (that.options.onClosed && typeof(that.options.onClosed) === "function") {
 				        that.options.onClosed(that);
 				    }
@@ -632,7 +632,7 @@
 					if( typeof param == 'object' ){
 						if(param.transition !== undefined || param.transitionOut !== undefined){
 							transitionOut = param.transition || param.transitionOut;
-						} 
+						}
 					}
 
 					if( (transitionOut === false || transitionOut === '' ) || animationEvent === undefined){
@@ -652,7 +652,7 @@
 							this.isFullscreen === true ? 'isFullscreen' : '',
 							this.options.rtl ? PLUGIN_NAME+'-rtl' : ''
 						].join(' '));
-						
+
 						this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
 
 						if(that.options.navigateArrows !== false){
@@ -660,7 +660,7 @@
 						}
 
 		                this.$element.one(animationEvent, function () {
-		                    
+
 		                    if( that.$element.hasClass(transitionOut) ){
 		                        that.$element.removeClass(transitionOut + " transitionOut").hide();
 		                    }
@@ -698,7 +698,7 @@
 				}
 
 	        	this.close({transition:transitionOut});
-	            
+
 				setTimeout(function(){
 
 					var loop = $('.'+PLUGIN_NAME+'[data-'+PLUGIN_NAME+'-group="'+that.group.name+'"][data-'+PLUGIN_NAME+'-loop]').length;
@@ -722,7 +722,7 @@
 
 									modals.in = $("#"+that.group.ids[index]).data().iziModal;
 									if(typeof modals.in !== 'undefined'){
-										$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });								
+										$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });
 										break;
 									}
 								}
@@ -748,7 +748,7 @@
 	            	modal = $(e.currentTarget);
 	            	transitionIn = modal.attr('data-'+PLUGIN_NAME+'-transitionIn');
 	            	transitionOut = modal.attr('data-'+PLUGIN_NAME+'-transitionOut');
-	            	
+
 				} else if(e !== undefined){
 
 					if(e.transitionIn !== undefined){
@@ -785,7 +785,7 @@
 
 									modals.in = $("#"+that.group.ids[index]).data().iziModal;
 									if(typeof modals.in !== 'undefined'){
-										$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });								
+										$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });
 										break;
 									}
 								}
@@ -820,7 +820,7 @@
 					.off('.'+PLUGIN_NAME)
 					.removeData(PLUGIN_NAME)
 					.attr('style', '');
-				
+
 				this.$overlay.remove();
 				this.$navigate.remove();
 				this.$element.trigger(STATES.DESTROYED);
@@ -846,7 +846,7 @@
 				var modalWidth = this.$element.outerWidth();
 	    		if(this.options.navigateArrows === true || this.options.navigateArrows == 'closeToModal'){
 			    	this.$navigate.find('.'+PLUGIN_NAME+'-navigate-prev').css('margin-left', -((modalWidth/2)+84)).show();
-			    	this.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84)).show();					    		
+			    	this.$navigate.find('.'+PLUGIN_NAME+'-navigate-next').css('margin-right', -((modalWidth/2)+84)).show();
 	    		}
 
 			},
@@ -894,7 +894,7 @@
 			setSubtitle: function(subtitle){
 
 				if(subtitle === ''){
-					
+
 					this.$header.find('.'+PLUGIN_NAME+'-header-subtitle').remove();
 					this.$header.addClass(PLUGIN_NAME+'-noSubtitle');
 
@@ -940,7 +940,7 @@
 					this.$element.css('background', '');
 				} else{
 	            	this.$element.css('background', background);
-	            	this.options.background = background;					
+	            	this.options.background = background;
 				}
 			},
 
@@ -982,7 +982,7 @@
 			},
 
 			setTransitionIn: function(transition){
-				
+
 				this.options.transitionIn = transition;
 			},
 
@@ -1009,7 +1009,7 @@
 			},
 
 			stopLoading: function(){
-				
+
 				var $loader = this.$element.find('.'+PLUGIN_NAME+'-loader');
 
 				if( !$loader.length ){
@@ -1228,10 +1228,10 @@
 		$window.off('hashchange.'+PLUGIN_NAME).on('hashchange.'+PLUGIN_NAME, function(e) {
 
 			var modalHash = document.location.hash;
-			var data = $(modalHash).data();
 
 			if(modalHash !== ""){
 				try {
+          var data = $(modalHash).data();
 					if(typeof data !== 'undefined' && $(modalHash).iziModal('getState') !== 'opening'){
 
 						setTimeout(function(){
@@ -1318,7 +1318,7 @@
 					id: this.selector.split('#'),
 					class: this.selector.split('.')
 				};
-					
+
 				if(newEL.id.length > 1){
 					try{
 						newEL.$el = document.createElement(id[0]);
@@ -1342,7 +1342,7 @@
 			var objs = this;
 
 			for (var i=0; i<objs.length; i++) {
-				
+
 				var $this = $(objs[i]);
 				var data = $this.data(PLUGIN_NAME);
 				var options = $.extend({}, $.fn[PLUGIN_NAME].defaults, $this.data(), typeof option == 'object' && option);
@@ -1358,13 +1358,13 @@
 				if (options.autoOpen){ // Automatically open the modal if autoOpen setted true or ms
 
 					if( !isNaN(parseInt(options.autoOpen)) ){
-						
+
 						setTimeout(function(){
 							data.open();
 						}, options.autoOpen);
 
 					} else if(options.autoOpen === true ) {
-						
+
 						data.open();
 					}
 					window.$iziModal.autoOpen++;
