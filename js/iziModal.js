@@ -37,12 +37,12 @@
 
 		function whichAnimationEvent(){
 			var t,
-				el = document.createElement("fakeelement"),
+				el = document.createElement('fakeelement'),
 				animations = {
-				"animation"      : "animationend",
-				"OAnimation"     : "oAnimationEnd",
-				"MozAnimation"   : "animationend",
-				"WebkitAnimation": "webkitAnimationEnd"
+				'animation'      : 'animationend',
+				'OAnimation'     : 'oAnimationEnd',
+				'MozAnimation'   : 'animationend',
+				'WebkitAnimation': 'webkitAnimationEnd'
 			};
 			for (t in animations){
 				if (el.style[t] !== undefined){
@@ -53,10 +53,10 @@
 
 		function isIE(version) {
 			if(version === 9){
-				return navigator.appVersion.indexOf("MSIE 9.") !== -1;
+				return navigator.appVersion.indexOf('MSIE 9.') !== -1;
 			} else {
 				userAgent = navigator.userAgent;
-				return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1;
+				return userAgent.indexOf('MSIE ') > -1 || userAgent.indexOf('Trident/') > -1;
 			}
 		}
 
@@ -118,7 +118,7 @@
 					this.$element.addClass('iziModal');
 				}
 
-	            if(this.group.name === undefined && options.group !== ""){
+	            if(this.group.name === undefined && options.group !== ''){
 	            	this.group.name = options.group;
 	            	this.$element.attr('data-'+PLUGIN_NAME+'-group', options.group);
 	            }
@@ -131,9 +131,9 @@
 	            	try {
 			            if(typeof attr !== typeof undefined){
 
-							if(attr === "" || attr == "true"){
+							if(attr === ''|| attr == 'true'){
 								options[index] = true;
-							} else if (attr == "false") {
+							} else if (attr == 'false') {
 								options[index] = false;
 							} else if (typeof val == 'function') {
 								options[index] = new Function(attr);
@@ -170,16 +170,16 @@
 				 	this.$overlay.css('z-index', options.zindex-2);
 				}
 
-				if(options.radius !== ""){
+				if(options.radius !== ''){
 	                this.$element.css('border-radius', options.radius);
 	            }
 
-	            if(options.padding !== ""){
+	            if(options.padding !== ''){
 	                this.$element.find('.'+PLUGIN_NAME+'-content').css('padding', options.padding);
 	            }
 
-	            if(options.theme !== ""){
-					if(options.theme === "light"){
+	            if(options.theme !== ''){
+					if(options.theme === 'light'){
 						this.$element.addClass(PLUGIN_NAME+'-light');
 					} else {
 						this.$element.addClass(options.theme);
@@ -199,7 +199,7 @@
 				this.recalcWidth();
 				this.recalcVerticalPos();
 
-				if (that.options.afterRender && ( typeof(that.options.afterRender) === "function" || typeof(that.options.afterRender) === "object" ) ) {
+				if (that.options.afterRender && ( typeof(that.options.afterRender) === 'function' || typeof(that.options.afterRender) === 'object' ) ) {
 			        that.options.afterRender(that);
 			    }
 
@@ -225,7 +225,7 @@
 	        		this.$header.addClass(PLUGIN_NAME+'-noSubtitle');
 	            }
 
-	            if (this.options.title !== "") {
+	            if (this.options.title !== '') {
 
 	                if (this.options.headerColor !== null) {
 	                	if(this.options.borderBottom === true){
@@ -259,7 +259,7 @@
 					this.group.name = group;
 					this.$element.attr('data-'+PLUGIN_NAME+'-group', group);
 				}
-				if(group !== undefined && group !== ""){
+				if(group !== undefined && group !== ''){
 
 	            	var count = 0;
 	            	$.each( $('.'+PLUGIN_NAME+'[data-'+PLUGIN_NAME+'-group='+group+']') , function(index, val) {
@@ -391,7 +391,7 @@
 
 						var href = null;
 						try {
-							href = $(param.currentTarget).attr('href') !== "" ? $(param.currentTarget).attr('href') : null;
+							href = $(param.currentTarget).attr('href') !== '' ? $(param.currentTarget).attr('href') : null;
 						} catch(e) {
 							// console.warn(e);
 						}
@@ -399,7 +399,7 @@
 							href = this.options.iframeURL;
 						}
 						if(href === null || href === undefined){
-							throw new Error("Failed to find iframe URL");
+							throw new Error('Failed to find iframe URL');
 						}
 					    this.$element.find('.'+PLUGIN_NAME+'-iframe').attr('src', href);
 					}
@@ -412,7 +412,7 @@
 						}
 					}
 
-					if (this.options.onOpening && typeof(this.options.onOpening) === "function") {
+					if (this.options.onOpening && typeof(this.options.onOpening) === 'function') {
 				        this.options.onOpening(this);
 				    }
 					(function open(){
@@ -480,10 +480,10 @@
 
 						if (transitionIn !== '' && animationEvent !== undefined) {
 
-							that.$element.addClass("transitionIn "+transitionIn).show();
+							that.$element.addClass('transitionIn '+transitionIn).show();
 							that.$wrap.one(animationEvent, function () {
 
-							    that.$element.removeClass(transitionIn + " transitionIn");
+							    that.$element.removeClass(transitionIn + ' transitionIn');
 							    that.$overlay.removeClass(that.options.transitionInOverlay);
 							    that.$navigate.removeClass('fadeIn');
 
@@ -587,7 +587,7 @@
 	                that.$element.trigger(STATES.CLOSED);
 
 	                if (that.options.iframe === true) {
-	                    that.$element.find('.'+PLUGIN_NAME+'-iframe').attr('src', "");
+	                    that.$element.find('.'+PLUGIN_NAME+'-iframe').attr('src', '');
 	                }
 
 					if (that.options.bodyOverflow || isMobile){
@@ -597,9 +597,9 @@
 						}
 					}
 
-					if (that.options.onClosed && typeof(that.options.onClosed) === "function") {
-				        that.options.onClosed(that);
-				    }
+					if (that.options.onClosed && typeof(that.options.onClosed) === 'function') {
+				      that.options.onClosed(that);
+				  }
 
 					if(that.options.restoreDefaultContent === true){
 					    that.$element.find('.'+PLUGIN_NAME+'-content').html( that.content );
@@ -653,16 +653,16 @@
 							this.options.rtl ? PLUGIN_NAME+'-rtl' : ''
 						].join(' '));
 
-						this.$overlay.attr('class', PLUGIN_NAME + "-overlay " + this.options.transitionOutOverlay);
+						this.$overlay.attr('class', PLUGIN_NAME + '-overlay ' + this.options.transitionOutOverlay);
 
 						if(that.options.navigateArrows !== false){
-							this.$navigate.attr('class', PLUGIN_NAME + "-navigate fadeOut");
+							this.$navigate.attr('class', PLUGIN_NAME + '-navigate fadeOut');
 						}
 
 		                this.$element.one(animationEvent, function () {
 
 		                    if( that.$element.hasClass(transitionOut) ){
-		                        that.$element.removeClass(transitionOut + " transitionOut").hide();
+		                        that.$element.removeClass(transitionOut + ' transitionOut').hide();
 		                    }
 	                        that.$overlay.removeClass(that.options.transitionOutOverlay).remove();
 							that.$navigate.removeClass('fadeOut').remove();
@@ -711,7 +711,7 @@
 						}
 						if(typeof modals.in !== 'undefined'){
 
-							$("#"+that.group.ids[i]).iziModal('open', { transition: transitionIn });
+							$('#'+that.group.ids[i]).iziModal('open', { transition: transitionIn });
 							break;
 
 						} else {
@@ -720,9 +720,11 @@
 
 								for (var index = 0; index <= that.group.ids.length; index++) {
 
-									modals.in = $("#"+that.group.ids[index]).data().iziModal;
+									modals.in = $('#'+that.group.ids[index]).data().iziModal;
 									if(typeof modals.in !== 'undefined'){
-										$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });
+
+                    $('#'+that.group.ids[index]).iziModal('open', { transition: transitionIn });
+                   
 										break;
 									}
 								}
@@ -732,7 +734,7 @@
 
 				}, 200);
 
-				$(document).trigger( PLUGIN_NAME + "-group-change", modals );
+				$(document).trigger( PLUGIN_NAME + '-group-change', modals );
 			},
 
 			prev: function (e){
@@ -768,13 +770,13 @@
 					for (var i = that.group.index; i >= 0; i--) {
 
 						try {
-							modals.in = $("#"+that.group.ids[i-1]).data().iziModal;
+							modals.in = $('#'+that.group.ids[i-1]).data().iziModal;
 						} catch(log) {
 							// console.info('[ '+PLUGIN_NAME+' ] No previous modal.');
 						}
 						if(typeof modals.in !== 'undefined'){
 
-							$("#"+that.group.ids[i-1]).iziModal('open', { transition: transitionIn });
+							$('#'+that.group.ids[i-1]).iziModal('open', { transition: transitionIn });
 							break;
 
 						} else {
@@ -783,9 +785,11 @@
 
 								for (var index = that.group.ids.length-1; index >= 0; index--) {
 
-									modals.in = $("#"+that.group.ids[index]).data().iziModal;
+									modals.in = $('#'+that.group.ids[index]).data().iziModal;
 									if(typeof modals.in !== 'undefined'){
-										$("#"+that.group.ids[index]).iziModal('open', { transition: transitionIn });
+
+										$('#'+that.group.ids[index]).iziModal('open', { transition: transitionIn });
+
 										break;
 									}
 								}
@@ -795,7 +799,7 @@
 
 				}, 200);
 
-				$(document).trigger( PLUGIN_NAME + "-group-change", modals );
+				$(document).trigger( PLUGIN_NAME + '-group-change', modals );
 			},
 
 			destroy: function () {
@@ -968,7 +972,7 @@
 
 			setContent: function(content){
 
-				if( typeof content == "object" ){
+				if( typeof content == 'object' ){
 					var replace = content.default || false;
 					if(replace === true){
 						this.content = content.content;
@@ -1031,7 +1035,7 @@
 	            if(isIE()){
 	            	var modalWidth = that.options.width;
 
-	            	if(modalWidth.toString().split("%").length > 1){
+	            	if(modalWidth.toString().split('%').length > 1){
 						modalWidth = that.$element.outerWidth();
 	            	}
 	            	that.$element.css({
@@ -1105,7 +1109,7 @@
 					}
 				}
 
-				if(this.options.borderBottom === true && this.options.title !== ""){
+				if(this.options.borderBottom === true && this.options.title !== ''){
 					borderSize = 3;
 				}
 
@@ -1211,13 +1215,13 @@
 
 			var modalHash = document.location.hash;
 
-			if(window.$iziModal.autoOpen === 0 && !$('.'+PLUGIN_NAME).is(":visible")){
+			if(window.$iziModal.autoOpen === 0 && !$('.'+PLUGIN_NAME).is(':visible')){
 
 				try {
 					var data = $(modalHash).data();
 					if(typeof data !== 'undefined'){
 						if(data.iziModal.options.autoOpen !== false){
-							$(modalHash).iziModal("open");
+							$(modalHash).iziModal('open');
 						}
 					}
 				} catch(exc) { /* console.warn(exc); */ }
@@ -1229,13 +1233,13 @@
 
 			var modalHash = document.location.hash;
 
-			if(modalHash !== ""){
+			if(modalHash !== ''){
 				try {
           var data = $(modalHash).data();
 					if(typeof data !== 'undefined' && $(modalHash).iziModal('getState') !== 'opening'){
 
 						setTimeout(function(){
-							$(modalHash).iziModal("open");
+							$(modalHash).iziModal('open');
 						},200);
 					}
 				} catch(exc) { /* console.warn(exc); */ }
@@ -1288,7 +1292,7 @@
 
 			if( $('.'+PLUGIN_NAME+':visible').length ){
 				var modal = $('.'+PLUGIN_NAME+':visible')[0].id,
-					group = $("#"+modal).iziModal('getGroup'),
+					group = $('#'+modal).iziModal('getGroup'),
 					e = event || window.event,
 					target = e.target || e.srcElement,
 					modals = {};
@@ -1297,11 +1301,11 @@
 
 					if(e.keyCode === 37) { // left
 
-						$("#"+modal).iziModal('prev', e);
+						$('#'+modal).iziModal('prev', e);
 					}
 					else if(e.keyCode === 39 ) { // right
 
-						$("#"+modal).iziModal('next', e);
+						$('#'+modal).iziModal('next', e);
 
 					}
 				}
@@ -1311,10 +1315,10 @@
 		$.fn[PLUGIN_NAME] = function(option, args) {
 
 
-			if( !$(this).length && typeof option == "object"){
+			if( !$(this).length && typeof option == 'object'){
 
 				var newEL = {
-					$el: document.createElement("div"),
+					$el: document.createElement('div'),
 					id: this.selector.split('#'),
 					class: this.selector.split('.')
 				};
