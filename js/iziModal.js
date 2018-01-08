@@ -552,8 +552,12 @@
 					var transitionIn = that.options.transitionIn;
 
 					if( typeof param == 'object' ){
+						
 						if(param.transition !== undefined || param.transitionIn !== undefined){
 							transitionIn = param.transition || param.transitionIn;
+						}
+						if(param.zindex !== undefined){
+							that.setZindex(param.zindex);
 						}
 					}
 
@@ -994,13 +998,13 @@
 			}
 		},
 
-		setZindex: function(zIndex){
+		setZindex: function(zindex){
 
 	        if (!isNaN(parseInt(this.options.zindex))) {
-	        	this.options.zindex = zIndex;
-			 	this.$element.css('z-index', zIndex);
-			 	this.$navigate.css('z-index', zIndex-1);
-			 	this.$overlay.css('z-index', zIndex-2);
+	        	this.options.zindex = zindex;
+			 	this.$element.css('z-index', zindex);
+			 	this.$navigate.css('z-index', zindex-1);
+			 	this.$overlay.css('z-index', zindex-2);
 	        }
 		},
 
