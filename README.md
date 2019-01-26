@@ -1,9 +1,9 @@
-# [iziModal](http://izimodal.dolce.ninja)
+# [iziModal](http://izimodal.marcelodolza.com)
 [![CDNJS](https://img.shields.io/cdnjs/v/izimodal.svg)](https://cdnjs.com/libraries/izimodal)
 
 Elegant, responsive, flexible and lightweight modal plugin with jQuery.
 
-[**izimodal**.marcelodolce.com](http://izimodal.marcelodolce.com)
+[**izimodal**.marcelodolza.com](http://izimodal.marcelodolza.com)
 
 ![capa](http://i.imgur.com/UneCF3L.gif)
 
@@ -18,18 +18,18 @@ Fast | Responsive | Animated | Lightweight | Customizable | History | Group Mode
 
 
 - All modern browsers are supported (Tested in Chrome, Firefox, Opera, Safari, IE9+ and Edge).
-- Bugs? create an issue [here](https://github.com/dolce/iziModal/issues).
+- Bugs? create an issue [here](https://github.com/marcelodolza/iziModal/issues).
 
 
 ___
-- ### [Changelog](http://izimodal.marcelodolce.com/#Changelog)
-- ### [Iframe](http://izimodal.marcelodolce.com/#Iframe)
-- ### [Ajax](http://izimodal.marcelodolce.com/#Ajax)
-- ### [DataAttributes](http://izimodal.marcelodolce.com/#DataAttributes)
-- ### [Options](http://izimodal.marcelodolce.com/#Options)
-- ### [Methods](http://izimodal.marcelodolce.com/#Methods)
-- ### [Events](http://izimodal.marcelodolce.com/#Events)
-- ### [Use](http://izimodal.marcelodolce.com/#Start)
+- ### [Changelog](http://izimodal.marcelodolza.com/#Changelog)
+- ### [Iframe](http://izimodal.marcelodolza.com/#Iframe)
+- ### [Ajax](http://izimodal.marcelodolza.com/#Ajax)
+- ### [DataAttributes](http://izimodal.marcelodolza.com/#DataAttributes)
+- ### [Options](http://izimodal.marcelodolza.com/#Options)
+- ### [Methods](http://izimodal.marcelodolza.com/#Methods)
+- ### [Events](http://izimodal.marcelodolza.com/#Events)
+- ### [Use](http://izimodal.marcelodolza.com/#Start)
 ___
 #### [CDNJS](https://cdnjs.com/libraries/izimodal)
 https://cdnjs.com/libraries/izimodal
@@ -56,4 +56,4 @@ Donations
 
 If you liked this plugin, you can donate to support it:
 
-- http://izimodal.marcelodolce.com#Donations
+- http://izimodal.marcelodolza.com#Donations
