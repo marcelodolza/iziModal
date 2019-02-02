@@ -55,7 +55,7 @@
 		if(version === 9){
 			return navigator.appVersion.indexOf('MSIE 9.') !== -1;
 		} else {
-			userAgent = navigator.userAgent;
+			var userAgent = navigator.userAgent;
 			return userAgent.indexOf('MSIE ') > -1 || userAgent.indexOf('Trident/') > -1;
 		}
 	}
