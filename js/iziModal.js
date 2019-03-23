@@ -1483,8 +1483,8 @@
 	    timeoutProgressbar: false,
 	    pauseOnHover: false,
 	    timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
-	    transitionIn: 'comingIn',   // comingIn, bounceInDown, bounceInUp, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX
-	    transitionOut: 'comingOut', // comingOut, bounceOutDown, bounceOutUp, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX
+	    transitionIn: 'comingIn',   // comingIn, bounceInDown, bounceInUp, bounceInLeft, bounceInRight, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX
+	    transitionOut: 'comingOut', // comingOut, bounceOutDown, bounceOutUp, bounceOutLeft, bounceOutRight, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX
 	    transitionInOverlay: 'fadeIn',
 	    transitionOutOverlay: 'fadeOut',
 	    onFullscreen: function(){},
