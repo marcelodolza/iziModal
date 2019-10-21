@@ -1271,7 +1271,7 @@
 
 	$window.off('load.'+PLUGIN_NAME).on('load.'+PLUGIN_NAME, function(e) {
 
-		var modalHash = document.location.hash;
+		var modalHash = decodeURIComponent(document.location.hash);
 
 		if(window.$iziModal.autoOpen === 0 && !$('.'+PLUGIN_NAME).is(':visible')){
 
@@ -1289,7 +1289,7 @@
 
 	$window.off('hashchange.'+PLUGIN_NAME).on('hashchange.'+PLUGIN_NAME, function(e) {
 
-		var modalHash = document.location.hash;
+		var modalHash = decodeURIComponent(document.location.hash);
 
 		if(modalHash !== ''){
 			try {
