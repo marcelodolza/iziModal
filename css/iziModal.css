@@ -170,7 +170,7 @@
         padding: 0 0 0 15px;
     }
     .iziModal-rtl .iziModal-header-buttons{
-        right: initial;
+        right: initial !important;
         left: 10px;
     }
     .iziModal-rtl .iziModal-button{
