@@ -6,7 +6,7 @@
   "main": "js/iziModal.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dolce/iziModal.git"
+    "url": "git+https://github.com/marcelodolza/iziModal.git"
   },
   "dependencies":{
     "jquery": "~3"
@@ -22,13 +22,13 @@
     "js"
   ],
   "author": {
-    "name": "Marcelo Dolce",
-    "email": "dolcemarcelo@gmail.com",
-    "homepage": "http://www.marcelodolce.com"
+    "name": "Marcelo Dolza",
+    "email": "marcelodolza@gmail.com",
+    "homepage": "https://dolza.dev"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/dolce/iziModal/issues"
+    "url": "https://github.com/marcelodolza/iziModal/issues"
   },
-  "homepage": "https://github.com/dolce/iziModal#readme"
+  "homepage": "https://github.com/marcelodolza/iziModal#readme"
 }
