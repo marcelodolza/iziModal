@@ -1,7 +1,7 @@
 /*
 * iziModal | v1.6.0
-* http://izimodal.marcelodolce.com
-* by Marcelo Dolce.
+* https://izimodal.marcelodolza.com
+* by Marcelo Dolza.
 */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
@@ -214,9 +214,8 @@
 		},
 
 		createHeader: function(){
-
-			this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title">' + this.options.title + '</h2><p class="'+PLUGIN_NAME+'-header-subtitle">' + this.options.subtitle + '</p><div class="'+PLUGIN_NAME+'-header-buttons"></div></div>');
-
+			this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title"></h2><p class="'+PLUGIN_NAME+'-header-subtitle"></p><div class="'+PLUGIN_NAME+'-header-buttons"></div></div>');
+			
 			if (this.options.closeButton === true) {
 				this.$header.find('.'+PLUGIN_NAME+'-header-buttons').append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-close" data-'+PLUGIN_NAME+'-close></a>');
 			}
@@ -225,16 +224,18 @@
             	this.$header.find('.'+PLUGIN_NAME+'-header-buttons').append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
             }
 
-            //if (this.options.timeoutProgressbar === true && !isNaN(parseInt(this.options.timeout)) && this.options.timeout !== false && this.options.timeout !== 0) {
 			if (this.options.timeoutProgressbar === true) {
 				this.$header.prepend('<div class="'+PLUGIN_NAME+'-progressbar"><div style="background-color:'+this.options.timeoutProgressbarColor+'"></div></div>');
             }
 
             if (this.options.subtitle === '') {
         		this.$header.addClass(PLUGIN_NAME+'-noSubtitle');
-            }
+            } else {
+				this.$header.find('.'+PLUGIN_NAME+'-header-subtitle').html(this.options.subtitle)
+			}
 
             if (this.options.title !== '') {
+				this.$header.find('.'+PLUGIN_NAME+'-header-title').html(this.options.title)
 
                 if (this.options.headerColor !== null) {
                 	if(this.options.borderBottom === true){
@@ -628,6 +629,8 @@
 		close: function (param) {
 
 			var that = this;
+
+			if(that.options.history) window.location.hash = "";
 
 			function closed(){
 
@@ -1375,9 +1378,7 @@
 	});
 
 	$.fn[PLUGIN_NAME] = function(option, args) {
-
-
-		if( !$(this).length && typeof option == 'object'){
+		if( !$(this).length && typeof option == 'object' && this.selector){
 
 			var newEL = {
 				$el: document.createElement('div'),
