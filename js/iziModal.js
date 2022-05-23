@@ -111,7 +111,7 @@
 			this.isFullscreen = false;
             this.headerHeight = 0;
             this.modalHeight = 0;
-            this.$overlay = $('<div class="'+PLUGIN_NAME+'-overlay" style="background-color:'+options.overlayColor+'"></div>');
+            this.$overlay = $('<div class="'+PLUGIN_NAME+'-overlay"></div>').css("background-color",options.overlayColor);
 			this.$navigate = $('<div class="'+PLUGIN_NAME+'-navigate"><div class="'+PLUGIN_NAME+'-navigate-caption">Use</div><button class="'+PLUGIN_NAME+'-navigate-prev"></button><button class="'+PLUGIN_NAME+'-navigate-next"></button></div>');
             this.group = {
             	name: this.$element.attr('data-'+PLUGIN_NAME+'-group'),
@@ -225,7 +225,7 @@
             }
 
 			if (this.options.timeoutProgressbar === true) {
-				this.$header.prepend('<div class="'+PLUGIN_NAME+'-progressbar"><div style="background-color:'+this.options.timeoutProgressbarColor+'"></div></div>');
+				this.$header.prepend($('<div class="'+PLUGIN_NAME+'-progressbar">').append($('<div>').css("background-color",this.options.timeoutProgressbarColor)));
             }
 
             if (this.options.subtitle === '') {
@@ -876,7 +876,7 @@
 			this.$element
 				.off('.'+PLUGIN_NAME)
 				.removeData(PLUGIN_NAME)
-				.attr('style', '');
+				.removeAttr("style");
 
 			this.$overlay.remove();
 			this.$navigate.remove();
