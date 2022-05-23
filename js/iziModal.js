@@ -1,7 +1,7 @@
 /*
 * iziModal | v1.6.0
-* http://izimodal.marcelodolce.com
-* by Marcelo Dolce.
+* https://izimodal.marcelodolza.com
+* by Marcelo Dolza.
 */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
@@ -55,7 +55,7 @@
 		if(version === 9){
 			return navigator.appVersion.indexOf('MSIE 9.') !== -1;
 		} else {
-			userAgent = navigator.userAgent;
+			var userAgent = navigator.userAgent;
 			return userAgent.indexOf('MSIE ') > -1 || userAgent.indexOf('Trident/') > -1;
 		}
 	}
@@ -214,9 +214,8 @@
 		},
 
 		createHeader: function(){
-
-			this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title">' + this.options.title + '</h2><p class="'+PLUGIN_NAME+'-header-subtitle">' + this.options.subtitle + '</p><div class="'+PLUGIN_NAME+'-header-buttons"></div></div>');
-
+			this.$header = $('<div class="'+PLUGIN_NAME+'-header"><h2 class="'+PLUGIN_NAME+'-header-title"></h2><p class="'+PLUGIN_NAME+'-header-subtitle"></p><div class="'+PLUGIN_NAME+'-header-buttons"></div></div>');
+			
 			if (this.options.closeButton === true) {
 				this.$header.find('.'+PLUGIN_NAME+'-header-buttons').append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-close" data-'+PLUGIN_NAME+'-close></a>');
 			}
@@ -225,16 +224,18 @@
             	this.$header.find('.'+PLUGIN_NAME+'-header-buttons').append('<a href="javascript:void(0)" class="'+PLUGIN_NAME+'-button '+PLUGIN_NAME+'-button-fullscreen" data-'+PLUGIN_NAME+'-fullscreen></a>');
             }
 
-            //if (this.options.timeoutProgressbar === true && !isNaN(parseInt(this.options.timeout)) && this.options.timeout !== false && this.options.timeout !== 0) {
 			if (this.options.timeoutProgressbar === true) {
 				this.$header.prepend($('<div class="'+PLUGIN_NAME+'-progressbar">').append($('<div>').css("background-color",this.options.timeoutProgressbarColor)));
             }
 
             if (this.options.subtitle === '') {
         		this.$header.addClass(PLUGIN_NAME+'-noSubtitle');
-            }
+            } else {
+				this.$header.find('.'+PLUGIN_NAME+'-header-subtitle').html(this.options.subtitle)
+			}
 
             if (this.options.title !== '') {
+				this.$header.find('.'+PLUGIN_NAME+'-header-title').html(this.options.title)
 
                 if (this.options.headerColor !== null) {
                 	if(this.options.borderBottom === true){
@@ -628,6 +629,8 @@
 		close: function (param) {
 
 			var that = this;
+
+			if(that.options.history) window.location.hash = "";
 
 			function closed(){
 
@@ -1271,7 +1274,7 @@
 
 	$window.off('load.'+PLUGIN_NAME).on('load.'+PLUGIN_NAME, function(e) {
 
-		var modalHash = document.location.hash;
+		var modalHash = decodeURIComponent(document.location.hash);
 
 		if(window.$iziModal.autoOpen === 0 && !$('.'+PLUGIN_NAME).is(':visible')){
 
@@ -1289,7 +1292,7 @@
 
 	$window.off('hashchange.'+PLUGIN_NAME).on('hashchange.'+PLUGIN_NAME, function(e) {
 
-		var modalHash = document.location.hash;
+		var modalHash = decodeURIComponent(document.location.hash);
 
 		if(modalHash !== ''){
 			try {
@@ -1375,9 +1378,7 @@
 	});
 
 	$.fn[PLUGIN_NAME] = function(option, args) {
-
-
-		if( !$(this).length && typeof option == 'object'){
+		if( !$(this).length && typeof option == 'object' && this.selector){
 
 			var newEL = {
 				$el: document.createElement('div'),
@@ -1483,8 +1484,8 @@
 	    timeoutProgressbar: false,
 	    pauseOnHover: false,
 	    timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
-	    transitionIn: 'comingIn',   // comingIn, bounceInDown, bounceInUp, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX
-	    transitionOut: 'comingOut', // comingOut, bounceOutDown, bounceOutUp, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX
+	    transitionIn: 'comingIn',   // comingIn, bounceInDown, bounceInUp, bounceInLeft, bounceInRight, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX
+	    transitionOut: 'comingOut', // comingOut, bounceOutDown, bounceOutUp, bounceOutLeft, bounceOutRight, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX
 	    transitionInOverlay: 'fadeIn',
 	    transitionOutOverlay: 'fadeOut',
 	    onFullscreen: function(){},

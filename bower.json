@@ -7,9 +7,9 @@
   ],
   "authors": [
     {
-      "name": "Marcelo Dolce",
-      "email": "dolcemarcelo@gmail.com",
-      "homepage": "http://marcelodolce.com"
+      "name": "Marcelo Dolza",
+      "email": "marcelodolza@gmail.com",
+      "homepage": "https://marcelodolza.com"
     }
   ],
   "license": "Apache-2.0",
@@ -24,7 +24,7 @@
     "javascript",
     "js"
   ],
-  "homepage": "http://izimodal.marcelodolce.com",
+  "homepage": "https://izimodal.marcelodolza.com",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -33,6 +33,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2"
+    "jquery": "~3"
   }
 }
