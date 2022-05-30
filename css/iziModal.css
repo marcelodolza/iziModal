@@ -1,5 +1,5 @@
 /*
-* iziModal | v1.6.0
+* iziModal | v1.6.1
 * https://izimodal.marcelodolza.com
 * by Marcelo Dolza.
 */
@@ -112,7 +112,7 @@
     margin: 0;
     opacity: 0.3;
     border-radius: 50%;
-    transition: transform 0.5s cubic-bezier(.16,.81,.32,1), opacity 0.5s ease;
+    transition: transform 0.3s cubic-bezier(.16,.81,.32,1), opacity 0.3s ease;
     background-size: 67% !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent; /* For some Androids */
@@ -230,14 +230,10 @@
 .iziModal .iziModal-content{
     zoom:1;
     width: 100%;
-    -webkit-overflow-scrolling: touch;
-    /*overflow-y: scroll;*/
 }
 .iziModal .iziModal-wrap{
     width: 100%;
     position: relative;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
 }
 .iziModal .iziModal-iframe{
     border: 0;
