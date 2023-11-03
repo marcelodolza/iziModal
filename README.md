@@ -34,6 +34,12 @@ ___
 #### [CDNJS](https://cdnjs.com/libraries/izimodal)
 https://cdnjs.com/libraries/izimodal
 
+### Install Using JsDelivr CDN
+```html
+<link href="https://cdn.jsdelivr.net/gh/marcelodolza/iziModal/css/iziModal.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/marcelodolza/iziModal/js/iziModal.min.js"></script>
+```
+
 #### [npm](https://www.npmjs.com/package/izimodal)
 ```
 npm install izimodal --save
