@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iziModal - Ajax Example</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.4.2/js/iziModal.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.4.2/css/iziModal.min.css">
+</head>
+<body>
+	
+
+	<button class="trigger-ajax">Ajax Example</button>
+
+	<div id="modal-ajax" data-izimodal-open="" data-izimodal-title="Ajax Example">
+		<div style="height:100px; width:100%;"></div>
+	</div>
+
+
+	<script type="text/javascript">
+
+		$("#modal-ajax").iziModal({
+			onOpening: function(modal){
+ 				modal.startLoading();
+			 
+				$.get('https://api.github.com/repos/dolce/izimodal', function(data) {
+
+					console.log(data);
+
+					$("#modal-ajax .iziModal-content").html(data.html_url);
+
+					setTimeout(function(){
+						modal.stopLoading();
+					},500);
+
+				}); 
+			}
+
+		});
+
+		$('.trigger-ajax').on('click', function(event) {
+			$("#modal-ajax").iziModal('open');
+		});
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <title>iziModal.js</title>
+        <link rel="stylesheet" href="css/iziToast.min.css" />
+        <link rel="stylesheet" href="css/iziModal.min.css?v=160" />
+        <link rel="stylesheet" href="css/demo.css?v=160" />
+        <link href="css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css" />
+        <script src="js/vendor/shCore.js" type="text/javascript"></script>
+        <script src="js/vendor/shBrushJScript.js" type="text/javascript"></script>
+        <script src="js/vendor/shBrushXml.js" type="text/javascript"></script>
+        <script src="js/vendor/shBrushBash.js" type="text/javascript"></script>
+        <script src="js/vendor/modernizr.js"></script> <!-- Modernizr -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        
+        <link rel="canonical" href="http://izimodal.marcelodolza.com/" />
+        <meta name="author" content="Marcelo Dolza">
+        <meta name="description" content="An elegant, responsive, and lightweight jQuery modal plugin by Marcelo Dolza.">
+        <meta name="theme-color" content="#1c307d" />
+        
+        <meta property="og:site_name" content="iziModal.js" />
+        <meta property="og:url" content="http://izimodal.marcelodolza.com/" />
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="iziModal.js" />
+        <meta property="og:description" content="An elegant, responsive, flexible, and lightweight jQuery modal plugin." />
+        <meta property="og:image" content="http://izimodal.marcelodolza.com/img/izimodal-social.jpg" />
+        
+        <!-- Google+ / Schema.org -->
+        <meta itemprop="name" content="iziModal.js">
+        <meta itemprop="description" content="An elegant, responsive, flexible, and lightweight jQuery modal plugin.">
+        <meta itemprop="image" content="http://izimodal.marcelodolza.com/img/izimodal-social.jpg">
+        
+        <!-- Twitter -->
+        <meta name="twitter:title" content="iziModal.js">
+        <meta name="twitter:description" content="An elegant, responsive, flexible, and lightweight jQuery modal plugin.">
+        <meta name="twitter:url" content="http://izimodal.marcelodolza.com/">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:image" content="http://izimodal.marcelodolza.com/img/izimodal-social.jpg">
+        <meta name="twitter:creator" content="@marcelodolza">
+    </head>
+<body>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-43600147-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
+    <nav id="cd-vertical-nav">
+        <ul>
+            <li>
+                <a href="#Welcome" data-number="1">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Welcome</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a href="#Changelog" data-number="2">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Changelog</span>
+                </a>
+            </li> -->
+            <li>
+                <a href="#Start" data-number="3">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Start</span>
+                </a>
+            </li>
+            <li>
+                <a href="#Iframe" data-number="4">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Iframe</span>
+                </a>
+            </li>
+            <li>
+                <a href="#Ajax" data-number="5">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Ajax</span>
+                </a>
+            </li>
+            <li>
+                <a href="#DataAttributes" data-number="6">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Data Attributes</span>
+                </a>
+            </li>
+            <li>
+                <a href="#Options" data-number="7">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Options</span>
+                </a>
+            </li>
+            <li>
+                <a href="#Methods" data-number="8">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Methods</span>
+                </a>
+            </li>
+            <li>
+                <a href="#Events" data-number="9">
+                    <span class="cd-dot"></span>
+                    <span class="cd-label">Events</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <a class="cd-nav-trigger cd-img-replace">Open navigation<span></span></a>
+    <main>
+        <section class="cd-section" id="Welcome">
+            <div class="highlight bg">
+                <header>
+                    <a href="https://github.com/marcelodolza/iziModal" target="blank" class="right github"></a>
+                    <a href="#documentation" data-target-scroll="#documentation" class="right documentation">Documentation</a>
+                    <a href="http://izitoast.marcelodolza.com/" target="blank" class="right documentation">See also <i class="icon icon-star" style="color:yellow"></i> <b>iziToast</b>.js</a>
+                </header>
+                <div class="core">
+                    <h1><span>jQuery</span>IZIMODAL <span>v1.6.1</span></h1>
+                    <p>Elegant, responsive, flexible and lightweight modal plugin with jQuery.</p>
+                    
+                    <div>
+                        <p class="examples">examples</p>
+                        <a href="http://codepen.io/search/collections/?q=izimodal" class="examples others" target="blank">Others examples</a>
+                    </div>
+                    <ul class="buttons">
+                        <li><a href="" class="trigger-default">Default</a></li>
+                        <li><a href="" class="trigger-iframe">Iframe</a></li>
+                        <li><a href="" class="trigger-custom">Custom</a></li>
+                        <li><a href="" class="trigger-alert">Alert like</a></li>
+                        <li><a href="" class="trigger-alert2">Alert like II</a></li>
+                        <li><a href="" class="trigger-large">Large Content</a></li>
+                        <li class="lava"></li>
+                    </ul>
+                    <div>
+                        <!-- <a href="http://codepen.io/search/collections/?q=izimodal" class="download" target="blank">Others examples</a> -->
+
+                        <a class="github-button" href="https://github.com/marcelodolza/iziModal" data-icon="octicon-star" data-count-href="/marcelodolza/iziModal/stargazers" data-count-api="/repos/marcelodolza/iziModal#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star marcelodolza/iziModal on GitHub">Star</a>
+                        <a class="github-button" href="https://github.com/marcelodolza/iziModal/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download marcelodolza/iziModal on GitHub">Download</a>
+                        <!-- Tweet button -->
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=#IZIMODAL - Elegant, responsive, flexible and lightweight modal #plugin with #jQuery.">Tweet</a>
+                        <!-- Like button -->
+                        <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fizimodal.marcelodolza.com%2F&amp;width=170&amp;layout=button_count&amp;action=like&amp;size=small&amp;show_faces=false&amp;share=true&amp;height=20&amp;appId" width="170" style="/* border:none; */overflow:hidden;" scrolling="no" frameborder="0" allowtransparency="true" height="20"></iframe>
+                    </div>
+                </div>
+                <div class="modal"></div>
+            </div>
+        </section>
+        <div class="features">
+            <div class="wrap">
+                <h4><span>A plugin for perky developers.</span></h4>
+            </div>
+            <ul class="wrap">
+                <li><i class="icon icon-flight"></i><p>Fast</p></li>
+                <li><i class="icon icon-aspect_ratio"></i><p>Responsive</p></li>
+                <li><i class="icon icon-movie_filter"></i><p>Animated</p></li>
+                <li><i class="icon icon-clear_all"></i><p>Lightweight</p></li>
+                <li><i class="icon icon-palette"></i><p>Customizable</p></li>
+                <li><i class="icon icon-money_off"></i><p>Free</p></li>
+            </ul>
+        </div>
+        <div class="wrap">
+
+            <!-- <section class="cd-section" id="Changelog">
+                <h2>Changelog</h2>
+                <div class="notes">
+                    <div class="header">
+                        <p><i class="icon icon-done_all"></i> All modern browsers are supported.</p>
+                        <p><i class="icon icon-bug_report"></i> Bugs? create an issue <a href="https://github.com/marcelodolza/iziModal/issues" target="blank">here</a>.</p>
+                    </div>
+
+                    <h3><b>1.6.0</b> (Updated on <b>May</b>, 2022)</h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> data-iziModal-preventClose - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> startProgress, pauseProgress, resumeProgress and resetProgress methods - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Open multiple Modals - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> arrowKeys option to enable/disable - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> 'border-box' as default - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Scrolling the page when the hash changes - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Issue <a href="https://github.com/marcelodolza/iziModal/issues/155">#155</a> - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.5.1</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> appendToOverlay option - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> afterRender option - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> setContent method - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> resetContent method - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Modal auto closing after a certain time - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Modal auto closing on URL change - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Fullscreen - IE9 - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Opening and closing functions - IE9 - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> No Modal closing transition - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.5.0</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> data-iziModal-open="#modal" for any selector - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> background option - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> setBackground method - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> borderBottom option - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Div tag for modal is no longer required - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> AMD support - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> setFullscreen method - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> setWidth method - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> setTop and setBottom methods - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> closeButton option - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> appendTo option - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Static margin (Top and Bottom options) - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Namespace - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Improvements when using Modal in flexbox layouts - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> IE Horizontal Alignment (Including %) - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Scroll iframe on iOS - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Hide navigation arrows does not work - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Some kinds of Data-attr do not work as they should - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Incompatibility with iziToast animations - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Methods setTransitionIn and setTransitionOut - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Modal closes when use shortcut arrows - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Modal loses its classes when closed - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Modal loses option RTL when closed - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Modal loses reference if it does not have an ID - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.4.2</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> All the options can now be used through the  data-iziModal-<b>optionName</b></i> attribute  - <b>Implemented</b> <i class="icon icon-done"></i></p></li>                 
+                        <li><p><span class="tag red">bug</span> Inaccurate modal height calculation - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> The Light theme was not applied correctly - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.4.0 / 1.4.1</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> RTL support - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> WAI-ARIA support - <b>Implemented</b> <i class="icon icon-done"></i></p></li>                        
+                        <li><p><span class="tag red">bug</span> An error occurred if there was a hash did not belong to the modal - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> It breaks the layout if "iziModal" class is missing - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> The vertical positioning of the modal, sometimes was not applied correctly - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Transitions of modals positioning do not behave correctly - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> The modals group navigation did not work correctly If any modal was destroyed - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+
+                    <h3><b>1.3.3</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> Text icons support (option, data-attr and set method) - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> History was always active on mobile - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> It was not possible to instantiate multiple modals at once - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.3.2</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> setGroup to set new group name  - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> group option work in some cases  - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.3.1</b></h3>
+                    <ul>
+                        <li><p><span class="tag red">bug</span> iframeURL (by event like click) not work with append childs  - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Widths with percentage does not work  - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.3.0</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> History support - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Group support (data-iziModal-group) with caption and navigation - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Methods next and prev to be used on group mode - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Loop option and its data-attr - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> pauseOnHover option when you have timeout - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Other Transitions and improvements in CSS  - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Methods setTransitionIn and setTransitionOut - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> data-iziModal-transitionIn and data-iziModal-transitionOut to triggers and modals - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> radius option, zindex option and method setZindex - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Open and Close methods they can be used with different animations - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> data-iziModal-open="#modal" - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> data-iziModal-title, data-iziModal-subtitle and data-iziModal-icon - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Callbacks onResize and onFullscreen - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> Event fullscreen and Global Event iziModal-group-change - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> autoOpen option with delay - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> attached option, top or bottom - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> return of the methods were always overwritten - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Overflow in fullscreen and other minor fixes in js structure - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.2.0</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> Retina display support - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag red">bug</span> Callbacks had no access to modal functions - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.1.0</b></h3>
+                    <ul>
+                        <li><p><span class="tag green">new</span> feature to apply fullscreen - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                        <li><p><span class="tag green">new</span> timeout feature with progress bar - <b>Implemented</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+
+                    <h3><b>1.0.1</b></h3>
+                    <ul>
+                        <li><p><span class="tag red">bug</span> overlayClose only works the first time - <b>Fixed</b> <i class="icon icon-done"></i></p></li>
+                    </ul>
+                </div>
+            </section> -->
+
+            <section class="cd-section" id="Start">
+                <h2 id="documentation"> Start</h2>
+                <div class="panel">
+                    <h3><b><a href="https://cdnjs.com/libraries/izimodal">CDN</a></b> › <b>use</b></h3>
+                    <div style="padding: 20px 20px 10px;">
+                        <a href="https://cdnjs.com/libraries/izimodal">https://cdnjs.com/libraries/izimodal</a>
+                    </div>
+                    <hr>
+                    <h3><b> <a href="https://www.npmjs.com/package/izimodal" target="blank"><i class="icon icon-link"></i> NPM</a></b> › <b>install</b></h3>
+                    <pre class="brush: bash">
+                        npm install izimodal --save
+                    </pre>
+                    <hr>
+                    <h3><b>Bower</b> › <b>install</b></h3>
+                    <pre class="brush: bash">
+                        bower install izimodal
+                    </pre>
+                    <hr>
+                    <h3><b><a href="https://github.com/elitenomad/izimodal"><i class="icon icon-link"></i> GEM</a></b> › <b>install</b></h3>
+                    <pre class="brush: bash">
+                        gem install izimodal
+                    </pre>
+
+                    <hr>
+                    <h3><b> ICONS</b> › Tested and recommended</h3><p class="in-block">One need only incorporate the CSS of icons and use the corresponding class.</p>
+                    <br>
+                    <ul style="padding: 20px;">
+                        <li>
+                            <a href="https://icomoon.io/" target="blank"><i class="icon icon-link"></i> icomoon</a>
+                        </li>
+                        <li>
+                            <a href="http://fontawesome.io/" target="blank"><i class="icon icon-link"></i> fontawesome</a>    
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="panel">
+
+                    <h3><b>HTML</b> › CSS file</h3><p class="in-block">Include in the <i>head</i> section.</p>
+                    <pre class="brush: xml">
+                        <!-- <link rel="stylesheet" href="iziModal.min.css"> -->
+                    </pre>
+                    <hr>
+                    <h3><b>HTML</b> › JS file</h3>
+                    <p class="in-block">Include before the end of the <i>body</i>. *jQuery is required. Recommended v2.</p> 
+                    <pre class="brush: xml">
+                        <!-- <script src="iziModal.min.js" type="text/javascript"></script> -->
+                    </pre>
+                    <hr>
+                    <h3><b>HTML</b> › In <i>body</i> section</h3>
+                    <pre class="brush: xml">
+                        <!-- Modal structure -->
+                        <div id="modal"> <!-- data-iziModal-fullscreen="true"  data-iziModal-title="Welcome"  data-iziModal-subtitle="Subtitle"  data-iziModal-icon="icon-home" -->
+                            <!-- Modal content -->
+                        </div>
+
+                        <!-- Trigger to open Modal -->
+                        <a href="https://github.com/marcelodolza/iziModal" class="trigger">Modal</a>
+                    </pre>
+                    <hr>
+                    <h3><b>JS</b> › Initializing</h3>
+                    <pre class="brush: js">
+                    $("#modal").iziModal();
+                    </pre>
+
+                </div>
+                <h2 id="opening"> Opening</h2>
+                <div class="panel">
+
+                    <h3><b>JS</b> › Event to open the modal</h3>
+                    <div class="bloco-js">
+                        <pre class="brush: js">
+                            $(document).on('click', '.trigger', function (event) {
+                                event.preventDefault();
+                                // $('#modal').iziModal('setZindex', 99999);
+                                // $('#modal').iziModal('open', { zindex: 99999 });
+                                $('#modal').iziModal('open');
+                            });
+                        </pre>
+                    </div>
+
+                    <h4><span><b>Or</b> you can also use.</span></h4>
+
+                    <h3><b>HTML</b> › Open the modal</h3>
+                    <div class="">
+                        <pre class="brush: html">
+                            <a href="#" data-iziModal-open="#modal" data-iziModal-transitionIn="fadeInDown">Modal</a>
+                        </pre>
+                    </div>
+
+                    <hr>
+                    <h3><b>HTML</b> › Open the modal</h3><p class="in-block">You can also use this button within the modal to open another modals.</p>
+                    <div class="">
+                        <pre class="brush: html">
+                            <!--  The attr 'data-iziModal-preventClose' will allow the already open modal is not closed.-->
+
+                            <a href="#" data-iziModal-open="#another-modal" data-iziModal-zindex="20000" data-iziModal-preventClose>Another Modal</a>
+
+                            <!-- You can also use: data-iziModal-transitionOut="fadeOutDown" without data-iziModal-preventClose -->
+                        </pre>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="cd-section" id="Iframe">
+                <h2>Iframe</h2>
+                <div class="panel">
+                    <h3><b>HTML</b></h3><p class="in-block">The modal will capture the href of the link responsible for its opening.</p>
+                    <pre class="brush: xml">
+                        <a href="http://izimodal.marcelodolza.com" class="trigger">Modal</a>
+                        <!-- or -->
+                        <button data-iziModal-iframeURL="http://..." data-iziModal-open="#modal-iframe">Modal</button>
+                    </pre>
+                    <hr>
+                    <h3><b>JS</b> › Event to open Modal</h3><p class="in-block">If you do not use <b>data-iziModal-open="#modal-name"</b>.</p>
+
+                    <div class="bloco-js-iframe">
+                        <pre class="brush: js">
+                            $(document).on('click', '.trigger', function (event) {
+                                event.preventDefault();
+                                $('#modal-iframe').iziModal('open')
+                                // or
+                                $('#modal-iframe').iziModal('open', event); // Use "event" to get URL href
+                            });
+                        </pre>
+                    </div>
+                    <hr>
+                    <h3><b>JS</b> › Initializing</h3><p class="in-block"><b>iframeURL</b> is optional</p>
+                    <pre class="brush: js">
+                    $("#modal-iframe").iziModal({
+                        iframe: true,
+                        iframeHeight: 800,
+                        iframeURL: "http://izimodal.marcelodolza.com"
+                    });
+                    </pre>
+                </div>
+            </section>
+
+            <section class="cd-section" id="Ajax">
+                <h2>Ajax</h2>
+                <div class="panel">
+                    <h3><b>JS</b> › Ajax opening</h3><p class="in-block">Example</p>
+                    <pre class="brush: js">
+                        
+
+                    //$("#modal").iziModal({
+
+                        onOpening: function(modal){
+
+                            modal.startLoading();
+
+                            $.get('/path/to/file', function(data) {
+                                $("#modal .iziModal-content").html(data);
+
+                                modal.stopLoading();
+                            });
+                        }
+
+                    //});
+
+                    </pre>
+                </div>
+            </section>
+
+            <section class="cd-section" id="DataAttributes">
+                <h2>Data Attributes</h2>
+                <div class="panel">
+                    
+                    <h3>Trigger › <b>Open</b></h3><p class="in-block">Add <b><i>data-izimodal-open</i></b> to any button or link inside or outsite the modal will open it when clicked.</p>
+                    <p>If you are in a modal, it will be automatically closed.</p>
+                    <pre class="brush: html">
+                    <button data-iziModal-open="#modal">Open</button>
+                    <!-- Specifying the opening transition -->
+                    <button data-iziModal-open="#modal" data-iziModal-transitionIn="fadeInDown">Open</button>
+                    </pre>
+                    <hr>
+
+                    <h3>Trigger › <b>Close</b></h3><p class="in-block">Add <b><i>data-izimodal-close</i></b> to any button or link inside the modal will close it when clicked.</p>
+                    <pre class="brush: html">
+                    <button data-iziModal-close>Close</button>
+                    <!-- Specifying the closing transition -->
+                    <button data-iziModal-close data-iziModal-transitionOut="bounceOutDown">Close</button>
+                    </pre>
+                    <hr>
+                    <h3>Trigger › <b>Fullscreen</b></h3><p class="in-block">Add <b><i>data-izimodal-fullscreen</i></b> to any button or link inside the modal will expand it when clicked.</p>
+                    <pre class="brush: html">
+                    <button data-iziModal-fullscreen>Maximize</button>
+                    </pre>
+                    
+                    <hr>
+                    <h3>Trigger › <b>Next</b></h3><p class="in-block">Closes the current and open the next modal.</p>
+                    <pre class="brush: html">
+                    <button data-iziModal-next>Next Modal</button>
+                    </pre>
+
+                    <hr>
+                    <h3>Trigger › <b>Previous</b></h3><p class="in-block">Closes the current and open the previous modal.</p>
+                    <pre class="brush: html">
+                    <button data-iziModal-prev>Previous Modal</button>
+                    </pre>
+    
+                    
+                    <h4><span><b>Data-attributes</b> to modal.</span></h4>
+
+                    <h3>Modal › <b>Group</b></h3><p class="in-block">Add <b><i>data-izimodal-group</i></b> to div of the modal for build a group with everyone involved.</p><p> You can navigate between them using the < arrow keys >.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-group="alerts"></div>
+                    </pre>
+
+                    <hr>
+                    <h3>Modal › <b>Loop</b></h3><p class="in-block">Sets <b>loop</b> for the same modals in the group.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-loop></div>
+                    </pre>
+                    
+                    <footer class="panel-footer">
+                        <h4 style="top: -12px;"><span><b>Data-attributes</b> to set options. Always will prevail.</span></h4>
+
+                        <h3>Update <b>v1.4.2</b>+</h3>
+                        <p class="in-block"><i class="icon-star" style="color:orange"></i> Now all options can be set via data-attrs.</p>
+                    </footer>
+
+                    <!--<h3>Modal › <b>Title</b></h3><p class="in-block">Set a default <b>Title</b>.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-title="Welcome to the iziModal"></div>
+                    </pre>
+                    <hr>
+                    <h3>Modal › <b>Subtitle</b></h3><p class="in-block">Set a default <b>Subtitle</b>.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-subtitle="Hello world"></div>
+                    </pre>
+
+                    <hr>
+                    <h3>Modal › <b>Icon</b></h3><p class="in-block">Set a default <b>Icon</b> class.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-icon="icon-star"></div>
+                    </pre>
+
+                    <hr>
+                    <h3>Modal › <b>IconText</b></h3><p class="in-block">Set a default <b>IconText</b>.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-iconText="star"></div>
+                    </pre>
+
+                    <hr>
+                    <h3>Modal › <b>transitionIn/Out</b></h3><p class="in-block">Set a default <b>transitionIn</b> and <b>transitionOut</b>.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-transitionIn="comingIn" data-iziModal-transitionOut="comingOut"></div>
+                    </pre>
+
+                    <hr>
+                    <h3>Modal › <b>Attached</b></h3><p class="in-block">Attach the modal at the <b>top</b> or <b>bottom</b> of the screen.</p>
+                    <pre class="brush: html">
+                    <div id="modal" class="iziModal" data-iziModal-attached="bottom">Attach Top/Bottom</div>
+                    </pre>-->
+
+                </div>
+            </section>
+
+            <section class="cd-section" id="Options">
+                    <h2>Options</h2>
+                    <div class="panel attached-bottom">
+                        <h3>Default Options (53)</h3>
+                        <pre class="brush: js">
+                        $("#modal").iziModal({
+                            title: '',
+                            subtitle: '',
+                            headerColor: '#88A0B9',
+                            background: null,
+                            theme: '',  // light
+                            icon: null,
+                            iconText: null,
+                            iconColor: '',
+                            rtl: false,
+                            width: 600,
+                            top: null,
+                            bottom: null,
+                            borderBottom: true,
+                            padding: 0,
+                            radius: 3,
+                            zindex: 999,
+                            iframe: false,
+                            iframeHeight: 400,
+                            iframeURL: null,
+                            focusInput: true,
+                            group: '',
+                            loop: false,
+                            arrowKeys: true,
+                            navigateCaption: true,
+                            navigateArrows: true, // Boolean, 'closeToModal', 'closeScreenEdge'
+                            history: false,
+                            restoreDefaultContent: false,
+                            autoOpen: 0, // Boolean, Number
+                            bodyOverflow: false,
+                            fullscreen: false,
+                            openFullscreen: false,
+                            closeOnEscape: true,
+                            closeButton: true,
+                            appendTo: 'body', // or false
+                            appendToOverlay: 'body', // or false
+                            overlay: true,
+                            overlayClose: true,
+                            overlayColor: 'rgba(0, 0, 0, 0.4)',
+                            timeout: false,
+                            timeoutProgressbar: false,
+                            pauseOnHover: false,
+                            timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
+                            transitionIn: 'comingIn',
+                            transitionOut: 'comingOut',
+                            transitionInOverlay: 'fadeIn',
+                            transitionOutOverlay: 'fadeOut',
+                            onFullscreen: function(){},
+                            onResize: function(){},
+                            onOpening: function(){},
+                            onOpened: function(){},
+                            onClosing: function(){},
+                            onClosed: function(){},
+                            afterRender: function(){}
+                        });
+                        </pre>
+                        <br>
+                    </div>
+                    <div class="table">
+                    <table>
+                        <tbody><tr class="titles">
+                            <th>
+                                <div class="border-left"></div>
+                                Argument
+                            </th>
+                            <th>Default value</th>
+                            <th>
+                                <div class="border-right"></div>
+                                Description
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>title</td>
+                            <td>''</td>
+                            <td>Title in modal's header.</td>
+                        </tr>
+                        <tr>
+                            <td>subtitle</td>
+                            <td>''</td>
+                            <td>Caption below modal's title.</td>
+                        </tr>
+                        <tr>
+                            <td>headerColor</td>
+                            <td>'#6d7d8d'</td>
+                            <td>Color to fill the header background, will also be applied to the bottom edge of the modal.</td>
+                        </tr>
+
+                        <tr>
+                            <td>background</td>
+                            <td>'null'</td>
+                            <td>Modal background.</td>
+                        </tr>
+
+                        <tr>
+                            <td>theme</td>
+                            <td>''</td>
+                            <td>Theme of the modal, can be empty or "<b>light</b>".</td>
+                        </tr>
+                        <tr>
+                            <td>attached <span class="tag red">Depreciated</span></td>
+                            <td>''</td>
+                            <td>Attach the modal at the <b>top</b> or <b>bottom</b> of the screen.</td>
+                        </tr>
+                        <tr>
+                            <td>appendTo <span class="tag green">New</span></td>
+                            <td>'.body'</td>
+                            <td>Where the modal will be placed?</td>
+                        </tr>
+                        <tr>
+                            <td>appendToOverlay <span class="tag green">New</span></td>
+                            <td>'.body'</td>
+                            <td>Where the modal overlay will be placed?</td>
+                        </tr>
+                        <tr>
+                            <td>icon</td>
+                            <td>null</td>
+                            <td>Icon class (font-icon of your choice) that will be displayed in modal header.</td>
+                        </tr>
+                        <tr>
+                            <td>iconText</td>
+                            <td>null</td>
+                            <td>Icon text (font-icon using text) that will be displayed in modal header.</td>
+                        </tr>
+                        <tr>
+                            <td>iconColor</td>
+                            <td>''</td>
+                            <td>Color of the header icon.</td>
+                        </tr>
+                        <tr>
+                            <td>rtl</td>
+                            <td>false</td>
+                            <td>Right To Left option.</td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td>600</td>
+                            <td>Fixed width of the modal. You can use <b>%</b>, <b>px</b>, <b>em</b> or <b>cm</b>. If not using a measure unity, <b>PX</b> will be assumed as measurement unit.</td>
+                        </tr>
+                        <tr>
+                            <td>top <span class="tag green">New</span></td>
+                            <td>null</td>
+                            <td>Top static margin.</td>
+                        </tr>
+                        <tr>
+                            <td>bottom <span class="tag green">New</span></td>
+                            <td>null</td>
+                            <td>Bottom static margin.</td>
+                        </tr>
+                        <tr>
+                            <td>borderBottom</td>
+                            <td>true</td>
+                            <td>Enable/disable border bottom.</td>
+                        </tr>
+                        <tr>
+                            <td>padding</td>
+                            <td>0</td>
+                            <td>Modal inner margin.</td>
+                        </tr>
+                        <tr>
+                            <td>radius</td>
+                            <td>3</td>
+                            <td>Border-radius that will be applied in modal.</td>
+                        </tr>
+                        <tr>
+                            <td>zindex</td>
+                            <td>999</td>
+                            <td>The z-index CSS attribute of the modal.</td>
+                        </tr>
+                        <tr>
+                            <td>iframe</td>
+                            <td>false</td>
+                            <td>If true, an Iframe will be used inside the modal.</td>
+                        </tr>
+                        <tr>
+                            <td>iframeHeight</td>
+                            <td>400</td>
+                            <td>Fixed height of the iframe.</td>
+                        </tr>
+                        <tr>
+                            <td>iframeURL</td>
+                            <td>null</td>
+                            <td>Address that will open in the iframe inside the modal, if not set, the user can alternatively use the href link responsible for opening it.</td>
+                        </tr>
+                        <tr>
+                            <td>focusInput</td>
+                            <td>true</td>
+                            <td>If set true, whenever you open a modal, the first visible field is active.</td>
+                        </tr>
+                        <tr>
+                            <td>group</td>
+                            <td>''</td>
+                            <td>Create a group with same 'group' name, so can navigate between them.</td>
+                        </tr>
+                        <tr>
+                            <td>loop</td>
+                            <td>false</td>
+                            <td>It allows loop with modals of the same group.</td>
+                        </tr>
+
+                        <tr>
+                            <td>arrowKeys <span class="tag green">New</span></td>
+                            <td>true</td>
+                            <td>Enable control by arrows keys.</td>
+                        </tr>
+
+                        <tr>
+                            <td>navigateCaption</td>
+                            <td>true</td>
+                            <td>Displays arrows to navigate.</td>
+                        </tr>
+                        <tr>
+                            <td>navigateArrows</td>
+                            <td>true</td>
+                            <td>Change arrows position to navigate between the modals. It can be: <b>'closeToModal'</b> or <b>'closeScreenEdge'</b>.</td>
+                        </tr>
+                        <tr>
+                            <td>history</td>
+                            <td>false</td>
+                            <td>Enable browsing history with hash.</td>
+                        </tr>
+                        <tr>
+                            <td>restoreDefaultContent</td>
+                            <td>false</td>
+                            <td>Reset the modal to default to be opened again.</td>
+                        </tr>
+                        <tr>
+                            <td>autoOpen</td>
+                            <td>0 or false</td>
+                            <td>If true, the modal opens automatically with any user action. Or you can set a delay time (in milliseconds) to open.</td>
+                        </tr>
+                        <tr>
+                            <td>bodyOverflow</td>
+                            <td>false</td>
+                            <td>Forcing overflow hidden in the document when opening the modal, closing the modal, overflow will be restored.</td>
+                        </tr>
+                        <tr>
+                            <td>fullscreen</td>
+                            <td>false</td>
+                            <td>Show a button in modal header to expand.</td>
+                        </tr>
+                        <tr>
+                            <td>openFullscreen</td>
+                            <td>false</td>
+                            <td>Force to open modal in fullscreen.</td>
+                        </tr>
+                        <tr>
+                            <td>closeOnEscape</td>
+                            <td>true</td>
+                            <td>If set true, you can close the modal only pressing the escape key.</td>
+                        </tr>
+                        <tr>
+                            <td>closeButton <span class="tag green">New</span></td>
+                            <td>true</td>
+                            <td>Display close button in the header.</td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td>true</td>
+                            <td>Enable or disable background overlay.</td>
+                        </tr>
+                        <tr>
+                            <td>overlayClose</td>
+                            <td>true</td>
+                            <td>If set true, the modal will be closed clicking outside of it.</td>
+                        </tr>
+                        <tr>
+                            <td>overlayColor</td>
+                            <td>'rgba(0,0,0,0.4)'</td>
+                            <td>Color overlay.</td>
+                        </tr>
+                        <tr>
+                            <td>timeout</td>
+                            <td>0 or false</td>
+                            <td>Amount in milliseconds to close the modal or false to disable.</td>
+                        </tr>
+                        <tr>
+                            <td>timeoutProgressbar</td>
+                            <td>false</td>
+                            <td>Enable timeout progress bar.</td>
+                        </tr>
+                        <tr>
+                            <td>timeoutProgressbarColor</td>
+                            <td>'rgba(255,255,255,0.5)'</td>
+                            <td>Progress bar color.</td>
+                        </tr>
+                        <tr>
+                            <td>pauseOnHover</td>
+                            <td>false</td>
+                            <td>Pause the progress bar when mouse cursor hover the modal.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionIn</td>
+                            <td>'comingIn'</td>
+                            <td>Modal opening default transition. Can be: <b>comingIn, bounceInDown, bounceInUp, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX</b>.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionOut</td>
+                            <td>'comingOut'</td>
+                            <td>Modal closing default transition. Can be: <b>comingOut, bounceOutDown, bounceOutUp, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX</b>.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionInOverlay</td>
+                            <td>'fadeIn'</td>
+                            <td>Default transition of overlay opening.</td>
+                        </tr>
+                        <tr>
+                            <td>transitionOutOverlay</td>
+                            <td>'fadeOut'</td>
+                            <td>Default transition of overlay closure.</td>
+                        </tr>
+                        <tr>
+                            <td>onFullscreen</td>
+                            <td>function() {}</td>
+                            <td>Callback function that will run when the modal enable or disable full screen.</td>
+                        </tr>
+                        <tr>
+                            <td>onResize</td>
+                            <td>function() {}</td>
+                            <td>Callback function that will be executed when a resize occurs.</td>
+                        </tr>
+                        <tr>
+                            <td>onOpening</td>
+                            <td>function() {}</td>
+                            <td>Callback function that will run when opening the modal.</td>
+                        </tr>
+                        <tr>
+                            <td>onOpened</td>
+                            <td>function() {}</td>
+                            <td>Callback function that will run when the modal is open.</td>
+                        </tr>
+                        <tr>
+                            <td>onClosing</td>
+                            <td>function() {}</td>
+                            <td>Callback function that will run when closing the modal.</td>
+                        </tr>
+                        <tr>
+                            <td>onClosed</td>
+                            <td>function() {}</td>
+                            <td>Callback function that will run when the modal is closed.</td>
+                        </tr>
+                        <tr>
+                            <td>afterRender <span class="tag green">New</span></td>
+                            <td>function() {}</td>
+                            <td>Callback function that will run when the modal structure is ready.</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+            </section>
+
+
+            <section class="cd-section" id="Methods">
+                <h2>Methods</h2>
+                <div class="panel">
+                    <h3><b>Catching instance of modal</b></h3>
+                    <pre class="brush: js">
+                        var modal = $('#modal').iziModal();
+                        // then you can use:
+                        // modal.iziModal('open');
+                    </pre>
+                    <hr>
+                    <h3><b>Open</h3></b><p class="in-block">Opens the modal window.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('open');
+
+                        // or with a specific transition of entry.
+
+                        $('#modal').iziModal('open', {
+                            transition: 'fadeInDown' // Here transitionIn is the same property.
+                        });
+
+                        // or with a specific transition of entry and output.
+
+                        $('#modal').iziModal('open', {
+                            transitionIn: 'bounceInDown'
+                            transitionOut: 'bounceOutDown' // TransitionOut will be applied if you have any open modal.
+                        });
+                    </pre>
+                    <hr>
+                    <h3><b>Close</h3></b><p class="in-block">Closes the modal window.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('close');
+
+                        // or with a specific transition of output.
+
+                        $('#modal').iziModal('close', {
+                            transition: 'bounceOutDown' // Here transitionOut is the same property.
+                        });
+                    </pre>
+                    <hr>
+
+                    <h3><b>Toggle</h3></b><p class="in-block">Change to the opposite of the current state.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('toggle');
+                    </pre>
+                    <hr>
+
+                    <h3><b>getState</h3></b><p class="in-block">Returns a current state of the modal.</p>
+                    <pre class="brush: js">
+                        /**
+                         * @returns {'closed'|'closing'|'opened'|'opening'}
+                         */
+                        $('#modal').iziModal('getState');
+                    </pre>
+                    <hr>
+
+                    <h3><b>getGroup</h3></b><p class="in-block">Returns group information.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('getGroup');
+                    </pre>
+                    <hr>
+
+                    <h3><b>setGroup</h3></b><p class="in-block">Set a new group name.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setGroup', 'alerts');
+                    </pre>
+                    <hr>
+
+                    <h3><b>setContent</h3></b><p class="in-block"> <span class="tag green">New</span> Set a new content to modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setContent', '<p>Example</p>');
+
+                        // And you can keep this new content by default.
+
+                        $("#modal").iziModal('setContent', {
+                            content: '<p>Example</p>',
+                            default: true
+                        })
+                    </pre>
+                    <hr>
+
+                    <h3><b>resetContent</h3></b><p class="in-block"> <span class="tag green">New</span> Returns the default Modal content.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('resetContent');
+                    </pre>
+                    <hr>
+
+                    <h3><b>setGroup</h3></b><p class="in-block">Set a new group name.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setGroup', 'alerts');
+                    </pre>
+                    <hr>
+
+                    <h3><b>Next</h3></b><p class="in-block">Skip to next modal to the same group.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('next');
+    
+                        // or with a specific transition of output.
+
+                        $('#modal').iziModal('next' ,{
+                            transitionIn: 'bounceInDown'
+                            transitionOut: 'bounceOutDown'
+                        });
+                    </pre>
+                    <hr>
+
+                    <h3><b>Prev</h3></b><p class="in-block">Skip to previous modal to the same group.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('prev');
+    
+                        // or with a specific transition of output.
+
+                        $('#modal').iziModal('prev' ,{
+                            transitionIn: 'bounceInDown'
+                            transitionOut: 'bounceOutDown'
+                        });
+                    </pre>
+                    
+                    <h4><span><b>Internal Loading</b></span></h4>
+
+                    <h3><b>startLoading</h3></b><p class="in-block">Start overlay loading within the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('startLoading');
+                    </pre>
+
+                    <h3><b>stopLoading</h3></b><p class="in-block">Stop overlay loading within the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('stopLoading');
+                    </pre>
+
+
+                    <h4><span><b>Progress Control</b></span></h4>
+
+                    <h3><b>startProgress</h3></b><p class="in-block">Start progress loading within the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('startProgress');
+                    </pre>
+
+                    <h3><b>pauseProgress</h3></b><p class="in-block">Pause progress loading within the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('pauseProgress');
+                    </pre>
+
+                    <h3><b>resumeProgress</h3></b><p class="in-block">Resume progress loading within the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('resumeProgress');
+                    </pre>
+
+                    <h3><b>resetProgress</h3></b><p class="in-block">Reset progress loading within the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('resetProgress');
+                    </pre>
+                    <br>
+
+
+                    <hr>
+                    <h3><b>Destroy</h3></b><p class="in-block">Destroys the modal instance.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('destroy');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setWidth</h3></b><p class="in-block"><span class="tag green">new</span> Change the width of the modal. </p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setWidth', 800); // '800px', 100%, '100vw'...
+                    </pre>
+
+                    <hr>
+                    <h3><b>setTop</h3></b><p class="in-block"><span class="tag green">new</span> Change the margin-top of the modal. </p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setTop', 100);
+                    </pre>
+
+                    <hr>
+                    <h3><b>setBottom</h3></b><p class="in-block"><span class="tag green">new</span> Change the margin-bottom of the modal. </p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setBottom', 100);
+                    </pre>
+
+                    <hr>
+                    <h3><b>setHeader</h3></b><p class="in-block"><span class="tag green">new</span> Enable/disable Modal header. </p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setHeader', false);
+                    </pre>
+
+                    <hr>
+                    <h3><b>setHeaderColor</h3></b><p class="in-block">Apply the background color in modal header.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setHeaderColor', 'color');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setBackground</h3></b><p class="in-block">Apply the Modal background.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setBackground', 'black');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setTitle</h3></b><p class="in-block">Change the title of the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setTitle', 'Title');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setSubtitle</h3></b><p class="in-block">Change the subtitle of the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setSubtitle', 'Subtitle');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setIcon</h3></b><p class="in-block">Change the class of icon.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setIcon', 'iconClass');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setIconText</h3></b><p class="in-block">Change the text of font icon.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setIconText', 'icon');
+                    </pre>
+
+                    <hr>
+                    <h3><b>setZindex</h3></b><p class="in-block">Change the z-index CSS attribute of the modal.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setZindex', 999);
+                    </pre>
+
+                    <hr>
+                    <h3><b>setFullscreen</h3></b><p class="in-block">Enter the full screen mode.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setFullscreen', true);
+                    </pre>
+
+                    <hr>
+                    <h3><b>setTransitionIn</h3></b><p class="in-block">Change the Modal opening transition.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setTransitionIn', 'comingIn');
+                        // comingIn, bounceInDown, bounceInUp, fadeInDown, fadeInUp, fadeInLeft, fadeInRight, flipInX
+                    </pre>
+
+                    <hr>
+                    <h3><b>setTransitionOut</h3></b><p class="in-block">Change the Modal closing transition.</p>
+                    <pre class="brush: js">
+                        $('#modal').iziModal('setTransitionOut', 'comingOut');
+                        // comingOut, bounceOutDown, bounceOutUp, fadeOutDown, fadeOutUp, , fadeOutLeft, fadeOutRight, flipOutX
+                    </pre>
+
+<!--                     <hr>
+<h3><b>recalculateLayout</h3></b><p class="in-block">Used to recalculate the placement and dimensions of the modal layout.</p>
+<pre class="brush: js">
+    $('#modal').iziModal('recalcLayout');
+</pre> -->
+                </div>
+            </section>
+            <section class="cd-section" id="Events">
+                <h2>Events</h2>
+                <div class="panel">
+                    <h3><b>Opening</h3></b><p class="in-block">Capture when the modal is opening.</p>
+                    <pre class="brush: js">
+                    $(document).on('opening', '#modal', function (e) {
+                        //console.log('Modal is opening');
+                    });
+                    </pre>
+                    <hr>
+                    <h3><b>Opened</h3></b><p class="in-block">Capture when the modal is open.</p>
+                    <pre class="brush: js">
+                    $(document).on('opened', '#modal', function (e) {
+                        //console.log('Modal is opened');
+                    });
+                    </pre>
+                    <hr>
+                    <h3><b>Closing</h3></b><p class="in-block">Capture when the modal is closing.</p>
+                    <pre class="brush: js">
+                    $(document).on('closing', '#modal', function (e) {
+                        //console.log('Modal is closing');
+                    });
+                    </pre>
+                    <hr>
+                    <h3><b>Closed</h3></b><p class="in-block">Capture when the modal is closed.</p>
+                    <pre class="brush: js">
+                    $(document).on('closed', '#modal', function (e) {
+                        // console.log('Modal is closed');
+                    });
+                    </pre>
+
+                    <hr>
+                    <h3><b>Fullscreen</h3></b><p class="in-block">Capture when the modal enables or disables the full screen.</p>
+                    <pre class="brush: js">
+                    $(document).on('fullscreen', '#modal-default', function (e, modal) {
+                        
+                        if(modal.isFullscreen){
+                            // Enabled
+                        } else {
+                            // Disabled
+                        }
+                    });
+                    </pre>
+
+
+                    <hr>
+                    <h3><b>iziModal-group-change</h3></b><p class="in-block">Capture when a modal opens and closes within a group.</p>
+                    <pre class="brush: js">
+                    $(document).on('iziModal-group-change', function (e, modal) {
+                        console.info(modal.in); // Modal that came in.
+                        console.info(modal.out); // Modal that came out.
+                    });
+                    </pre>
+
+                </div>
+            </section>
+        </div>
+
+        <hr class="divider" />
+
+    <div class="wrap tweets">
+        <blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">izimodal - Elegant, responsive, flexible and lightweight modal plugin with jQuery <a href="https://t.co/XTLM4MlCYW">https://t.co/XTLM4MlCYW</a> <a href="https://t.co/NOI70BYeIJ">pic.twitter.com/NOI70BYeIJ</a></p>&mdash; Speckyboy (@speckyboy) <a href="https://twitter.com/speckyboy/status/756565836865888256">22 de julho de 2016</a></blockquote>
+        <blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">iziModal by Marcelo Dolza<a href="https://t.co/i9OiZ19T4m">https://t.co/i9OiZ19T4m</a><br>Elegant, responsive, flexible &amp; lightweight modal plugin<a href="https://twitter.com/hashtag/jQuery?src=hash">#jQuery</a> <a href="https://t.co/01TzcPLH0r">pic.twitter.com/01TzcPLH0r</a></p>&mdash; CSS Design Awards (@cssdesignawards) <a href="https://twitter.com/cssdesignawards/status/755279196713136128">19 de julho de 2016</a></blockquote>
+        <blockquote class="twitter-tweet" data-lang="pt"><p lang="und" dir="ltr">iziModal.js &amp;ndash; A Truly Dynamic Modal Window jQuery Plugin <a href="https://t.co/9IDZdCUzqs">https://t.co/9IDZdCUzqs</a> <a href="https://t.co/AAiV6k5q2r">pic.twitter.com/AAiV6k5q2r</a></p>&mdash; Hongkiat (@hongkiat) <a href="https://twitter.com/hongkiat/status/845283590850187264">24 de março de 2017</a></blockquote>
+        <blockquote class="twitter-tweet" data-lang="pt"><p lang="ro" dir="ltr">iziModal.js: A Responsive, Flexible jQuery Modal Plugin - <a href="https://t.co/jEE5DyhzWv">https://t.co/jEE5DyhzWv</a></p>&mdash; JavaScript Daily (@JavaScriptDaily) <a href="https://twitter.com/JavaScriptDaily/status/757350691337805824">24 de julho de 2016</a></blockquote>
+        <blockquote class="twitter-tweet" data-lang="pt"><p lang="en" dir="ltr">💙 IZIMODAL is in ➡️ 30 JavaScript frameworks and libraries to check out in 2017 via <a href="https://twitter.com/HeyFlywheel">@HeyFlywheel</a> <a href="https://t.co/qLofAAT9Oa">https://t.co/qLofAAT9Oa</a></p>&mdash; Marcelo Dolza (@marcelodolza) <a href="https://twitter.com/marcelodolza/status/829751616035225600">9 de fevereiro de 2017</a></blockquote>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+    </main>
+    <footer class="main">
+        <p>Made with <i class="icon icon-heart"></i> by <a href="https://dolza.dev">Marcelo Dolza</a>.</p>
+        |
+        <p>Copyright 2016 - All rights reserved.</p>
+    </footer>
+    <div class="bg"></div>
+
+    <div id="modal-default">
+        <p>You have several possibilities to use the easy Modal, with options, and also data-attributes. Click below for see some examples.</p>
+        
+        <h4><span>Progress</span></h4>
+        <button class="btn btn-progress-start">Start Progress</button>
+        <button class="btn btn-progress-pause">Pause Progress</button>
+        <button class="btn btn-progress-resume">Resume Progress</button>
+        <button class="btn btn-progress-reset">Reset Progress</button>
+
+        <h4><span>Ajax/Fetch</span></h4>
+        <button class="btn btn-ajax">Load Ajax</button>
+        <button class="btn btn-fetch">Load Fetch</button>
+
+        <h4><span>Group</span></h4>
+        <button class="btn" data-izimodal-prev>Prev Modal</button>
+        <button class="btn" data-izimodal-next>Next Modal</button>
+
+        <h4><span>Data-Attributes</span></h4>
+        <button class="btn" data-izimodal-close>Close</button>
+        <button class="btn" data-izimodal-fullscreen>Fullscreen</button>
+        <button data-iziModal-open="#modal-custom" data-iziModal-transitionIn="fadeInDown" data-iziModal-transitionOut="fadeOutDown">Open a specific Modal</button>        
+
+        <h4><span>Another Modal</span></h4>
+        <button class="btn" data-iziModal-open="#modal-custom" data-iziModal-zindex="20000" data-iziModal-preventClose>Another Modal</button>
+    </div>
+
+    <div id="modal-custom">
+        <button data-iziModal-close class="icon-close"></button>
+        <header>
+            <a href="" id="signin">Sign in</a>
+            <a href="" class="active">New Account</a>
+        </header>
+        <div class="sections">
+                <section class="hide">
+                    <input type="text" placeholder="Username">
+                    <input type="password" placeholder="Password">
+                    <footer>
+                        <button data-iziModal-close>Cancel</button>
+                        <button class="submit">Log in</button>            
+                    </footer>
+                </section>
+                <section>
+                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <label for="check"><input type="checkbox" name="checkbox" id="check" value="1"> I agree to the <u>Terms</u>.</label>
+                    <footer>
+                        <button data-iziModal-close data-iziModal-transitionOut="bounceOutDown">Cancel</button>
+                        <button class="submit">Create Account</button>
+                    </footer>
+                </section>
+        </div>
+    </div>
+    <div id="modal-iframe"></div>
+    <div id="modal-alert" data-iziModal-group="alert" data-iziModal-loop></div>
+    <div id="modal-alert2" data-iziModal-group="alert"></div>
+    <div id="modal-large" data-iziModal-group="grupo1" data-iziModal-fullscreen="true">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum iusto voluptates facilis, non provident perspiciatis sint deserunt amet iste impedit vero fugit minus incidunt perferendis adipisci natus veritatis ipsa, officia vitae, nobis error voluptate. Quaerat totam excepturi quo nesciunt accusantium. Eos libero aut quasi corrupti, reprehenderit cum nihil porro laboriosam inventore, sit ullam neque dolores accusamus expedita facilis. Consequatur neque, doloremque voluptatem sapiente magnam. Quam aspernatur voluptate neque, debitis. Velit ipsa, facilis? Voluptatum nisi excepturi dolores harum, dolorum earum culpa quod fuga. Facere rerum quos quidem, odio, sint nihil adipisci at dicta dolorem officia quas! Aliquam corrupti qui porro eligendi!</p>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum iusto voluptates facilis, non provident perspiciatis sint deserunt amet iste impedit vero fugit minus incidunt perferendis adipisci natus veritatis ipsa, officia vitae, nobis error voluptate. Quaerat totam excepturi quo nesciunt accusantium. Eos libero aut quasi corrupti, reprehenderit cum nihil porro laboriosam inventore, sit ullam neque dolores accusamus expedita facilis. Consequatur neque, doloremque voluptatem sapiente magnam. Quam aspernatur voluptate neque, debitis. Velit ipsa, facilis? Voluptatum nisi excepturi dolores harum, dolorum earum culpa quod fuga. Facere rerum quos quidem, odio, sint nihil adipisci at dicta dolorem officia quas! Aliquam corrupti qui porro eligendi!</p>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum iusto voluptates facilis, non provident perspiciatis sint deserunt amet iste impedit vero fugit minus incidunt perferendis adipisci natus veritatis ipsa, officia vitae, nobis error voluptate. Quaerat totam excepturi quo nesciunt accusantium. Eos libero aut quasi corrupti, reprehenderit cum nihil porro laboriosam inventore, sit ullam neque dolores accusamus expedita facilis. Consequatur neque, doloremque voluptatem sapiente magnam. Quam aspernatur voluptate neque, debitis. Velit ipsa, facilis? Voluptatum nisi excepturi dolores harum, dolorum earum culpa quod fuga. Facere rerum quos quidem, odio, sint nihil adipisci at dicta dolorem officia quas! Aliquam corrupti qui porro eligendi!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore. Dolorum perferendis, non nisi quisquam animi iusto, officiis eligendi eos, fugit, dolore corporis provident accusantium. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, ea ad aspernatur, temporibus iusto cum autem repudiandae, delectus non voluptas corporis facere cumque! Qui accusantium ratione eum eligendi maiores velit ea porro voluptatibus architecto dolore.</p>
+    </div>
+    <button class="icon-arrow_upward scrollToTop" data-target-scroll=".highlight.bg"></button>
+
+    <!-- Main Scripts -->
+    <!-- <script src="js/vendor/jquery-2.2.4.min.js" type="text/javascript"></script> -->
+    <script src="js/vendor/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/vendor/iziToast.min.js" type="text/javascript"></script>
+    <script src="/js/vendor/iziModal.js?v=160" type="text/javascript"></script>
+    <script src="js/demo.js" type="text/javascript"></script>
+</body>
+</html>
