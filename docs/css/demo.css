@@ -492,9 +492,6 @@ h4 span{
 }
 
 
-#disqus_thread{
-  padding: 30px 10px;
-}
 .tweets{
   overflow: auto;
   margin-bottom: 20px;
@@ -508,12 +505,9 @@ h4 span{
   float: right;
 }
 
-
 .divider {
   margin-bottom: 40px;
 }
-
-
 
 footer.main{
   background: #fff;
